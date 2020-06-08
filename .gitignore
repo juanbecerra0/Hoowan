@@ -1,4 +1,10 @@
 # gitignore for C++
+
+# Directories
+.vs/
+bin/
+bin-int/
+
 # Compiled Object files
 *.slo
 *.lo
