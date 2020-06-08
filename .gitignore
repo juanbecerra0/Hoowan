@@ -5,6 +5,9 @@
 bin/
 bin-int/
 
+# Files
+*.user
+
 # Compiled Object files
 *.slo
 *.lo
