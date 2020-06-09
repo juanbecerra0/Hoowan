@@ -1,0 +1,3 @@
+[submodule "Hoowan/vendor/spdlog"]
+	path = Hoowan/vendor/spdlog
+	url = https://github.com/gabime/spdlog
