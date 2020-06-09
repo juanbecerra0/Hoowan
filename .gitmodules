@@ -1,3 +1,6 @@
 [submodule "Hoowan/vendor/spdlog"]
 	path = Hoowan/vendor/spdlog
 	url = https://github.com/gabime/spdlog
+[submodule "Hoowan/vendor/GLFW"]
+	path = Hazel/vendor/GLFW
+	url = https://github.com/TheCherno/glfw
