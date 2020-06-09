@@ -19,6 +19,9 @@ project "Hoowan"
 
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
+	
+	pchheader "hwpch.h"
+	pchsource "Hoowan/src/hwpch.cpp"
 
 	files
 	{
@@ -28,7 +31,8 @@ project "Hoowan"
 
 	includedirs
 	{
-		"%{prj.name}/vendor/spdlog/include"
+		"%{prj.name}/vendor/spdlog/include",
+		"%{prj.name}/src"
 	}
 
 	filter "system:windows"

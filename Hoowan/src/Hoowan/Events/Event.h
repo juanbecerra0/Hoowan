@@ -1,9 +1,7 @@
 #pragma once
+#include "hwpch.h"
 
 #include "Hoowan/Core.h"
-
-#include <string>
-#include <functional>
 
 namespace Hoowan {
 

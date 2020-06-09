@@ -1,3 +1,5 @@
+#include "hwpch.h"
+
 #include "Application.h"
 
 #include "Hoowan/Events/ApplicationEvent.h"

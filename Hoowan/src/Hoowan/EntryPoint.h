@@ -1,4 +1,5 @@
 #pragma once
+#include "hwpch.h"
 
 #ifdef HW_PLATFORM_WINDOWS
 

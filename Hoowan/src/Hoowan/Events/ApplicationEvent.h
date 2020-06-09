@@ -1,8 +1,7 @@
 #pragma once
+#include "hwpch.h"
 
 #include "Event.h"
-
-#include <sstream>
 
 namespace Hoowan {
 
