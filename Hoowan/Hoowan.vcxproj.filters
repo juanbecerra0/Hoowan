@@ -35,6 +35,12 @@
       <Filter>Hoowan</Filter>
     </ClInclude>
     <ClInclude Include="src\hwpch.h" />
+    <ClInclude Include="src\Hoowan\Window.h">
+      <Filter>Hoowan</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Platform\Windows\WindowsWindow.h">
+      <Filter>Hoowan</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Hoowan\Application.cpp">
@@ -44,5 +50,8 @@
       <Filter>Hoowan</Filter>
     </ClCompile>
     <ClCompile Include="src\hwpch.cpp" />
+    <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp">
+      <Filter>Hoowan</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
