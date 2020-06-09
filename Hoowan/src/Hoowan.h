@@ -3,6 +3,7 @@
 
 // For use by Hoowan applications
 #include "Hoowan/Application.h"
+#include "Hoowan/Layer.h"
 #include "Hoowan/Log.h"
 
 // Entry point

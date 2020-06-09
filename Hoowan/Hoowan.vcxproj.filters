@@ -7,6 +7,12 @@
     <Filter Include="Hoowan\Events">
       <UniqueIdentifier>{F5813D20-6142-B956-2A7D-02D496FCFD32}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Platform">
+      <UniqueIdentifier>{2AC788B4-1694-E3BF-3FAD-D1672BD9184E}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Platform\Windows">
+      <UniqueIdentifier>{64FBD71A-50F4-F66C-7926-DCF1657ED678}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Hoowan.h" />
@@ -31,27 +37,39 @@
     <ClInclude Include="src\Hoowan\Events\MouseEvent.h">
       <Filter>Hoowan\Events</Filter>
     </ClInclude>
+    <ClInclude Include="src\Hoowan\Layer.h">
+      <Filter>Hoowan</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Hoowan\LayerStack.h">
+      <Filter>Hoowan</Filter>
+    </ClInclude>
     <ClInclude Include="src\Hoowan\Log.h">
       <Filter>Hoowan</Filter>
     </ClInclude>
-    <ClInclude Include="src\hwpch.h" />
     <ClInclude Include="src\Hoowan\Window.h">
       <Filter>Hoowan</Filter>
     </ClInclude>
     <ClInclude Include="src\Platform\Windows\WindowsWindow.h">
-      <Filter>Hoowan</Filter>
+      <Filter>Platform\Windows</Filter>
     </ClInclude>
+    <ClInclude Include="src\hwpch.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Hoowan\Application.cpp">
       <Filter>Hoowan</Filter>
     </ClCompile>
+    <ClCompile Include="src\Hoowan\Layer.cpp">
+      <Filter>Hoowan</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Hoowan\LayerStack.cpp">
+      <Filter>Hoowan</Filter>
+    </ClCompile>
     <ClCompile Include="src\Hoowan\Log.cpp">
       <Filter>Hoowan</Filter>
     </ClCompile>
-    <ClCompile Include="src\hwpch.cpp" />
     <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp">
-      <Filter>Hoowan</Filter>
+      <Filter>Platform\Windows</Filter>
     </ClCompile>
+    <ClCompile Include="src\hwpch.cpp" />
   </ItemGroup>
 </Project>
