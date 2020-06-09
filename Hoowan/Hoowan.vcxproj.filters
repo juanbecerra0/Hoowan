@@ -4,6 +4,9 @@
     <Filter Include="Hoowan">
       <UniqueIdentifier>{31F7E9B7-1D99-148E-0654-28E2F2949BDE}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Hoowan\Events">
+      <UniqueIdentifier>{1ef53881-2520-4872-a76c-be7979b14a1e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Hoowan.h" />
@@ -19,6 +22,15 @@
     <ClInclude Include="src\Hoowan\Log.h">
       <Filter>Hoowan</Filter>
     </ClInclude>
+    <ClInclude Include="src\Hoowan\Events\Event.h">
+      <Filter>Hoowan\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Hoowan\Events\KeyEvent.h">
+      <Filter>Hoowan\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Hoowan\Events\MouseEvent.h">
+      <Filter>Hoowan\Events</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Hoowan\Application.cpp">
@@ -26,6 +38,9 @@
     </ClCompile>
     <ClCompile Include="src\Hoowan\Log.cpp">
       <Filter>Hoowan</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Hoowan\Events\ApplicationEvent.h">
+      <Filter>Hoowan\Events</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
