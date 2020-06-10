@@ -15,8 +15,10 @@ outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 -- Include directories relative to root folder (solution directory)
 IncludeDir = {}
 IncludeDir["GLFW"] = "Hoowan/vendor/GLFW/include"
+IncludeDir["Glad"] = "Hoowan/vendor/Glad/include"
 
 include "Hoowan/vendor/GLFW"
+include "Hoowan/vendor/Glad"
 
 project "Hoowan"
 	location "Hoowan"
@@ -39,12 +41,14 @@ project "Hoowan"
 	{
 		"%{prj.name}/src",
 		"%{prj.name}/vendor/spdlog/include",
-		"%{IncludeDir.GLFW}"
+		"%{IncludeDir.GLFW}",
+		"%{IncludeDir.Glad}"
 	}
 
 	links 
 	{ 
 		"GLFW",
+		"Glad",
 		"opengl32.lib"
 	}
 
@@ -56,7 +60,8 @@ project "Hoowan"
 		defines
 		{
 			"HW_PLATFORM_WINDOWS",
-			"HW_BUILD_DLL"
+			"HW_BUILD_DLL",
+			"GLFW_INCLUDE_NONE"
 		}
 
 		postbuildcommands

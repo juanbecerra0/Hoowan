@@ -4,6 +4,8 @@
 
 #include <GLFW/glfw3.h>
 
+struct GLFWwindow;
+
 namespace Hoowan {
 
 	class WindowsWindow : public Window
