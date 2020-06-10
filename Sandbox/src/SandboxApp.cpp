@@ -24,6 +24,7 @@ class Sandbox : public Hoowan::Application {
 public:
 	Sandbox() {
 		PushLayer(new ExampleLayer());
+		PushOverlay(new Hoowan::ImGuiLayer());
 	}
 
 	~Sandbox() {

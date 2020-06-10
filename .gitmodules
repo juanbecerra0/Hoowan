@@ -4,3 +4,6 @@
 [submodule "Hoowan/vendor/GLFW"]
 	path = Hoowan/vendor/GLFW
 	url = https://github.com/TheCherno/glfw
+[submodule "Hoowan/vendor/imgui"]
+	path = Hoowan/vendor/imgui
+	url = https://github.com/TheCherno/imgui

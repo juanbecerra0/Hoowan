@@ -13,6 +13,9 @@
     <Filter Include="Platform\Windows">
       <UniqueIdentifier>{64FBD71A-50F4-F66C-7926-DCF1657ED678}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Hoowan\ImGui">
+      <UniqueIdentifier>{cec3a360-47d3-4d6b-9f41-12725e4e6508}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Hoowan.h" />
@@ -53,6 +56,10 @@
       <Filter>Platform\Windows</Filter>
     </ClInclude>
     <ClInclude Include="src\hwpch.h" />
+    <ClInclude Include="src\Hoowan\ImGui\ImGuiLayer.h">
+      <Filter>Hoowan\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Platform\OpenGL\ImGuiOpenGLRenderer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Hoowan\Application.cpp">
@@ -71,5 +78,9 @@
       <Filter>Platform\Windows</Filter>
     </ClCompile>
     <ClCompile Include="src\hwpch.cpp" />
+    <ClCompile Include="src\Hoowan\ImGui\ImGuiLayer.cpp">
+      <Filter>Hoowan\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Platform\OpenGL\ImGuiOpenGLRenderer.cpp" />
   </ItemGroup>
 </Project>

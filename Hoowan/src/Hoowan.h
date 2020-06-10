@@ -5,6 +5,7 @@
 #include "Hoowan/Application.h"
 #include "Hoowan/Layer.h"
 #include "Hoowan/Log.h"
+#include "Hoowan/ImGui/ImGuiLayer.h"
 
 // Entry point
 #include "Hoowan/EntryPoint.h"
