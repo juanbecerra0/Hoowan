@@ -83,8 +83,7 @@
       <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\GLFW\include;vendor\Glad\include;vendor\imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
-      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
-      <AdditionalOptions>/MDd %(AdditionalOptions)</AdditionalOptions>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
@@ -109,8 +108,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <MinimalRebuild>false</MinimalRebuild>
       <StringPooling>true</StringPooling>
-      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
-      <AdditionalOptions>/MDd %(AdditionalOptions)</AdditionalOptions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
@@ -136,8 +134,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <MinimalRebuild>false</MinimalRebuild>
       <StringPooling>true</StringPooling>
-      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
-      <AdditionalOptions>/MDd %(AdditionalOptions)</AdditionalOptions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
@@ -152,7 +149,6 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="src\Hoowan\ImGui\ImGuiLayer.h" />
     <ClInclude Include="src\Hoowan.h" />
     <ClInclude Include="src\Hoowan\Application.h" />
     <ClInclude Include="src\Hoowan\Core.h" />
@@ -161,6 +157,7 @@
     <ClInclude Include="src\Hoowan\Events\Event.h" />
     <ClInclude Include="src\Hoowan\Events\KeyEvent.h" />
     <ClInclude Include="src\Hoowan\Events\MouseEvent.h" />
+    <ClInclude Include="src\Hoowan\ImGui\ImGuiLayer.h" />
     <ClInclude Include="src\Hoowan\Layer.h" />
     <ClInclude Include="src\Hoowan\LayerStack.h" />
     <ClInclude Include="src\Hoowan\Log.h" />
@@ -170,8 +167,8 @@
     <ClInclude Include="src\hwpch.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\Hoowan\ImGui\ImGuiLayer.cpp" />
     <ClCompile Include="src\Hoowan\Application.cpp" />
+    <ClCompile Include="src\Hoowan\ImGui\ImGuiLayer.cpp" />
     <ClCompile Include="src\Hoowan\Layer.cpp" />
     <ClCompile Include="src\Hoowan\LayerStack.cpp" />
     <ClCompile Include="src\Hoowan\Log.cpp" />

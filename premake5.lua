@@ -26,6 +26,7 @@ project "Hoowan"
 	location "Hoowan"
 	kind "SharedLib"
 	language "C++"
+	staticruntime "off"
 
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -58,7 +59,6 @@ project "Hoowan"
 
 	filter "system:windows"
 		cppdialect "C++17"
-		staticruntime "On"
 		systemversion "latest"
 
 		defines
@@ -75,23 +75,24 @@ project "Hoowan"
 
 	filter "configurations:Debug"
 		defines "HW_DEBUG"
-		buildoptions "/MDd"
+		runtime "Debug"
 		symbols "On"
 
 	filter "configurations:Release"
 		defines "HW_RELEASE"
-		buildoptions "/MDd"
+		runtime "Release"
 		optimize "On"
 
 	filter "configurations:Dist"
 		defines "HW_DIST"
-		buildoptions "/MDd"
+		runtime "Release"
 		optimize "On"
 
 project "Sandbox"
 	location "Sandbox"
 	kind "ConsoleApp"
 	language "C++"
+	staticruntime "off"
 
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -115,7 +116,6 @@ project "Sandbox"
 
 	filter "system:windows"
 		cppdialect "C++17"
-		staticruntime "On"
 		systemversion "latest"
 
 		defines
@@ -125,16 +125,16 @@ project "Sandbox"
 
 	filter "configurations:Debug"
 		defines "HW_DEBUG"
-		buildoptions "/MDd"
+		runtime "Debug"
 		symbols "On"
 
 	filter "configurations:Release"
 		defines "HW_RELEASE"
-		buildoptions "/MDd"
+		runtime "Release"
 		optimize "On"
 
 	filter "configurations:Dist"
 		defines "HW_DIST"
-		buildoptions "/MDd"
+		runtime "Release"
 		optimize "On"
 		
