@@ -6,6 +6,8 @@
 
 #include <glad/glad.h>
 
+#include "Input.h"
+
 namespace Hoowan {
 
 #define BIND_EVENT_FN(x) std::bind(&Application::x, this, std::placeholders::_1)
@@ -47,22 +49,11 @@ namespace Hoowan {
 				break;
 		}
 
-		// TODO debug
-		//HW_CORE_TRACE("{0}", e);
 	}
 
 	void Application::Run() {
 
 		WindowResizeEvent e(1280, 720);
-
-		if (e.IsInCategory(EventCategoryApplication))
-		{
-			HW_TRACE(e);
-		}
-		if (e.IsInCategory(EventCategoryInput))
-		{
-			HW_TRACE(e);
-		}
 
 		while (m_Running) {
 			glClearColor(1, 0, 1, 1);
@@ -70,6 +61,9 @@ namespace Hoowan {
 
 			for (Layer* layer : m_LayerStack)
 				layer->OnUpdate();
+
+			auto [x, y] = Input::GetMousePosition();
+			HW_CORE_TRACE("{0}, {1}", x, y);
 
 			m_Window->OnUpdate();
 		}

@@ -158,11 +158,13 @@
     <ClInclude Include="src\Hoowan\Events\KeyEvent.h" />
     <ClInclude Include="src\Hoowan\Events\MouseEvent.h" />
     <ClInclude Include="src\Hoowan\ImGui\ImGuiLayer.h" />
+    <ClInclude Include="src\Hoowan\Input.h" />
     <ClInclude Include="src\Hoowan\Layer.h" />
     <ClInclude Include="src\Hoowan\LayerStack.h" />
     <ClInclude Include="src\Hoowan\Log.h" />
     <ClInclude Include="src\Hoowan\Window.h" />
     <ClInclude Include="src\Platform\OpenGL\ImGuiOpenGLRenderer.h" />
+    <ClInclude Include="src\Platform\Windows\WindowsInput.h" />
     <ClInclude Include="src\Platform\Windows\WindowsWindow.h" />
     <ClInclude Include="src\hwpch.h" />
   </ItemGroup>
@@ -173,6 +175,7 @@
     <ClCompile Include="src\Hoowan\LayerStack.cpp" />
     <ClCompile Include="src\Hoowan\Log.cpp" />
     <ClCompile Include="src\Platform\OpenGL\ImGuiOpenGLRenderer.cpp" />
+    <ClCompile Include="src\Platform\Windows\WindowsInput.cpp" />
     <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp" />
     <ClCompile Include="src\hwpch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
