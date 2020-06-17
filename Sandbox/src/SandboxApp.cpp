@@ -10,12 +10,19 @@ public:
 
 	void OnUpdate() override
 	{
-		HW_INFO("ExampleLayer::Update");
+		if (Hoowan::Input::IsKeyPressed(HW_KEY_TAB))
+			HW_TRACE("Tab key is pressed (poll)!");
 	}
 
 	void OnEvent(Hoowan::Event& event) override
 	{
-		HW_TRACE("{0}", event);
+		if (event.GetEventType() == Hoowan::EventType::KeyPressed)
+		{
+			Hoowan::KeyPressedEvent& e = (Hoowan::KeyPressedEvent&)event;
+			if (e.GetKeyCode() == HW_KEY_TAB)
+				HW_TRACE("Tab key is pressed (event)!");
+			HW_TRACE("{0}", (char)e.GetKeyCode());
+		}
 	}
 
 };

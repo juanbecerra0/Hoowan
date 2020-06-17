@@ -67,6 +67,8 @@
     <ClInclude Include="src\hwpch.h" />
     <ClInclude Include="src\Hoowan\Input.h" />
     <ClInclude Include="src\Platform\Windows\WindowsInput.h" />
+    <ClInclude Include="src\Hoowan\KeyCodes.h" />
+    <ClInclude Include="src\Hoowan\MouseButtonCodes.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Hoowan\Application.cpp">

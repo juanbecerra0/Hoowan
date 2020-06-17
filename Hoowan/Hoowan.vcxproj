@@ -159,9 +159,11 @@
     <ClInclude Include="src\Hoowan\Events\MouseEvent.h" />
     <ClInclude Include="src\Hoowan\ImGui\ImGuiLayer.h" />
     <ClInclude Include="src\Hoowan\Input.h" />
+    <ClInclude Include="src\Hoowan\KeyCodes.h" />
     <ClInclude Include="src\Hoowan\Layer.h" />
     <ClInclude Include="src\Hoowan\LayerStack.h" />
     <ClInclude Include="src\Hoowan\Log.h" />
+    <ClInclude Include="src\Hoowan\MouseButtonCodes.h" />
     <ClInclude Include="src\Hoowan\Window.h" />
     <ClInclude Include="src\Platform\OpenGL\ImGuiOpenGLRenderer.h" />
     <ClInclude Include="src\Platform\Windows\WindowsInput.h" />
