@@ -17,6 +17,7 @@ IncludeDir = {}
 IncludeDir["GLFW"] = "Hoowan/vendor/GLFW/include"
 IncludeDir["Glad"] = "Hoowan/vendor/Glad/include"
 IncludeDir["ImGui"] = "Hoowan/vendor/imgui"
+IncludeDir["glm"] = "Hoowan/vendor/glm"
 
 include "Hoowan/vendor/GLFW"
 include "Hoowan/vendor/Glad"
@@ -37,7 +38,9 @@ project "Hoowan"
 	files
 	{
 		"%{prj.name}/src/**.h",
-		"%{prj.name}/src/**.cpp"
+		"%{prj.name}/src/**.cpp",
+		"%{prj.name}/vendor/glm/glm/**.hpp",
+		"%{prj.name}/vendor/glm/glm/**.inl"
 	}
 
 	includedirs
@@ -46,7 +49,8 @@ project "Hoowan"
 		"%{prj.name}/vendor/spdlog/include",
 		"%{IncludeDir.GLFW}",
 		"%{IncludeDir.Glad}",
-		"%{IncludeDir.ImGui}"
+		"%{IncludeDir.ImGui}",
+		"%{IncludeDir.glm}"
 	}
 
 	links 
@@ -106,7 +110,8 @@ project "Sandbox"
 	includedirs
 	{
 		"Hoowan/vendor/spdlog/include",
-		"Hoowan/src"
+		"Hoowan/src",
+		"%{IncludeDir.glm}"
 	}
 
 	links
