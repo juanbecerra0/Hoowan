@@ -1,11 +1,14 @@
 #pragma once
-#include "hwpch.h"
 
 #ifdef HW_PLATFORM_WINDOWS
-	#ifdef HW_BUILD_DLL
-		#define HOOWAN_API __declspec(dllexport)
+	#if HW_DYNAMIC_LINK
+		#ifdef HW_BUILD_DLL
+			#define HOOWAN_API __declspec(dllexport)
+		#else
+			#define HOOWAN_API __declspec(dllimport)
+		#endif
 	#else
-		#define HOOWAN_API __declspec(dllimport)
+		#define HOOWAN_API
 	#endif
 #else
 	#error Hoowan only supports Windows!
