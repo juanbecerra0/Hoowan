@@ -22,7 +22,7 @@ group "Dependencies"
 	include "Hoowan/vendor/GLFW"
 	include "Hoowan/vendor/Glad"
 	include "Hoowan/vendor/imgui"
-
+	
 group ""
 
 project "Hoowan"
@@ -34,7 +34,7 @@ project "Hoowan"
 
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
-	
+
 	pchheader "hwpch.h"
 	pchsource "Hoowan/src/hwpch.cpp"
 
@@ -43,9 +43,9 @@ project "Hoowan"
 		"%{prj.name}/src/**.h",
 		"%{prj.name}/src/**.cpp",
 		"%{prj.name}/vendor/glm/glm/**.hpp",
-		"%{prj.name}/vendor/glm/glm/**.inl"
+		"%{prj.name}/vendor/glm/glm/**.inl",
 	}
-	
+
 	defines
 	{
 		"_CRT_SECURE_NO_WARNINGS"
@@ -145,4 +145,3 @@ project "Sandbox"
 		defines "HW_DIST"
 		runtime "Release"
 		optimize "on"
-		
