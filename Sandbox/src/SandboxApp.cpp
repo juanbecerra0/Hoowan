@@ -1,9 +1,6 @@
 #include <Hoowan.h>
 
-#include <glm/vec3.hpp> // glm::vec3
-#include <glm/vec4.hpp> // glm::vec4
-#include <glm/mat4x4.hpp> // glm::mat4
-#include <glm/gtc/matrix_transform.hpp> // glm::translate, glm::rotate, glm::scale, glm::perspective
+#include "imgui/imgui.h"
 
 class ExampleLayer : public Hoowan::Layer
 {
@@ -18,6 +15,13 @@ public:
 	{
 		if (Hoowan::Input::IsKeyPressed(HW_KEY_TAB))
 			HW_TRACE("Tab key is pressed (poll)!");
+	}
+
+	virtual void OnImGuiRender() override
+	{
+		ImGui::Begin("Test");
+		ImGui::Text("Hello World");
+		ImGui::End();
 	}
 
 	void OnEvent(Hoowan::Event& event) override
@@ -37,7 +41,6 @@ class Sandbox : public Hoowan::Application {
 public:
 	Sandbox() {
 		PushLayer(new ExampleLayer());
-		PushOverlay(new Hoowan::ImGuiLayer());
 	}
 
 	~Sandbox() {

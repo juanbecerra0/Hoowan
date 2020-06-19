@@ -1,5 +1,6 @@
 workspace "Hoowan"
 	architecture "x64"
+	startproject "Sandbox"
 
 	configurations
 	{
@@ -7,8 +8,6 @@ workspace "Hoowan"
 		"Release",
 		"Dist"
 	}
-	
-	startproject "Sandbox"
 
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
@@ -19,15 +18,19 @@ IncludeDir["Glad"] = "Hoowan/vendor/Glad/include"
 IncludeDir["ImGui"] = "Hoowan/vendor/imgui"
 IncludeDir["glm"] = "Hoowan/vendor/glm"
 
-include "Hoowan/vendor/GLFW"
-include "Hoowan/vendor/Glad"
-include "Hoowan/vendor/imgui"
+group "Dependencies"
+	include "Hoowan/vendor/GLFW"
+	include "Hoowan/vendor/Glad"
+	include "Hoowan/vendor/imgui"
+
+group ""
 
 project "Hoowan"
 	location "Hoowan"
-	kind "SharedLib"
+	kind "StaticLib"
 	language "C++"
-	staticruntime "off"
+	cppdialect "C++17"
+	staticruntime "on"
 
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -41,6 +44,11 @@ project "Hoowan"
 		"%{prj.name}/src/**.cpp",
 		"%{prj.name}/vendor/glm/glm/**.hpp",
 		"%{prj.name}/vendor/glm/glm/**.inl"
+	}
+	
+	defines
+	{
+		"_CRT_SECURE_NO_WARNINGS"
 	}
 
 	includedirs
@@ -62,7 +70,6 @@ project "Hoowan"
 	}
 
 	filter "system:windows"
-		cppdialect "C++17"
 		systemversion "latest"
 
 		defines
@@ -72,31 +79,27 @@ project "Hoowan"
 			"GLFW_INCLUDE_NONE"
 		}
 
-		postbuildcommands
-		{
-			("{COPY} %{cfg.buildtarget.relpath} \"../bin/" .. outputdir .. "/Sandbox/\"")
-		}
-
 	filter "configurations:Debug"
 		defines "HW_DEBUG"
 		runtime "Debug"
-		symbols "On"
+		symbols "on"
 
 	filter "configurations:Release"
 		defines "HW_RELEASE"
 		runtime "Release"
-		optimize "On"
+		optimize "on"
 
 	filter "configurations:Dist"
 		defines "HW_DIST"
 		runtime "Release"
-		optimize "On"
+		optimize "on"
 
 project "Sandbox"
 	location "Sandbox"
 	kind "ConsoleApp"
 	language "C++"
-	staticruntime "off"
+	cppdialect "C++17"
+	staticruntime "on"
 
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -111,6 +114,7 @@ project "Sandbox"
 	{
 		"Hoowan/vendor/spdlog/include",
 		"Hoowan/src",
+		"Hoowan/vendor",
 		"%{IncludeDir.glm}"
 	}
 
@@ -120,7 +124,6 @@ project "Sandbox"
 	}
 
 	filter "system:windows"
-		cppdialect "C++17"
 		systemversion "latest"
 
 		defines
@@ -131,15 +134,15 @@ project "Sandbox"
 	filter "configurations:Debug"
 		defines "HW_DEBUG"
 		runtime "Debug"
-		symbols "On"
+		symbols "on"
 
 	filter "configurations:Release"
 		defines "HW_RELEASE"
 		runtime "Release"
-		optimize "On"
+		optimize "on"
 
 	filter "configurations:Dist"
 		defines "HW_DIST"
 		runtime "Release"
-		optimize "On"
+		optimize "on"
 		
