@@ -9,6 +9,8 @@
 
 #include "Hoowan/ImGui/ImGuiLayer.h"
 
+#include "Hoowan/Renderer/Shader.h"
+
 namespace Hoowan {
 
 	class HOOWAN_API Application {
@@ -36,6 +38,7 @@ namespace Hoowan {
 		LayerStack m_LayerStack;
 
 		unsigned int m_VertexArray, m_VertexBuffer, m_IndexBuffer;
+		std::unique_ptr<Shader> m_Shader;
 
 		static Application* s_Instance;
 	};
