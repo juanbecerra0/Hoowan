@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Hoowan/Window.h"
+#include "Hoowan/Renderer/GraphicsContext.h"
 
 #include <GLFW/glfw3.h>
 
@@ -30,6 +31,7 @@ namespace Hoowan {
 		inline virtual void* GetNativeWindow() const { return m_Window; }
 	private:
 		GLFWwindow* m_Window;
+		GraphicsContext* m_Context;
 
 		struct WindowData
 		{

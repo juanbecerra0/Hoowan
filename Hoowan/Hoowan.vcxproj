@@ -140,6 +140,7 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\Platform\OpenGL\OpenGLContext.h" />
     <ClInclude Include="src\Hoowan.h" />
     <ClInclude Include="src\Hoowan\Application.h" />
     <ClInclude Include="src\Hoowan\Core.h" />
@@ -155,6 +156,7 @@
     <ClInclude Include="src\Hoowan\LayerStack.h" />
     <ClInclude Include="src\Hoowan\Log.h" />
     <ClInclude Include="src\Hoowan\MouseButtonCodes.h" />
+    <ClInclude Include="src\Hoowan\Renderer\GraphicsContext.h" />
     <ClInclude Include="src\Hoowan\Window.h" />
     <ClInclude Include="src\Platform\Windows\WindowsInput.h" />
     <ClInclude Include="src\Platform\Windows\WindowsWindow.h" />
@@ -569,6 +571,7 @@
     <ClInclude Include="vendor\glm\glm\vector_relational.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Platform\OpenGL\OpenGLContext.cpp" />
     <ClCompile Include="src\Hoowan\Application.cpp" />
     <ClCompile Include="src\Hoowan\ImGui\ImGuiBuild.cpp" />
     <ClCompile Include="src\Hoowan\ImGui\ImGuiLayer.cpp" />
