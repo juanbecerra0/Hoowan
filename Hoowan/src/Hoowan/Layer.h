@@ -21,5 +21,4 @@ namespace Hoowan {
 	protected:
 		std::string m_DebugName;
 	};
-
 }
