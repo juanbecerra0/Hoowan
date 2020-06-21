@@ -143,6 +143,7 @@
     <ClInclude Include="src\Hoowan\Renderer\Buffer.h" />
     <ClInclude Include="src\Hoowan\Renderer\Renderer.h" />
     <ClInclude Include="src\Hoowan\Renderer\Shader.h" />
+    <ClInclude Include="src\Hoowan\Renderer\VertexArray.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLBuffer.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLContext.h" />
     <ClInclude Include="src\Hoowan.h" />
@@ -162,6 +163,7 @@
     <ClInclude Include="src\Hoowan\MouseButtonCodes.h" />
     <ClInclude Include="src\Hoowan\Renderer\GraphicsContext.h" />
     <ClInclude Include="src\Hoowan\Window.h" />
+    <ClInclude Include="src\Platform\OpenGL\OpenGLVertexArray.h" />
     <ClInclude Include="src\Platform\Windows\WindowsInput.h" />
     <ClInclude Include="src\Platform\Windows\WindowsWindow.h" />
     <ClInclude Include="src\hwpch.h" />
@@ -578,6 +580,7 @@
     <ClCompile Include="src\Hoowan\Renderer\Buffer.cpp" />
     <ClCompile Include="src\Hoowan\Renderer\Renderer.cpp" />
     <ClCompile Include="src\Hoowan\Renderer\Shader.cpp" />
+    <ClCompile Include="src\Hoowan\Renderer\VertexArray.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLBuffer.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLContext.cpp" />
     <ClCompile Include="src\Hoowan\Application.cpp" />
@@ -586,6 +589,7 @@
     <ClCompile Include="src\Hoowan\Layer.cpp" />
     <ClCompile Include="src\Hoowan\LayerStack.cpp" />
     <ClCompile Include="src\Hoowan\Log.cpp" />
+    <ClCompile Include="src\Platform\OpenGL\OpenGLVertexArray.cpp" />
     <ClCompile Include="src\Platform\Windows\WindowsInput.cpp" />
     <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp" />
     <ClCompile Include="src\hwpch.cpp">
