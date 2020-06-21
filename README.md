@@ -10,7 +10,7 @@ Game Engine Architecture, Third Edition buy/rent: https://www.amazon.com/Engine-
 
 # Log
 ### 06/21/2020 - Hello, Abstraction!
-[1](RMImages/1.PNG)
+![1](RMImages/1.PNG)
 This took way too much code…
 
 In this update, I set up an empty C++ project with an engine and corresponding sandbox solution. I imported several APIs and libraries, including spdlog for console logging, GLFW for setting up the OpenGL rendering context and input handling, Glad for load generating, glm for an OpenGL math library, and imgui for in-app user interface customization. Then came the monstrous task of abstracting all of these elements away for use by the sandbox environment…
