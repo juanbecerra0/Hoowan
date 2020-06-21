@@ -8,9 +8,4 @@ namespace Hoowan {
 	{
 	}
 
-	Layer::~Layer()
-	{
-
-	}
-
 }
