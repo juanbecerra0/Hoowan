@@ -4,7 +4,7 @@
 
 #include "Hoowan/Log.h"
 
-#include <glad/glad.h>
+#include "Hoowan/Renderer/Renderer.h"
 
 #include "Input.h"
 
@@ -24,16 +24,15 @@ namespace Hoowan {
 		m_ImGuiLayer = new ImGuiLayer();
 		PushOverlay(m_ImGuiLayer);
 
-		// OpenGL triangle 
-
+		// Triangle verticies
 		m_VertexArray.reset(VertexArray::Create());
-
 		float vertices[3 * 7] = {
 			-0.5f, -0.5f, 0.0f, 0.8f, 0.2f, 0.8f, 1.0f,
 			 0.5f, -0.5f, 0.0f, 0.2f, 0.3f, 0.8f, 1.0f,
 			 0.0f,  0.5f, 0.0f, 0.8f, 0.8f, 0.2f, 1.0f
 		};
 
+		// Set up vertex buffer
 		std::shared_ptr<VertexBuffer> vertexBuffer;
 		vertexBuffer.reset(VertexBuffer::Create(vertices, sizeof(vertices)));
 
@@ -41,16 +40,18 @@ namespace Hoowan {
 			{ ShaderDataType::Float3, "a_Position" },
 			{ ShaderDataType::Float4, "a_Color" }
 		};
+
 		vertexBuffer->SetLayout(layout);
 		m_VertexArray->AddVertexBuffer(vertexBuffer);
 
+		// Set up index buffer
 		uint32_t indices[3] = { 0, 1, 2 };
 		std::shared_ptr<IndexBuffer> indexBuffer;
 		indexBuffer.reset(IndexBuffer::Create(indices, sizeof(indices) / sizeof(uint32_t)));
 		m_VertexArray->SetIndexBuffer(indexBuffer);
 
+		// Square verticies
 		m_SquareVA.reset(VertexArray::Create());
-
 		float squareVertices[3 * 4] = {
 			-0.75f, -0.75f, 0.0f,
 			 0.75f, -0.75f, 0.0f,
@@ -58,18 +59,22 @@ namespace Hoowan {
 			-0.75f,  0.75f, 0.0f
 		};
 
+		// Set up vertex buffer
 		std::shared_ptr<VertexBuffer> squareVB;
 		squareVB.reset(VertexBuffer::Create(squareVertices, sizeof(squareVertices)));
+
 		squareVB->SetLayout({
 			{ ShaderDataType::Float3, "a_Position" }
 			});
 		m_SquareVA->AddVertexBuffer(squareVB);
 
+		// Set up index buffer
 		uint32_t squareIndices[6] = { 0, 1, 2, 2, 3, 0 };
 		std::shared_ptr<IndexBuffer> squareIB;
 		squareIB.reset(IndexBuffer::Create(squareIndices, sizeof(squareIndices) / sizeof(uint32_t)));
 		m_SquareVA->SetIndexBuffer(squareIB);
 
+		// Triangle shaders
 		std::string vertexSrc = R"(
 			#version 330 core
 			
@@ -102,6 +107,7 @@ namespace Hoowan {
 
 		m_Shader.reset(new Shader(vertexSrc, fragmentSrc));
 
+		// Square shader
 		std::string blueShaderVertexSrc = R"(
 			#version 330 core
 			
@@ -157,17 +163,21 @@ namespace Hoowan {
 		WindowResizeEvent e(1280, 720);
 
 		while (m_Running) {
-			// Draw triangle
-			glClearColor(0.1f, 0.1f, 0.1f, 1);
-			glClear(GL_COLOR_BUFFER_BIT);
+			// Clear  buffer
+			RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1 });
+			RenderCommand::Clear();
 
+			Renderer::BeginScene();
+
+			// Draw square
 			m_BlueShader->Bind();
-			m_SquareVA->Bind();
-			glDrawElements(GL_TRIANGLES, m_SquareVA->GetIndexBuffer()->GetCount(), GL_UNSIGNED_INT, nullptr);
+			Renderer::Submit(m_SquareVA);
 
+			// Draw triangle
 			m_Shader->Bind();
-			m_VertexArray->Bind();
-			glDrawElements(GL_TRIANGLES, m_VertexArray->GetIndexBuffer()->GetCount(), GL_UNSIGNED_INT, nullptr);
+			Renderer::Submit(m_VertexArray);
+
+			Renderer::EndScene();
 
 			for (Layer* layer : m_LayerStack)
 				layer->OnUpdate();
@@ -176,9 +186,6 @@ namespace Hoowan {
 			for (Layer* layer : m_LayerStack)
 				layer->OnImGuiRender();
 			m_ImGuiLayer->End();
-
-			//auto [x, y] = Input::GetMousePosition();
-			//HW_CORE_TRACE("{0}, {1}", x, y);
 
 			m_Window->OnUpdate();
 		}
