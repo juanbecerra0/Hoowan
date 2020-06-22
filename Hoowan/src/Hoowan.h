@@ -12,5 +12,15 @@
 
 #include "Hoowan/ImGui/ImGuiLayer.h"
 
+// Renderer
+#include "Hoowan/Renderer/Renderer.h"
+#include "Hoowan/Renderer/RenderCommand.h"
+
+#include "Hoowan/Renderer/Buffer.h"
+#include "Hoowan/Renderer/Shader.h"
+#include "Hoowan/Renderer/VertexArray.h"
+
+#include "Hoowan/Renderer/OrthographicCamera.h"
+
 // Entry point
 #include "Hoowan/EntryPoint.h"
