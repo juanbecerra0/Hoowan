@@ -13,6 +13,8 @@
 #include "Hoowan/Renderer/Buffer.h"
 #include "Hoowan/Renderer/VertexArray.h"
 
+#include "Hoowan/Renderer/OrthographicCamera.h"
+
 namespace Hoowan {
 
 	class HOOWAN_API Application {
@@ -44,6 +46,8 @@ namespace Hoowan {
 
 		std::shared_ptr<Shader> m_BlueShader;
 		std::shared_ptr<VertexArray> m_SquareVA;
+
+		OrthographicCamera m_Camera;
 
 		static Application* s_Instance;
 	};
