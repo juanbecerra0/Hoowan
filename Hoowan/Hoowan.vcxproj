@@ -140,6 +140,7 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\Hoowan\Core\Timestep.h" />
     <ClInclude Include="src\Hoowan\Renderer\Buffer.h" />
     <ClInclude Include="src\Hoowan\Renderer\OrthographicCamera.h" />
     <ClInclude Include="src\Hoowan\Renderer\RenderCommand.h" />

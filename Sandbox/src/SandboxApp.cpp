@@ -126,35 +126,37 @@ public:
 
 	}
 
-	void OnUpdate() override
+	void OnUpdate(Hoowan::Timestep ts) override
 	{
+		float time = ts;
+
 		// Up/down movement
 		if (Hoowan::Input::IsKeyPressed(HW_KEY_W))
 		{
-			m_CameraPosition.y -= m_CameraMoveSpeed;
+			m_CameraPosition.y -= m_CameraMoveSpeed * ts;
 		}else if (Hoowan::Input::IsKeyPressed(HW_KEY_S))
 		{
-			m_CameraPosition.y += m_CameraMoveSpeed;
+			m_CameraPosition.y += m_CameraMoveSpeed * ts;
 		}
 
 		// Left/right movement
 		if (Hoowan::Input::IsKeyPressed(HW_KEY_A))
 		{
-			m_CameraPosition.x += m_CameraMoveSpeed;
+			m_CameraPosition.x += m_CameraMoveSpeed * ts;
 		}
 		else if (Hoowan::Input::IsKeyPressed(HW_KEY_D))
 		{
-			m_CameraPosition.x -= m_CameraMoveSpeed;
+			m_CameraPosition.x -= m_CameraMoveSpeed * ts;
 		}
 
 		// Rotation
 		if (Hoowan::Input::IsKeyPressed(HW_KEY_Q))
 		{
-			m_CameraRotation -= m_CameraRotationSpeed;
+			m_CameraRotation -= m_CameraRotationSpeed * ts;
 		}
 		else if (Hoowan::Input::IsKeyPressed(HW_KEY_E))
 		{
-			m_CameraRotation += m_CameraRotationSpeed;
+			m_CameraRotation += m_CameraRotationSpeed * ts;
 		}
 
 		// Clear  buffer
@@ -191,11 +193,13 @@ private:
 
 	Hoowan::OrthographicCamera m_Camera;
 
+	// Speeds are per second
+
 	glm::vec3 m_CameraPosition;
-	float m_CameraMoveSpeed = 0.01f;
+	float m_CameraMoveSpeed = 2.0f;
 
 	float m_CameraRotation;
-	float m_CameraRotationSpeed = 2.0f;
+	float m_CameraRotationSpeed = 90.0f;
 };
 
 class Sandbox : public Hoowan::Application {

@@ -6,6 +6,8 @@
 #include "Hoowan/Layer.h"
 #include "Hoowan/Log.h"
 
+#include "Hoowan/Core/Timestep.h"
+
 #include "Hoowan/Input.h"
 #include "Hoowan/KeyCodes.h"
 #include "Hoowan/MouseButtonCodes.h"
