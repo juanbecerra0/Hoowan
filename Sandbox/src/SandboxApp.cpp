@@ -1,8 +1,11 @@
 #include <Hoowan.h>
 
+#include "Platform/OpenGL/OpenGLShader.h"
+
 #include "imgui/imgui.h"
 
-#include <glm/gtc/matrix_transform.hpp>	// temp! (maybe?)
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
 
 class ExampleLayer : public Hoowan::Layer
 {
@@ -95,7 +98,7 @@ public:
 			}
 		)";
 
-		m_Shader.reset(new Hoowan::Shader(vertexSrc, fragmentSrc));
+		m_Shader.reset(Hoowan::Shader::Create(vertexSrc, fragmentSrc));
 
 		// Square shader
 		std::string blueShaderVertexSrc = R"(
@@ -115,18 +118,22 @@ public:
 			}
 		)";
 
-		std::string blueShaderFragmentSrc = R"(
+		std::string flatColorShaderFragmentSrc = R"(
 			#version 330 core
 			
-			layout(location = 0) out vec4 color;
+			layout(location = 0) out vec4 color;			
+
 			in vec3 v_Position;
+			
+			uniform vec3 u_Color;
+
 			void main()
 			{
-				color = vec4(0.2, 0.3, 0.8, 1.0);
+				color = vec4(u_Color, 1.0f);
 			}
 		)";
 
-		m_BlueShader.reset(new Hoowan::Shader(blueShaderVertexSrc, blueShaderFragmentSrc));
+		m_FlatColorShader.reset(Hoowan::Shader::Create(blueShaderVertexSrc, flatColorShaderFragmentSrc));
 
 	}
 
@@ -199,12 +206,28 @@ public:
 		
 		glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.1f));
 
+		glm::vec4 redColor(0.8f, 0.2f, 0.3f, 1.0f);
+		glm::vec4 blueColor(0.2f, 0.3f, 0.8f, 1.0f);
+
+		std::dynamic_pointer_cast<Hoowan::OpenGLShader>(m_FlatColorShader) -> Bind();
+		std::dynamic_pointer_cast<Hoowan::OpenGLShader>(m_FlatColorShader)->UploadUniformFloat3("u_Color", m_SquareColor);
+
+		/*
+		Hoowan::MaterialRef material = new Hoowan::Material(m_FlatColorShader);
+		Hoowan::MaterialInstanceRef mi = new Hoowan::MaterialInstance(material);
+
+		mi -> SetValue("u_Color", redColor);
+		mi -> SetTexture("u_AlbedoMap", texture);
+
+		squareMesh->SetMaterial(mi);
+		*/
+
 		for (int i = 0; i < 25; i++) {
 			for (int j = 0; j < 25; j++) {
 				glm::vec3 pos(i * 0.12f, j * 0.12f, 0.0f);
 				glm::mat4 transform = glm::translate(glm::mat4(1.0f), pos) * scale;
 
-				Hoowan::Renderer::Submit(m_BlueShader, m_SquareVA, transform);
+				Hoowan::Renderer::Submit(m_FlatColorShader, m_SquareVA, transform);
 			}
 		}
 		
@@ -216,7 +239,9 @@ public:
 
 	virtual void OnImGuiRender() override
 	{
-		
+		ImGui::Begin("Settings");
+		ImGui::ColorEdit3("Square Color", glm::value_ptr(m_SquareColor));
+		ImGui::End();
 	}
 
 	void OnEvent(Hoowan::Event& event) override
@@ -225,10 +250,10 @@ public:
 	}
 
 private:
-	std::shared_ptr<Hoowan::Shader> m_Shader;
+	std::unique_ptr<Hoowan::Shader> m_Shader;
 	std::shared_ptr<Hoowan::VertexArray> m_VertexArray;
 
-	std::shared_ptr<Hoowan::Shader> m_BlueShader;
+	std::shared_ptr<Hoowan::Shader> m_FlatColorShader;
 	std::shared_ptr<Hoowan::VertexArray> m_SquareVA;
 
 	Hoowan::OrthographicCamera m_Camera;
@@ -243,6 +268,8 @@ private:
 
 	glm::vec3 m_SquarePosition;
 	float m_SquareMoveSpeed = 2.0f;
+
+	glm::vec3 m_SquareColor = { 0.2f, 0.3f, 0.8f };
 };
 
 class Sandbox : public Hoowan::Application {
