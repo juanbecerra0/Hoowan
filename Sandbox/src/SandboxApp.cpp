@@ -2,12 +2,14 @@
 
 #include "imgui/imgui.h"
 
+#include <glm/gtc/matrix_transform.hpp>	// temp! (maybe?)
+
 class ExampleLayer : public Hoowan::Layer
 {
 public:
 	ExampleLayer()
 		: Layer("Example"), m_Camera(-1.6f, 1.6f, -0.9f, 0.9f),
-		m_CameraPosition(0.0f), m_CameraRotation(0.0f)
+		m_CameraPosition(0.0f), m_CameraRotation(0.0f), m_SquarePosition(0.0f)
 	{
 		// Triangle verticies
 		m_VertexArray.reset(Hoowan::VertexArray::Create());
@@ -38,10 +40,10 @@ public:
 		// Square verticies
 		m_SquareVA.reset(Hoowan::VertexArray::Create());
 		float squareVertices[3 * 4] = {
-			-0.75f, -0.75f, 0.0f,
-			 0.75f, -0.75f, 0.0f,
-			 0.75f,  0.75f, 0.0f,
-			-0.75f,  0.75f, 0.0f
+			-0.5f, -0.5f, 0.0f,
+			 0.5f, -0.5f, 0.0f,
+			 0.5f,  0.5f, 0.0f,
+			-0.5f,  0.5f, 0.0f
 		};
 
 		// Set up vertex buffer
@@ -67,6 +69,7 @@ public:
 			layout(location = 1) in vec4 a_Color;
 
 			uniform mat4 u_ViewProjection;
+			uniform mat4 u_Transform;
 
 			out vec3 v_Position;
 			out vec4 v_Color;
@@ -75,7 +78,7 @@ public:
 			{
 				v_Position = a_Position;
 				v_Color = a_Color;
-				gl_Position = u_ViewProjection * vec4(a_Position, 1.0);	
+				gl_Position = u_ViewProjection * u_Transform * vec4(a_Position, 1.0);	
 			}
 		)";
 
@@ -101,13 +104,14 @@ public:
 			layout(location = 0) in vec3 a_Position;
 
 			uniform mat4 u_ViewProjection;
+			uniform mat4 u_Transform;
 
 			out vec3 v_Position;
 
 			void main()
 			{
 				v_Position = a_Position;
-				gl_Position = u_ViewProjection * vec4(a_Position, 1.0);	
+				gl_Position = u_ViewProjection * u_Transform * vec4(a_Position, 1.0);	
 			}
 		)";
 
@@ -130,33 +134,57 @@ public:
 	{
 		float time = ts;
 
+		// Camera interaction
+
+		// Up/down movement
+		if (Hoowan::Input::IsKeyPressed(HW_KEY_I))
+		{
+			m_CameraPosition.y += m_CameraMoveSpeed * ts;
+		}else if (Hoowan::Input::IsKeyPressed(HW_KEY_K))
+		{
+			m_CameraPosition.y -= m_CameraMoveSpeed * ts;
+		}
+
+		// Left/right movement
+		if (Hoowan::Input::IsKeyPressed(HW_KEY_J))
+		{
+			m_CameraPosition.x -= m_CameraMoveSpeed * ts;
+		}
+		else if (Hoowan::Input::IsKeyPressed(HW_KEY_L))
+		{
+			m_CameraPosition.x += m_CameraMoveSpeed * ts;
+		}
+
+		// Rotation
+		if (Hoowan::Input::IsKeyPressed(HW_KEY_U))
+		{
+			m_CameraRotation -= m_CameraRotationSpeed * ts;
+		}
+		else if (Hoowan::Input::IsKeyPressed(HW_KEY_O))
+		{
+			m_CameraRotation += m_CameraRotationSpeed * ts;
+		}
+
+		// Model interaction 
+
 		// Up/down movement
 		if (Hoowan::Input::IsKeyPressed(HW_KEY_W))
 		{
-			m_CameraPosition.y -= m_CameraMoveSpeed * ts;
-		}else if (Hoowan::Input::IsKeyPressed(HW_KEY_S))
+			m_SquarePosition.y += m_SquareMoveSpeed * ts;
+		}
+		else if (Hoowan::Input::IsKeyPressed(HW_KEY_S))
 		{
-			m_CameraPosition.y += m_CameraMoveSpeed * ts;
+			m_SquarePosition.y -= m_SquareMoveSpeed * ts;
 		}
 
 		// Left/right movement
 		if (Hoowan::Input::IsKeyPressed(HW_KEY_A))
 		{
-			m_CameraPosition.x += m_CameraMoveSpeed * ts;
+			m_SquarePosition.x -= m_SquareMoveSpeed * ts;
 		}
 		else if (Hoowan::Input::IsKeyPressed(HW_KEY_D))
 		{
-			m_CameraPosition.x -= m_CameraMoveSpeed * ts;
-		}
-
-		// Rotation
-		if (Hoowan::Input::IsKeyPressed(HW_KEY_Q))
-		{
-			m_CameraRotation -= m_CameraRotationSpeed * ts;
-		}
-		else if (Hoowan::Input::IsKeyPressed(HW_KEY_E))
-		{
-			m_CameraRotation += m_CameraRotationSpeed * ts;
+			m_SquarePosition.x += m_SquareMoveSpeed * ts;
 		}
 
 		// Clear  buffer
@@ -168,8 +196,20 @@ public:
 
 		Hoowan::Renderer::BeginScene(m_Camera);
 
-		Hoowan::Renderer::Submit(m_BlueShader, m_SquareVA);
-		Hoowan::Renderer::Submit(m_Shader, m_VertexArray);
+		
+		glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.1f));
+
+		for (int i = 0; i < 25; i++) {
+			for (int j = 0; j < 25; j++) {
+				glm::vec3 pos(i * 0.12f, j * 0.12f, 0.0f);
+				glm::mat4 transform = glm::translate(glm::mat4(1.0f), pos) * scale;
+
+				Hoowan::Renderer::Submit(m_BlueShader, m_SquareVA, transform);
+			}
+		}
+		
+		glm::mat4 transform = glm::translate(glm::mat4(1.0f), m_SquarePosition);
+		Hoowan::Renderer::Submit(m_Shader, m_VertexArray, transform);
 
 		Hoowan::Renderer::EndScene();
 	}
@@ -200,6 +240,9 @@ private:
 
 	float m_CameraRotation;
 	float m_CameraRotationSpeed = 90.0f;
+
+	glm::vec3 m_SquarePosition;
+	float m_SquareMoveSpeed = 2.0f;
 };
 
 class Sandbox : public Hoowan::Application {
