@@ -141,9 +141,12 @@ public:
 			
 			layout(location = 0) in vec3 a_Position;
 			layout(location = 1) in vec2 a_TexCoord;
+
 			uniform mat4 u_ViewProjection;
 			uniform mat4 u_Transform;
+
 			out vec2 v_TexCoord;
+
 			void main()
 			{
 				v_TexCoord = a_TexCoord;
@@ -167,6 +170,7 @@ public:
 		m_TextureShader.reset(Hoowan::Shader::Create(textureShaderVertexSrc, textureShaderFragmentSrc));
 
 		m_Texture = Hoowan::Texture2D::Create("assets/textures/test.png");
+		m_TransTexture = Hoowan::Texture2D::Create("assets/textures/trans.png");
 
 		std::dynamic_pointer_cast<Hoowan::OpenGLShader>(m_TextureShader)->Bind();
 		std::dynamic_pointer_cast<Hoowan::OpenGLShader>(m_TextureShader)->UploadUniformInt("u_Texture", 0);
@@ -234,44 +238,39 @@ public:
 		Hoowan::RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1 });
 		Hoowan::RenderCommand::Clear();
 
+		// Set camera
 		m_Camera.SetPosition(m_CameraPosition);
 		m_Camera.SetRotation(m_CameraRotation);
 
+		// Begine scene
 		Hoowan::Renderer::BeginScene(m_Camera);
-
 		
+		// Setup for little squares
 		glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.1f));
-
-		glm::vec4 redColor(0.8f, 0.2f, 0.3f, 1.0f);
-		glm::vec4 blueColor(0.2f, 0.3f, 0.8f, 1.0f);
-
 		std::dynamic_pointer_cast<Hoowan::OpenGLShader>(m_FlatColorShader) -> Bind();
 		std::dynamic_pointer_cast<Hoowan::OpenGLShader>(m_FlatColorShader)->UploadUniformFloat3("u_Color", m_SquareColor);
 
-		/*
-		Hoowan::MaterialRef material = new Hoowan::Material(m_FlatColorShader);
-		Hoowan::MaterialInstanceRef mi = new Hoowan::MaterialInstance(material);
-
-		mi -> SetValue("u_Color", redColor);
-		mi -> SetTexture("u_AlbedoMap", texture);
-
-		squareMesh->SetMaterial(mi);
-		*/
-
-		for (int i = 0; i < 25; i++) {
-			for (int j = 0; j < 25; j++) {
+		// Submit little squares
+		for (int i = -20; i < 20; i++) {
+			for (int j = -20; j < 20; j++) {
 				glm::vec3 pos(i * 0.12f, j * 0.12f, 0.0f);
 				glm::mat4 transform = glm::translate(glm::mat4(1.0f), pos) * scale;
 
 				Hoowan::Renderer::Submit(m_FlatColorShader, m_SquareVA, transform);
 			}
 		}
-		
-		glm::mat4 transform = glm::translate(glm::mat4(1.0f), m_SquarePosition);
-		Hoowan::Renderer::Submit(m_Shader, m_VertexArray, transform);
 
+		// Submit textured square
+		
 		m_Texture->Bind();
 		Hoowan::Renderer::Submit(m_TextureShader, m_SquareVA, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
+		
+		m_TransTexture->Bind();
+		Hoowan::Renderer::Submit(m_TextureShader, m_SquareVA, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
+
+		// Submit triangle
+		glm::mat4 transform = glm::translate(glm::mat4(1.0f), m_SquarePosition);
+		Hoowan::Renderer::Submit(m_Shader, m_VertexArray, transform);
 
 		Hoowan::Renderer::EndScene();
 	}
@@ -295,7 +294,7 @@ private:
 	Hoowan::Ref<Hoowan::Shader> m_FlatColorShader, m_TextureShader;
 	Hoowan::Ref<Hoowan::VertexArray> m_SquareVA;
 
-	Hoowan::Ref<Hoowan::Texture2D> m_Texture;
+	Hoowan::Ref<Hoowan::Texture2D> m_Texture, m_TransTexture;
 
 	Hoowan::OrthographicCamera m_Camera;
 

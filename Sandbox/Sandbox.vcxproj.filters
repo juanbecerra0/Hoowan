@@ -23,5 +23,8 @@
     <Image Include="assets\textures\test.png">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="assets\textures\dots.png">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>
