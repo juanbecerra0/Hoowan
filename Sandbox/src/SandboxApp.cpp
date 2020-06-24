@@ -6,13 +6,14 @@
 
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
+#include <glm\glm\gtx\quaternion.hpp>
 
 class ExampleLayer : public Hoowan::Layer
 {
 public:
 	ExampleLayer()
 		: Layer("Example"), m_Camera(-1.6f, 1.6f, -0.9f, 0.9f),
-		m_CameraPosition(0.0f), m_CameraRotation(0.0f), m_SquarePosition(0.0f)
+		m_CameraPosition(0.0f), m_CameraRotation(0.0f), m_TrianglePosition(0.0f), m_TriangleRotation(0.0f)
 	{
 		// Triangle verticies
 		m_VertexArray.reset(Hoowan::VertexArray::Create());
@@ -217,21 +218,31 @@ public:
 		// Up/down movement
 		if (Hoowan::Input::IsKeyPressed(HW_KEY_W))
 		{
-			m_SquarePosition.y += m_SquareMoveSpeed * ts;
+			m_TrianglePosition.y += m_TriangleMoveSpeed * ts;
 		}
 		else if (Hoowan::Input::IsKeyPressed(HW_KEY_S))
 		{
-			m_SquarePosition.y -= m_SquareMoveSpeed * ts;
+			m_TrianglePosition.y -= m_TriangleMoveSpeed * ts;
 		}
 
 		// Left/right movement
 		if (Hoowan::Input::IsKeyPressed(HW_KEY_A))
 		{
-			m_SquarePosition.x -= m_SquareMoveSpeed * ts;
+			m_TrianglePosition.x -= m_TriangleMoveSpeed * ts;
 		}
 		else if (Hoowan::Input::IsKeyPressed(HW_KEY_D))
 		{
-			m_SquarePosition.x += m_SquareMoveSpeed * ts;
+			m_TrianglePosition.x += m_TriangleMoveSpeed * ts;
+		}
+
+		// Rotation
+		if (Hoowan::Input::IsKeyPressed(HW_KEY_Q))
+		{
+			m_TriangleRotation += m_TriangleRotationSpeed * ts;
+		}
+		else if (Hoowan::Input::IsKeyPressed(HW_KEY_E))
+		{
+			m_TriangleRotation -= m_TriangleRotationSpeed * ts;
 		}
 
 		// Clear  buffer
@@ -269,7 +280,8 @@ public:
 		Hoowan::Renderer::Submit(m_TextureShader, m_SquareVA, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
 
 		// Submit triangle
-		glm::mat4 transform = glm::translate(glm::mat4(1.0f), m_SquarePosition);
+		glm::mat4 transform = glm::translate(glm::mat4(1.0f), m_TrianglePosition);
+		transform = glm::rotate(transform, glm::radians(m_TriangleRotation), glm::vec3(0.0f, 0.0f, 1.0f));
 		Hoowan::Renderer::Submit(m_Shader, m_VertexArray, transform);
 
 		Hoowan::Renderer::EndScene();
@@ -306,8 +318,11 @@ private:
 	float m_CameraRotation;
 	float m_CameraRotationSpeed = 90.0f;
 
-	glm::vec3 m_SquarePosition;
-	float m_SquareMoveSpeed = 2.0f;
+	glm::vec3 m_TrianglePosition;
+	float m_TriangleMoveSpeed = 2.0f;
+
+	float m_TriangleRotation;
+	float m_TriangleRotationSpeed = 90.0f;
 
 	glm::vec3 m_SquareColor = { 0.2f, 0.3f, 0.8f };
 };
