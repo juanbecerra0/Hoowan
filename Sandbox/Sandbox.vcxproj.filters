@@ -20,11 +20,8 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="assets\textures\test.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="assets\textures\dots.png">
-      <Filter>Resource Files</Filter>
-    </Image>
+    <None Include="assets\shaders\Texture.glsl" />
+    <None Include="assets\shaders\TriLerp.glsl" />
+    <None Include="assets\shaders\FlatColor.glsl" />
   </ItemGroup>
 </Project>

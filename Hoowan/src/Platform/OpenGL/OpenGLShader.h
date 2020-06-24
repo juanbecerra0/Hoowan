@@ -1,12 +1,18 @@
 #pragma once
 
 #include "Hoowan/Renderer/Shader.h"
+#include <glm/glm.hpp>
+
+// TODO
+// This is awful, remove later lol
+typedef unsigned int GLenum;
 
 namespace Hoowan {
 
 	class OpenGLShader : public Shader
 	{
 	public:
+		OpenGLShader(const std::string& filepath);
 		OpenGLShader(const std::string& vertexSrc, const std::string& fragmentSrc);
 		virtual ~OpenGLShader();
 
@@ -22,6 +28,10 @@ namespace Hoowan {
 
 		void UploadUniformMat3(const std::string& name, const glm::mat4& matrix);
 		void UploadUniformMat4(const std::string& name, const glm::mat4& matrix);
+	private:
+		std::string ReadFile(const std::string filepath);
+		std::unordered_map<GLenum, std::string> PreProcess(const std::string& source);
+		void Compile(std::unordered_map<GLenum, std::string>& shaderSourceMap);
 	private:
 		uint32_t m_RendererID;
 	};
