@@ -67,9 +67,9 @@ public:
 		m_SquareVA->SetIndexBuffer(squareIB);
 
 		// Compile Shaders
-		m_Shader.reset(Hoowan::Shader::Create("assets/shaders/TriLerp.glsl"));
-		m_FlatColorShader.reset(Hoowan::Shader::Create("assets/shaders/FlatColor.glsl"));
-		m_TextureShader.reset(Hoowan::Shader::Create("assets/shaders/Texture.glsl"));
+		m_Shader = (Hoowan::Shader::Create("assets/shaders/TriLerp.glsl"));
+		m_FlatColorShader = (Hoowan::Shader::Create("assets/shaders/FlatColor.glsl"));
+		m_TextureShader = (Hoowan::Shader::Create("assets/shaders/Texture.glsl"));
 
 		// Feed texture into shaders
 		m_Texture = Hoowan::Texture2D::Create("assets/textures/test.png");
@@ -191,6 +191,7 @@ public:
 
 	virtual void OnImGuiRender() override
 	{
+		// Square color window
 		ImGui::Begin("Settings");
 		ImGui::ColorEdit3("Square Color", glm::value_ptr(m_SquareColor));
 		ImGui::End();
