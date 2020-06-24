@@ -17,6 +17,7 @@ IncludeDir["GLFW"] = "Hoowan/vendor/GLFW/include"
 IncludeDir["Glad"] = "Hoowan/vendor/Glad/include"
 IncludeDir["ImGui"] = "Hoowan/vendor/imgui"
 IncludeDir["glm"] = "Hoowan/vendor/glm"
+IncludeDir["stb_image"] = "Hoowan/vendor/stb_image"
 
 group "Dependencies"
 	include "Hoowan/vendor/GLFW"
@@ -42,6 +43,8 @@ project "Hoowan"
 	{
 		"%{prj.name}/src/**.h",
 		"%{prj.name}/src/**.cpp",
+		"%{prj.name}/vendor/stb_image/**.h",
+		"%{prj.name}/vendor/stb_image/**.cpp",
 		"%{prj.name}/vendor/glm/glm/**.hpp",
 		"%{prj.name}/vendor/glm/glm/**.inl",
 	}
@@ -58,7 +61,8 @@ project "Hoowan"
 		"%{IncludeDir.GLFW}",
 		"%{IncludeDir.Glad}",
 		"%{IncludeDir.ImGui}",
-		"%{IncludeDir.glm}"
+		"%{IncludeDir.glm}",
+		"%{IncludeDir.stb_image}"
 	}
 
 	links 

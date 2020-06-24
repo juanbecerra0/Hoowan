@@ -23,7 +23,7 @@ public:
 		};
 
 		// Set up vertex buffer
-		std::shared_ptr<Hoowan::VertexBuffer> vertexBuffer;
+		Hoowan::Ref<Hoowan::VertexBuffer> vertexBuffer;
 		vertexBuffer.reset(Hoowan::VertexBuffer::Create(vertices, sizeof(vertices)));
 
 		Hoowan::BufferLayout layout = {
@@ -36,31 +36,32 @@ public:
 
 		// Set up index buffer
 		uint32_t indices[3] = { 0, 1, 2 };
-		std::shared_ptr<Hoowan::IndexBuffer> indexBuffer;
+		Hoowan::Ref<Hoowan::IndexBuffer> indexBuffer;
 		indexBuffer.reset(Hoowan::IndexBuffer::Create(indices, sizeof(indices) / sizeof(uint32_t)));
 		m_VertexArray->SetIndexBuffer(indexBuffer);
 
 		// Square verticies
 		m_SquareVA.reset(Hoowan::VertexArray::Create());
-		float squareVertices[3 * 4] = {
-			-0.5f, -0.5f, 0.0f,
-			 0.5f, -0.5f, 0.0f,
-			 0.5f,  0.5f, 0.0f,
-			-0.5f,  0.5f, 0.0f
+		float squareVertices[5 * 4] = {
+			-0.5f, -0.5f, 0.0f, 0.0f, 0.0f,
+			 0.5f, -0.5f, 0.0f, 1.0f, 0.0f,
+			 0.5f,  0.5f, 0.0f, 1.0f, 1.0f,
+			-0.5f,  0.5f, 0.0f, 0.0f, 1.0f
 		};
 
 		// Set up vertex buffer
-		std::shared_ptr<Hoowan::VertexBuffer> squareVB;
+		Hoowan::Ref<Hoowan::VertexBuffer> squareVB;
 		squareVB.reset(Hoowan::VertexBuffer::Create(squareVertices, sizeof(squareVertices)));
 
 		squareVB->SetLayout({
-			{ Hoowan::ShaderDataType::Float3, "a_Position" }
+			{ Hoowan::ShaderDataType::Float3, "a_Position" },
+			{ Hoowan::ShaderDataType::Float2, "a_TexCoord" }
 			});
 		m_SquareVA->AddVertexBuffer(squareVB);
 
 		// Set up index buffer
 		uint32_t squareIndices[6] = { 0, 1, 2, 2, 3, 0 };
-		std::shared_ptr<Hoowan::IndexBuffer> squareIB;
+		Hoowan::Ref<Hoowan::IndexBuffer> squareIB;
 		squareIB.reset(Hoowan::IndexBuffer::Create(squareIndices, sizeof(squareIndices) / sizeof(uint32_t)));
 		m_SquareVA->SetIndexBuffer(squareIB);
 
@@ -134,6 +135,41 @@ public:
 		)";
 
 		m_FlatColorShader.reset(Hoowan::Shader::Create(blueShaderVertexSrc, flatColorShaderFragmentSrc));
+
+		std::string textureShaderVertexSrc = R"(
+			#version 330 core
+			
+			layout(location = 0) in vec3 a_Position;
+			layout(location = 1) in vec2 a_TexCoord;
+			uniform mat4 u_ViewProjection;
+			uniform mat4 u_Transform;
+			out vec2 v_TexCoord;
+			void main()
+			{
+				v_TexCoord = a_TexCoord;
+				gl_Position = u_ViewProjection * u_Transform * vec4(a_Position, 1.0);	
+			}
+		)";
+
+		std::string textureShaderFragmentSrc = R"(
+			#version 330 core
+			
+			layout(location = 0) out vec4 color;
+			in vec2 v_TexCoord;
+			
+			uniform sampler2D u_Texture;
+			void main()
+			{
+				color = texture(u_Texture, v_TexCoord);
+			}
+		)";
+
+		m_TextureShader.reset(Hoowan::Shader::Create(textureShaderVertexSrc, textureShaderFragmentSrc));
+
+		m_Texture = Hoowan::Texture2D::Create("assets/textures/test.png");
+
+		std::dynamic_pointer_cast<Hoowan::OpenGLShader>(m_TextureShader)->Bind();
+		std::dynamic_pointer_cast<Hoowan::OpenGLShader>(m_TextureShader)->UploadUniformInt("u_Texture", 0);
 
 	}
 
@@ -234,6 +270,9 @@ public:
 		glm::mat4 transform = glm::translate(glm::mat4(1.0f), m_SquarePosition);
 		Hoowan::Renderer::Submit(m_Shader, m_VertexArray, transform);
 
+		m_Texture->Bind();
+		Hoowan::Renderer::Submit(m_TextureShader, m_SquareVA, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
+
 		Hoowan::Renderer::EndScene();
 	}
 
@@ -250,11 +289,13 @@ public:
 	}
 
 private:
-	std::unique_ptr<Hoowan::Shader> m_Shader;
-	std::shared_ptr<Hoowan::VertexArray> m_VertexArray;
+	Hoowan::Ref<Hoowan::Shader> m_Shader;
+	Hoowan::Ref<Hoowan::VertexArray> m_VertexArray;
+				
+	Hoowan::Ref<Hoowan::Shader> m_FlatColorShader, m_TextureShader;
+	Hoowan::Ref<Hoowan::VertexArray> m_SquareVA;
 
-	std::shared_ptr<Hoowan::Shader> m_FlatColorShader;
-	std::shared_ptr<Hoowan::VertexArray> m_SquareVA;
+	Hoowan::Ref<Hoowan::Texture2D> m_Texture;
 
 	Hoowan::OrthographicCamera m_Camera;
 

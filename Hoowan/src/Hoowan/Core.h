@@ -1,5 +1,7 @@
 #pragma once
 
+#include <memory>
+
 #ifdef HW_PLATFORM_WINDOWS
 	#if HW_DYNAMIC_LINK
 		#ifdef HW_BUILD_DLL
