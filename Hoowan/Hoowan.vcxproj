@@ -140,6 +140,7 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\Hoowan\OrthographicCameraController.h" />
     <ClInclude Include="src\Hoowan.h" />
     <ClInclude Include="src\Hoowan\Application.h" />
     <ClInclude Include="src\Hoowan\Core.h" />
@@ -586,6 +587,7 @@
     <ClInclude Include="vendor\stb_image\stb_image.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Hoowan\OrthographicCameraController.cpp" />
     <ClCompile Include="src\Hoowan\Application.cpp" />
     <ClCompile Include="src\Hoowan\ImGui\ImGuiBuild.cpp" />
     <ClCompile Include="src\Hoowan\ImGui\ImGuiLayer.cpp" />

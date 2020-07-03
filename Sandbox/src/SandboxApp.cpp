@@ -12,8 +12,7 @@ class ExampleLayer : public Hoowan::Layer
 {
 public:
 	ExampleLayer()
-		: Layer("Example"), m_Camera(-1.6f, 1.6f, -0.9f, 0.9f),
-		m_CameraPosition(0.0f), m_CameraRotation(0.0f), m_TrianglePosition(0.0f), m_TriangleRotation(0.0f)
+		: Layer("Example"), m_CameraController(1920.0f / 1080.0f, true)
 	{
 		// Triangle verticies
 		m_VertexArray.reset(Hoowan::VertexArray::Create());
@@ -84,37 +83,6 @@ public:
 	{
 		float time = ts;
 
-		// Camera interaction
-
-		// Up/down movement
-		if (Hoowan::Input::IsKeyPressed(HW_KEY_I))
-		{
-			m_CameraPosition.y += m_CameraMoveSpeed * ts;
-		}else if (Hoowan::Input::IsKeyPressed(HW_KEY_K))
-		{
-			m_CameraPosition.y -= m_CameraMoveSpeed * ts;
-		}
-
-		// Left/right movement
-		if (Hoowan::Input::IsKeyPressed(HW_KEY_J))
-		{
-			m_CameraPosition.x -= m_CameraMoveSpeed * ts;
-		}
-		else if (Hoowan::Input::IsKeyPressed(HW_KEY_L))
-		{
-			m_CameraPosition.x += m_CameraMoveSpeed * ts;
-		}
-
-		// Rotation
-		if (Hoowan::Input::IsKeyPressed(HW_KEY_U))
-		{
-			m_CameraRotation -= m_CameraRotationSpeed * ts;
-		}
-		else if (Hoowan::Input::IsKeyPressed(HW_KEY_O))
-		{
-			m_CameraRotation += m_CameraRotationSpeed * ts;
-		}
-
 		// Model interaction 
 
 		// Up/down movement
@@ -147,16 +115,15 @@ public:
 			m_TriangleRotation -= m_TriangleRotationSpeed * ts;
 		}
 
+		// Camera
+		m_CameraController.OnUpdate(ts);
+
 		// Clear  buffer
 		Hoowan::RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1 });
 		Hoowan::RenderCommand::Clear();
 
-		// Set camera
-		m_Camera.SetPosition(m_CameraPosition);
-		m_Camera.SetRotation(m_CameraRotation);
-
 		// Begine scene
-		Hoowan::Renderer::BeginScene(m_Camera);
+		Hoowan::Renderer::BeginScene(m_CameraController.GetCamera());
 		
 		// Setup for little squares
 		glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.1f));
@@ -197,9 +164,9 @@ public:
 		ImGui::End();
 	}
 
-	void OnEvent(Hoowan::Event& event) override
+	void OnEvent(Hoowan::Event& e) override
 	{
-		
+		m_CameraController.OnEvent(e);
 	}
 
 private:
@@ -211,15 +178,9 @@ private:
 
 	Hoowan::Ref<Hoowan::Texture2D> m_Texture, m_TransTexture;
 
-	Hoowan::OrthographicCamera m_Camera;
+	Hoowan::OrthographicCameraController m_CameraController;
 
 	// Speeds are per second
-
-	glm::vec3 m_CameraPosition;
-	float m_CameraMoveSpeed = 2.0f;
-
-	float m_CameraRotation;
-	float m_CameraRotationSpeed = 90.0f;
 
 	glm::vec3 m_TrianglePosition;
 	float m_TriangleMoveSpeed = 2.0f;

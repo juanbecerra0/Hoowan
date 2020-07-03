@@ -11,6 +11,7 @@
 #include "Hoowan/Input.h"
 #include "Hoowan/KeyCodes.h"
 #include "Hoowan/MouseButtonCodes.h"
+#include "Hoowan/OrthographicCameraController.h"
 
 #include "Hoowan/ImGui/ImGuiLayer.h"
 

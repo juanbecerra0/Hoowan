@@ -1386,6 +1386,9 @@
     <ClInclude Include="vendor\stb_image\stb_image.h">
       <Filter>vendor\stb_image</Filter>
     </ClInclude>
+    <ClInclude Include="src\Hoowan\OrthographicCameraController.h">
+      <Filter>src\Hoowan</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Hoowan\Application.cpp">
@@ -1459,6 +1462,9 @@
     </ClCompile>
     <ClCompile Include="vendor\stb_image\stb_image.cpp">
       <Filter>vendor\stb_image</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Hoowan\OrthographicCameraController.cpp">
+      <Filter>src\Hoowan</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
