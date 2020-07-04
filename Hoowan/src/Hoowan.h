@@ -2,16 +2,16 @@
 #include "hwpch.h"
 
 // For use by Hoowan applications
-#include "Hoowan/Application.h"
-#include "Hoowan/Layer.h"
-#include "Hoowan/Log.h"
+#include "Hoowan/Core/Application.h"
+#include "Hoowan/Core/Layer.h"
+#include "Hoowan/Core/Log.h"
 
 #include "Hoowan/Core/Timestep.h"
 
-#include "Hoowan/Input.h"
-#include "Hoowan/KeyCodes.h"
-#include "Hoowan/MouseButtonCodes.h"
-#include "Hoowan/OrthographicCameraController.h"
+#include "Hoowan/Core/Input.h"
+#include "Hoowan/Core/KeyCodes.h"
+#include "Hoowan/Core/MouseButtonCodes.h"
+#include "Hoowan/Renderer/OrthographicCameraController.h"
 
 #include "Hoowan/ImGui/ImGuiLayer.h"
 
@@ -27,4 +27,4 @@
 #include "Hoowan/Renderer/OrthographicCamera.h"
 
 // Entry point
-#include "Hoowan/EntryPoint.h"
+#include "Hoowan/Core/EntryPoint.h"

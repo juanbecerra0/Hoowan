@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Hoowan/Core.h"
+#include "Hoowan/Core/Core.h"
 #include "Layer.h"
 
 #include <vector>

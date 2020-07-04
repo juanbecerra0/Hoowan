@@ -80,7 +80,9 @@
       <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\GLFW\include;vendor\Glad\include;vendor\imgui;vendor\glm;vendor\stb_image;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
+      <MinimalRebuild>false</MinimalRebuild>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
@@ -104,6 +106,7 @@
       <MinimalRebuild>false</MinimalRebuild>
       <StringPooling>true</StringPooling>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
@@ -128,6 +131,7 @@
       <MinimalRebuild>false</MinimalRebuild>
       <StringPooling>true</StringPooling>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
@@ -140,33 +144,33 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="src\Hoowan\OrthographicCameraController.h" />
     <ClInclude Include="src\Hoowan.h" />
-    <ClInclude Include="src\Hoowan\Application.h" />
-    <ClInclude Include="src\Hoowan\Core.h" />
+    <ClInclude Include="src\Hoowan\Core\Application.h" />
+    <ClInclude Include="src\Hoowan\Core\Core.h" />
+    <ClInclude Include="src\Hoowan\Core\EntryPoint.h" />
+    <ClInclude Include="src\Hoowan\Core\Input.h" />
+    <ClInclude Include="src\Hoowan\Core\KeyCodes.h" />
+    <ClInclude Include="src\Hoowan\Core\Layer.h" />
+    <ClInclude Include="src\Hoowan\Core\LayerStack.h" />
+    <ClInclude Include="src\Hoowan\Core\Log.h" />
+    <ClInclude Include="src\Hoowan\Core\MouseButtonCodes.h" />
     <ClInclude Include="src\Hoowan\Core\Timestep.h" />
-    <ClInclude Include="src\Hoowan\EntryPoint.h" />
+    <ClInclude Include="src\Hoowan\Core\Window.h" />
     <ClInclude Include="src\Hoowan\Events\ApplicationEvent.h" />
     <ClInclude Include="src\Hoowan\Events\Event.h" />
     <ClInclude Include="src\Hoowan\Events\KeyEvent.h" />
     <ClInclude Include="src\Hoowan\Events\MouseEvent.h" />
     <ClInclude Include="src\Hoowan\ImGui\ImGuiLayer.h" />
-    <ClInclude Include="src\Hoowan\Input.h" />
-    <ClInclude Include="src\Hoowan\KeyCodes.h" />
-    <ClInclude Include="src\Hoowan\Layer.h" />
-    <ClInclude Include="src\Hoowan\LayerStack.h" />
-    <ClInclude Include="src\Hoowan\Log.h" />
-    <ClInclude Include="src\Hoowan\MouseButtonCodes.h" />
     <ClInclude Include="src\Hoowan\Renderer\Buffer.h" />
     <ClInclude Include="src\Hoowan\Renderer\GraphicsContext.h" />
     <ClInclude Include="src\Hoowan\Renderer\OrthographicCamera.h" />
+    <ClInclude Include="src\Hoowan\Renderer\OrthographicCameraController.h" />
     <ClInclude Include="src\Hoowan\Renderer\RenderCommand.h" />
     <ClInclude Include="src\Hoowan\Renderer\Renderer.h" />
     <ClInclude Include="src\Hoowan\Renderer\RendererAPI.h" />
     <ClInclude Include="src\Hoowan\Renderer\Shader.h" />
     <ClInclude Include="src\Hoowan\Renderer\Texture.h" />
     <ClInclude Include="src\Hoowan\Renderer\VertexArray.h" />
-    <ClInclude Include="src\Hoowan\Window.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLBuffer.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLContext.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLRendererAPI.h" />
@@ -587,15 +591,15 @@
     <ClInclude Include="vendor\stb_image\stb_image.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\Hoowan\OrthographicCameraController.cpp" />
-    <ClCompile Include="src\Hoowan\Application.cpp" />
+    <ClCompile Include="src\Hoowan\Core\Application.cpp" />
+    <ClCompile Include="src\Hoowan\Core\Layer.cpp" />
+    <ClCompile Include="src\Hoowan\Core\LayerStack.cpp" />
+    <ClCompile Include="src\Hoowan\Core\Log.cpp" />
     <ClCompile Include="src\Hoowan\ImGui\ImGuiBuild.cpp" />
     <ClCompile Include="src\Hoowan\ImGui\ImGuiLayer.cpp" />
-    <ClCompile Include="src\Hoowan\Layer.cpp" />
-    <ClCompile Include="src\Hoowan\LayerStack.cpp" />
-    <ClCompile Include="src\Hoowan\Log.cpp" />
     <ClCompile Include="src\Hoowan\Renderer\Buffer.cpp" />
     <ClCompile Include="src\Hoowan\Renderer\OrthographicCamera.cpp" />
+    <ClCompile Include="src\Hoowan\Renderer\OrthographicCameraController.cpp" />
     <ClCompile Include="src\Hoowan\Renderer\RenderCommand.cpp" />
     <ClCompile Include="src\Hoowan\Renderer\Renderer.cpp" />
     <ClCompile Include="src\Hoowan\Renderer\RendererAPI.cpp" />

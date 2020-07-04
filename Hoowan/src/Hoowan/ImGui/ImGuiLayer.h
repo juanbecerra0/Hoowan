@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Hoowan/Layer.h"
+#include "Hoowan/Core/Layer.h"
 
 #include "Hoowan/Events/ApplicationEvent.h"
 #include "Hoowan/Events/KeyEvent.h"

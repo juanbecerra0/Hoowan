@@ -2,8 +2,8 @@
 
 #include "OrthoGraphicCameraController.h"
 
-#include "Hoowan/Input.h"
-#include "Hoowan/KeyCodes.h"
+#include "Hoowan/Core/Input.h"
+#include "Hoowan/Core/KeyCodes.h"
 
 namespace Hoowan {
 	OrthographicCameraController::OrthographicCameraController(float aspectRatio, bool rotation)

@@ -13,7 +13,7 @@
 #include <unordered_map>
 #include <unordered_set>
 
-#include "Hoowan/Log.h"
+#include "Hoowan/Core/Log.h"
 
 #ifdef HW_PLATFORM_WINDOWS
 	#include <Windows.h>

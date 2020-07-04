@@ -2,7 +2,7 @@
 #include "WindowsInput.h"
 
 #include <GLFW/glfw3.h>
-#include "Hoowan/Application.h"
+#include "Hoowan/Core/Application.h"
 
 namespace Hoowan {
 

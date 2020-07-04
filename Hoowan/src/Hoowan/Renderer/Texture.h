@@ -2,7 +2,7 @@
 
 #include <string>
 
-#include "Hoowan/Core.h"
+#include "Hoowan/Core/Core.h"
 
 namespace Hoowan {
 

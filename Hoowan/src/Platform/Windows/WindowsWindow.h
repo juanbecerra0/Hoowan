@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Hoowan/Window.h"
+#include "Hoowan/Core/Window.h"
 #include "Hoowan/Renderer/GraphicsContext.h"
 
 #include <GLFW/glfw3.h>

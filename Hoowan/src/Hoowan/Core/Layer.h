@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Hoowan/Core.h"
+#include "Hoowan/Core/Core.h"
 #include "Hoowan/Core/Timestep.h"
 #include "Hoowan/Events/Event.h"
 

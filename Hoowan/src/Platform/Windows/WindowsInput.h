@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Hoowan/Input.h"
+#include "Hoowan/Core/Input.h"
 
 namespace Hoowan {
 	

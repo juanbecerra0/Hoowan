@@ -2,7 +2,7 @@
 
 #include "Application.h"
 
-#include "Hoowan/Log.h"
+#include "Hoowan/Core/Log.h"
 
 #include "Hoowan/Renderer/Renderer.h"
 
