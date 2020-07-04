@@ -12,7 +12,7 @@ class ExampleLayer : public Hoowan::Layer
 {
 public:
 	ExampleLayer()
-		: Layer("Example"), m_CameraController(1920.0f / 1080.0f, true)
+		: Layer("Example"), m_CameraController(1920.0f / 1080.0f, true), m_TrianglePosition( {0.0f, 0.0f, 0.0f} )
 	{
 		// Triangle verticies
 		m_VertexArray.reset(Hoowan::VertexArray::Create());
@@ -185,7 +185,7 @@ private:
 	glm::vec3 m_TrianglePosition;
 	float m_TriangleMoveSpeed = 2.0f;
 
-	float m_TriangleRotation;
+	float m_TriangleRotation = 0.0f;
 	float m_TriangleRotationSpeed = 90.0f;
 
 	glm::vec3 m_SquareColor = { 0.2f, 0.3f, 0.8f };
