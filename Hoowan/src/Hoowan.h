@@ -25,6 +25,3 @@
 #include "Hoowan/Renderer/VertexArray.h"
 
 #include "Hoowan/Renderer/OrthographicCamera.h"
-
-// Entry point
-#include "Hoowan/Core/EntryPoint.h"

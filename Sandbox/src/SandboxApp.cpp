@@ -8,6 +8,8 @@
 #include <glm/gtc/type_ptr.hpp>
 #include <glm\glm\gtx\quaternion.hpp>
 
+#include "Sandbox2D.h"
+
 class ExampleLayer : public Hoowan::Layer
 {
 public:
@@ -15,7 +17,7 @@ public:
 		: Layer("Example"), m_CameraController(1920.0f / 1080.0f, true), m_TrianglePosition( {0.0f, 0.0f, 0.0f} )
 	{
 		// Triangle verticies
-		m_VertexArray.reset(Hoowan::VertexArray::Create());
+		m_VertexArray = Hoowan::VertexArray::Create();
 		float vertices[3 * 7] = {
 			-0.5f, -0.5f, 0.0f, 0.8f, 0.2f, 0.8f, 1.0f,
 			 0.5f, -0.5f, 0.0f, 0.2f, 0.3f, 0.8f, 1.0f,
@@ -41,7 +43,7 @@ public:
 		m_VertexArray->SetIndexBuffer(indexBuffer);
 
 		// Square verticies
-		m_SquareVA.reset(Hoowan::VertexArray::Create());
+		m_SquareVA = Hoowan::VertexArray::Create();
 		float squareVertices[5 * 4] = {
 			-0.5f, -0.5f, 0.0f, 0.0f, 0.0f,
 			 0.5f, -0.5f, 0.0f, 1.0f, 0.0f,
@@ -194,7 +196,8 @@ private:
 class Sandbox : public Hoowan::Application {
 public:
 	Sandbox() {
-		PushLayer(new ExampleLayer());
+		//PushLayer(new ExampleLayer());
+		PushLayer(new Sandbox2D());
 	}
 
 	~Sandbox() {
