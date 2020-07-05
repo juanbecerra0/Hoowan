@@ -1,12 +1,16 @@
 [submodule "Hoowan/vendor/spdlog"]
 	path = Hoowan/vendor/spdlog
 	url = https://github.com/gabime/spdlog
+	branch = v1.x
 [submodule "Hoowan/vendor/GLFW"]
 	path = Hoowan/vendor/GLFW
 	url = https://github.com/TheCherno/glfw
+	branch = master
 [submodule "Hoowan/vendor/imgui"]
 	path = Hoowan/vendor/imgui
 	url = https://github.com/TheCherno/imgui
+	branch = docking
 [submodule "Hoowan/vendor/glm"]
 	path = Hoowan/vendor/glm
 	url = https://github.com/g-truc/glm/
+	branch = master

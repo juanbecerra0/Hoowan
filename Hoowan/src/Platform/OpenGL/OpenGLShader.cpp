@@ -197,7 +197,10 @@ namespace Hoowan {
 			glDeleteProgram(program);
 			
 			for (auto id : glShaderIDs)
+			{
+				glDetachShader(program, id);
 				glDeleteShader(id);
+			}
 
 			HW_CORE_ERROR("{0}", infoLog.data());
 			HW_CORE_ASSERT(false, "Shader link failure!");
