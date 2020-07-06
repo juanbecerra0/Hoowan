@@ -16,7 +16,7 @@ namespace Hoowan {
 	class HOOWAN_API Application {
 	public:
 		Application();
-		virtual ~Application() = default;
+		virtual ~Application();
 
 		void Run();
 

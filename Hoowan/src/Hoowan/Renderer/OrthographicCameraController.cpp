@@ -15,6 +15,8 @@ namespace Hoowan {
 
 	void OrthographicCameraController::OnUpdate(Timestep ts)
 	{
+		HW_PROFILE_FUNCTION();
+
 		// Up/down movement
 		if (Input::IsKeyPressed(HW_KEY_I))
 		{
@@ -64,6 +66,8 @@ namespace Hoowan {
 
 	void OrthographicCameraController::OnEvent(Event& e)
 	{
+		HW_PROFILE_FUNCTION();
+
 		EventDispatcher dispatcher(e);
 		dispatcher.Dispatch<MouseScrolledEvent>(HW_BIND_EVENT_FN(OrthographicCameraController::OnMouseScrolled));
 		dispatcher.Dispatch<WindowResizeEvent>(HW_BIND_EVENT_FN(OrthographicCameraController::OnWindowResized));
@@ -71,6 +75,8 @@ namespace Hoowan {
 
 	bool OrthographicCameraController::OnMouseScrolled(MouseScrolledEvent& e)
 	{
+		HW_PROFILE_FUNCTION();
+
 		m_ZoomLevel -= e.GetYOffset() * 0.2f;
 		m_ZoomLevel = std::max(m_ZoomLevel, 0.25f);
 
@@ -81,6 +87,8 @@ namespace Hoowan {
 
 	bool OrthographicCameraController::OnWindowResized(WindowResizeEvent& e)
 	{
+		HW_PROFILE_FUNCTION();
+
 		m_AspectRatio = (float)e.GetWidth() / (float)e.GetHeight();
 		m_Camera.SetProjection(-m_AspectRatio * m_ZoomLevel, m_AspectRatio * m_ZoomLevel, -m_ZoomLevel, m_ZoomLevel);
 

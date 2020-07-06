@@ -19,6 +19,8 @@ namespace Hoowan
 
 	void Renderer2D::Init()
 	{
+		HW_PROFILE_FUNCTION();
+
 		s_Data = new Renderer2DStorage;
 
 		// Square verts
@@ -58,17 +60,23 @@ namespace Hoowan
 
 	void Renderer2D::Shutdown()
 	{
+		HW_PROFILE_FUNCTION();
+
 		delete s_Data;
 	}
 
 	void Renderer2D::BeginScene(const OrthographicCamera& camera)
 	{
+		HW_PROFILE_FUNCTION();
+
 		s_Data->Shader->Bind();
 		s_Data->Shader->SetMat4("u_ViewProjection", camera.GetViewProjectionMatrix());
 	}
 
 	void Renderer2D::EndScene()
 	{
+		HW_PROFILE_FUNCTION();
+
 
 	}
 
@@ -79,6 +87,8 @@ namespace Hoowan
 
 	void Renderer2D::DrawQuad(const glm::vec3& position, const float rotation, const glm::vec3& size, const glm::vec4& color)
 	{
+		HW_PROFILE_FUNCTION();
+
 		s_Data->Shader->SetFloat4("u_Color", color);
 		s_Data->WhiteTexture->Bind();
 
@@ -99,6 +109,8 @@ namespace Hoowan
 
 	void Renderer2D::DrawQuad(const glm::vec3& position, const float rotation, const glm::vec3& size, const Ref<Texture2D> texture)
 	{
+		HW_PROFILE_FUNCTION();
+
 		s_Data->Shader->SetFloat4("u_Color", glm::vec4(1.0f));
 		texture->Bind();
 

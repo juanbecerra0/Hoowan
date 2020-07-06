@@ -15,24 +15,22 @@ Sandbox2D::Sandbox2D()
 
 void Sandbox2D::OnAttach()
 {
+	HW_PROFILE_FUNCTION();
+
 	m_Texture = Hoowan::Texture2D::Create("assets/textures/test.png");
 }
 
 void Sandbox2D::OnDetach()
 {
-
+	HW_PROFILE_FUNCTION();
 }
 
 void Sandbox2D::OnUpdate(Hoowan::Timestep ts)
 {
 	HW_PROFILE_FUNCTION();
 
-	{
-		HW_PROFILE_SCOPE("CameraController::OnUpdate");
-
-		// Camera Input/VP update
-		m_CameraController.OnUpdate(ts);
-	}
+	// Camera Input/VP update
+	m_CameraController.OnUpdate(ts);
 
 	{
 		HW_PROFILE_SCOPE("ClearBuffer::OnUpdate");

@@ -9,6 +9,8 @@
 namespace Hoowan {
 	OpenGLShader::OpenGLShader(const std::string& filepath)
 	{
+		HW_PROFILE_FUNCTION();
+
 		std::string src = ReadFile(filepath);
 		auto shaderSources = PreProcess(src);
 		Compile(shaderSources);
@@ -20,9 +22,12 @@ namespace Hoowan {
 		auto count = lastDot == std::string::npos ? filepath.size() - lastSlash : lastDot - lastSlash;
 		m_Name = filepath.substr(lastSlash, count);
 	}
+
 	OpenGLShader::OpenGLShader(const std::string& name, const std::string& vertexSrc, const std::string& fragmentSrc)
 		: m_Name(name)
 	{
+		HW_PROFILE_FUNCTION();
+
 		std::unordered_map<GLenum, std::string> shaderSources;
 		shaderSources[GL_VERTEX_SHADER] = vertexSrc;
 		shaderSources[GL_FRAGMENT_SHADER] = fragmentSrc;
@@ -32,36 +37,50 @@ namespace Hoowan {
 
 	OpenGLShader::~OpenGLShader()
 	{
+		HW_PROFILE_FUNCTION();
+
 		glDeleteProgram(m_RendererID);
 	}
 
 	void OpenGLShader::Bind() const
 	{
+		HW_PROFILE_FUNCTION();
+
 		glUseProgram(m_RendererID);
 	}
 
 	void OpenGLShader::Unbind() const
 	{
+		HW_PROFILE_FUNCTION();
+
 		glUseProgram(0);
 	}
 
 	void OpenGLShader::SetInt(const std::string& name, int value)
 	{
+		HW_PROFILE_FUNCTION();
+
 		UploadUniformInt(name, value);
 	}
 
 	void OpenGLShader::SetFloat3(const std::string& name, const glm::vec3& value)
 	{
+		HW_PROFILE_FUNCTION();
+
 		UploadUniformFloat3(name, value);
 	}
 
 	void OpenGLShader::SetFloat4(const std::string& name, const glm::vec4& value)
 	{
+		HW_PROFILE_FUNCTION();
+
 		UploadUniformFloat4(name, value);
 	}
 
 	void OpenGLShader::SetMat4(const std::string& name, const glm::mat4& value)
 	{
+		HW_PROFILE_FUNCTION();
+
 		UploadUniformMat4(name, value);
 	}
 
@@ -109,6 +128,8 @@ namespace Hoowan {
 
 	std::string OpenGLShader::ReadFile(const std::string filepath)
 	{
+		HW_PROFILE_FUNCTION();
+
 		std::string result;
 		std::ifstream in(filepath, std::ios::in | std::ios::binary);
 		if (in)
@@ -138,6 +159,8 @@ namespace Hoowan {
 
 	std::unordered_map<GLenum, std::string> OpenGLShader::PreProcess(const std::string& source)
 	{
+		HW_PROFILE_FUNCTION();
+
 		std::unordered_map<GLenum, std::string> shaderSourceMap;
 
 		const char* typeToken = "#type";
@@ -164,6 +187,8 @@ namespace Hoowan {
 
 	void OpenGLShader::Compile(std::unordered_map<GLenum, std::string>& shaderSourceMap)
 	{
+		HW_PROFILE_FUNCTION();
+
 		GLuint program = glCreateProgram();
 		HW_CORE_ASSERT(shaderSourceMap.size() <= 2, "We only support 2 shaders for now");
 		std::array<GLenum, 2> glShaderIDs;
