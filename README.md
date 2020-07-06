@@ -8,6 +8,14 @@ The Cherno's Game Engine YouTube series: https://www.youtube.com/playlist?list=P
 
 Game Engine Architecture, Third Edition buy/rent: https://www.amazon.com/Engine-Architecture-Third-Jason-Gregory/dp/1138035459/ref=sr_1_2?dchild=1&keywords=game+engine&qid=1591651300&sr=8-2
 
+# Usage
+To run Hoowan...
+1. Clone this repository (NOTE: Hoowan only supports Windows x64 at the moment)
+2. Download the version of Premake 5 (https://github.com/premake/premake-core), and place the executable under "../Hoowan/vendor/bin/premake"
+3. Run the "GenerateProjects.bat" file to run premake and create a VS solution
+4. Open the solution and compile the entire project
+5. Run the Sandbox.exe to start the current compiled project (all customer code is written under the Sandbox solution)
+
 # Log
 ### 07/05/2020 - Camera, Context, and 2D Rendering Abstractions
 ![3](RMImages/3.PNG)
