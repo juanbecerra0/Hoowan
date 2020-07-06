@@ -91,10 +91,12 @@ namespace Hoowan
 		s_Data->QuadVertexArray->Bind();
 		RenderCommand::DrawIndexed(s_Data->QuadVertexArray);
 	}
+
 	void Renderer2D::DrawQuad(const glm::vec2& position, const float rotation, const glm::vec3& size, const Ref<Texture2D> texture)
 	{
 		DrawQuad({ position.x, position.y, 0.0f }, rotation, size, texture);
 	}
+
 	void Renderer2D::DrawQuad(const glm::vec3& position, const float rotation, const glm::vec3& size, const Ref<Texture2D> texture)
 	{
 		s_Data->Shader->SetFloat4("u_Color", glm::vec4(1.0f));
