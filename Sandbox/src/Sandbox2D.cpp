@@ -16,7 +16,7 @@ Sandbox2D::Sandbox2D()
 
 void Sandbox2D::OnAttach()
 {
-
+	m_Texture = Hoowan::Texture2D::Create("assets/textures/test.png");
 }
 
 void Sandbox2D::OnDetach()
@@ -39,6 +39,7 @@ void Sandbox2D::OnUpdate(Hoowan::Timestep ts)
 
 	Hoowan::Renderer2D::DrawQuad({ 0.0f, -0.5f }, 0.0f, { 2.0f, 1.0f, 1.0f}, { 0.8f, 0.2f, 0.3f, 1.0f });
 	Hoowan::Renderer2D::DrawQuad({ 1.0f, 0.5f }, 45.0f, { 1.0f, 2.0f, 1.0f }, { 0.4f, 0.9f, 0.3f, 1.0f });
+	Hoowan::Renderer2D::DrawQuad({ -0.4f, 0.7f, 0.1f }, -45.0f, { 0.5f, 0.5f, 1.0f }, m_Texture);
 
 	Hoowan::Renderer2D::EndScene();
 }
