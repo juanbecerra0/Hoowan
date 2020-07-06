@@ -4,8 +4,7 @@
 #include "VertexArray.h"
 #include "Shader.h"
 #include "RenderCommand.h"
-
-#include "Platform/OpenGL/OpenGLShader.h"
+#include <glm\ext\matrix_transform.hpp>
 
 namespace Hoowan
 {
@@ -56,9 +55,8 @@ namespace Hoowan
 
 	void Renderer2D::BeginScene(const OrthographicCamera& camera)
 	{
-		std::dynamic_pointer_cast<Hoowan::OpenGLShader>(s_Data->Shader)->Bind();
-		std::dynamic_pointer_cast<Hoowan::OpenGLShader>(s_Data->Shader)->UploadUniformMat4("u_ViewProjection", camera.GetViewProjectionMatrix());
-		std::dynamic_pointer_cast<Hoowan::OpenGLShader>(s_Data->Shader)->UploadUniformMat4("u_Transform", glm::mat4(1.0f));
+		s_Data->Shader->Bind();
+		s_Data->Shader->SetMat4("u_ViewProjection", camera.GetViewProjectionMatrix());
 	}
 
 	void Renderer2D::EndScene()
@@ -66,17 +64,21 @@ namespace Hoowan
 
 	}
 
-	void Renderer2D::DrawQuad(const glm::vec2& position, const glm::vec3& size, const glm::vec4& color)
+	void Renderer2D::DrawQuad(const glm::vec2& position, const float rotation, const glm::vec3& size, const glm::vec4& color)
 	{
-		DrawQuad({ position.x, position.y, 0.0f }, size, color);
+		DrawQuad({ position.x, position.y, 0.0f }, rotation, size, color);
 	}
 
-	void Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec3& size, const glm::vec4& color)
+	void Renderer2D::DrawQuad(const glm::vec3& position, const float rotation, const glm::vec3& size, const glm::vec4& color)
 	{
-		std::dynamic_pointer_cast<Hoowan::OpenGLShader>(s_Data->Shader)->Bind();
+		s_Data->Shader->Bind();
+		s_Data->Shader->SetFloat4("u_Color", color);
 
-		// TODO position and size
-		std::dynamic_pointer_cast<Hoowan::OpenGLShader>(s_Data->Shader)->UploadUniformFloat4("u_Color", color);
+		glm::mat4 transform =
+			glm::translate(glm::mat4(1.0f), position) *
+			glm::rotate(glm::mat4(1.0f), rotation, glm::vec3(0.0f, 0.0f, 1.0f)) *
+			glm::scale(glm::mat4(1.0f), {size.x, size.y, 1.0f});
+		s_Data->Shader->SetMat4("u_Transform", transform);
 
 		s_Data->QuadVertexArray->Bind();
 		RenderCommand::DrawIndexed(s_Data->QuadVertexArray);
