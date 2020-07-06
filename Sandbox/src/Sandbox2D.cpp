@@ -6,6 +6,8 @@
 #include <glm/gtc/type_ptr.hpp>
 #include "Platform/OpenGL/OpenGLShader.h"
 
+//#include <Hoowan\Renderer\Renderer2D.h>
+
 Sandbox2D::Sandbox2D()
 	: Layer("Sandbox2D"), m_CameraController(1920.0f / 1080.0f, true)
 {
@@ -14,7 +16,8 @@ Sandbox2D::Sandbox2D()
 
 void Sandbox2D::OnAttach()
 {
-	// Square verticies
+	/*
+	// Square verts
 	m_VertexArray = Hoowan::VertexArray::Create();
 	float vertices[3 * 4] = {
 		-0.5f, -0.5f, 0.0f,
@@ -40,6 +43,7 @@ void Sandbox2D::OnAttach()
 
 	// Compile Shaders
 	m_Shader = (Hoowan::Shader::Create("assets/shaders/FlatColor.glsl"));
+	*/
 }
 
 void Sandbox2D::OnDetach()
@@ -57,9 +61,12 @@ void Sandbox2D::OnUpdate(Hoowan::Timestep ts)
 	Hoowan::RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1 });
 	Hoowan::RenderCommand::Clear();
 
-	// Begine scene
-	Hoowan::Renderer::BeginScene(m_CameraController.GetCamera());
+	// Begin scene
+	Hoowan::Renderer2D::BeginScene(m_CameraController.GetCamera());
 
+	Hoowan::Renderer2D::DrawQuad({ 0.0f, 0.0f }, { 1.0f, 1.0f, 1.0f}, {0.8f, 0.2f, 0.3f, 1.0f});
+
+	/*
 	// Setup for square
 	glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(2.0f));
 	std::dynamic_pointer_cast<Hoowan::OpenGLShader>(m_Shader)->Bind();
@@ -68,8 +75,9 @@ void Sandbox2D::OnUpdate(Hoowan::Timestep ts)
 	glm::vec3 pos(0);
 	glm::mat4 transform = glm::translate(glm::mat4(1.0f), pos) * scale;
 	Hoowan::Renderer::Submit(m_Shader, m_VertexArray, transform);
+	*/
 
-	Hoowan::Renderer::EndScene();
+	Hoowan::Renderer2D::EndScene();
 }
 
 void Sandbox2D::OnImGuiRender()

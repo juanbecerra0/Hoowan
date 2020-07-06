@@ -17,6 +17,7 @@
 
 // Renderer
 #include "Hoowan/Renderer/Renderer.h"
+#include "Hoowan/Renderer/Renderer2D.h"
 #include "Hoowan/Renderer/RenderCommand.h"
 
 #include "Hoowan/Renderer/Buffer.h"
