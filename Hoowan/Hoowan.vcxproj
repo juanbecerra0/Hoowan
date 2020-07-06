@@ -156,6 +156,7 @@
     <ClInclude Include="src\Hoowan\Core\MouseButtonCodes.h" />
     <ClInclude Include="src\Hoowan\Core\Timestep.h" />
     <ClInclude Include="src\Hoowan\Core\Window.h" />
+    <ClInclude Include="src\Hoowan\Debug\Instrumentor.h" />
     <ClInclude Include="src\Hoowan\Events\ApplicationEvent.h" />
     <ClInclude Include="src\Hoowan\Events\Event.h" />
     <ClInclude Include="src\Hoowan\Events\KeyEvent.h" />

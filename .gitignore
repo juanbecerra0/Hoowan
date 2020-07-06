@@ -34,3 +34,6 @@ Release
 *.vbproj.user
 ipch
 *sdf
+
+# Output Instrumentation Files
+*.json

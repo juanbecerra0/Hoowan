@@ -14,6 +14,7 @@
 #include <unordered_set>
 
 #include "Hoowan/Core/Log.h"
+#include "Hoowan/Debug/Instrumentor.h"
 
 #ifdef HW_PLATFORM_WINDOWS
 	#include <Windows.h>
