@@ -13,6 +13,7 @@ namespace Hoowan {
 
 		static void BeginScene(const OrthographicCamera& camera);
 		static void EndScene();
+		static void Flush();
 
 		// Primatives
 		static void DrawQuad(const glm::vec2& position, const float rotation, const glm::vec3& size, const glm::vec4&color);

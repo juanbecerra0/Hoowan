@@ -4,8 +4,6 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
-#include <chrono>
-
 Sandbox2D::Sandbox2D()
 	: Layer("Sandbox2D"), m_CameraController(1920.0f / 1080.0f, true)
 {
@@ -50,10 +48,13 @@ void Sandbox2D::OnUpdate(Hoowan::Timestep ts)
 		{
 			for (int y = -5; y < 5; y++)
 			{
+				Hoowan::Renderer2D::DrawQuad({ (float)x, (float)y, 0.1f }, 0.0f, { 1.0f, 1.0f, 1.0f }, m_Color);
+				/*
 				if ((x + y) % 2 == 0)
 					Hoowan::Renderer2D::DrawQuad({ (float)x, (float)y, 0.1f }, 0.0f, { 1.0f, 1.0f, 1.0f }, m_Texture);
 				else
 					Hoowan::Renderer2D::DrawQuad({ (float)x, (float)y, 0.1f }, 0.0f, { 1.0f, 1.0f, 1.0f }, m_Color);
+					*/
 			}
 		}
 
