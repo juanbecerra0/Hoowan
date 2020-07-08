@@ -21,7 +21,7 @@ namespace Hoowan
 		const uint32_t MaxQuads = 10000;
 		const uint32_t MaxVertices = MaxQuads * 4;
 		const uint32_t MaxIndices = MaxQuads * 6;
-		static const uint32_t MaxTextureSlots = 32;	// TODO: get renderer API cap
+		static const uint32_t MaxTextureSlots = 32;	// TODO: get rendering API cap
 
 		Ref<VertexArray> QuadVertexArray;
 		Ref<VertexBuffer> QuadVertexBuffer;
@@ -34,6 +34,8 @@ namespace Hoowan
 
 		std::array<Ref<Texture2D>, MaxTextureSlots> TextureSlots;
 		uint32_t TextureSlotIndex = 1;	// 0 = white texture
+
+		glm::vec4 QuadVertexPositions[4];
 	};
 
 	static Renderer2DData s_Data;
@@ -95,6 +97,12 @@ namespace Hoowan
 
 		// Set all texture slots to 0
 		s_Data.TextureSlots[0] = s_Data.WhiteTexture;
+
+		// Construct vertex location of quad
+		s_Data.QuadVertexPositions[0] = { -0.5f, -0.5f, 0.0f, 1.0f };
+		s_Data.QuadVertexPositions[1] = {  0.5f, -0.5f, 0.0f, 1.0f };
+		s_Data.QuadVertexPositions[2] = {  0.5f,  0.5f, 0.0f, 1.0f };
+		s_Data.QuadVertexPositions[3] = { -0.5f,  0.5f, 0.0f, 1.0f };
 	}
 
 	void Renderer2D::Shutdown()
@@ -145,27 +153,30 @@ namespace Hoowan
 	{
 		HW_PROFILE_FUNCTION();
 
-		// TODO: fix rotations in batch renderer
+		glm::mat4 transform =
+			glm::translate(glm::mat4(1.0f), translation) *
+			glm::rotate(glm::mat4(1.0f), glm::radians(rotation), glm::vec3(0.0f, 0.0f, 1.0f)) *
+			glm::scale(glm::mat4(1.0f), { scale.x, scale.y, 1.0f });
 
-		s_Data.QuadVertexBufferPtr->Position = { (translation.x) - (scale.x / 2), (translation.y) - (scale.y / 2), translation.z };
+		s_Data.QuadVertexBufferPtr->Position = transform * s_Data.QuadVertexPositions[0];
 		s_Data.QuadVertexBufferPtr->Color = color;
 		s_Data.QuadVertexBufferPtr->TexCoord = { 0.0f, 0.0f };
 		s_Data.QuadVertexBufferPtr->TexIndex = 0;
 		s_Data.QuadVertexBufferPtr++;
 
-		s_Data.QuadVertexBufferPtr->Position = { (translation.x) + (scale.x / 2), (translation.y) - (scale.y / 2), translation.z };
+		s_Data.QuadVertexBufferPtr->Position = transform * s_Data.QuadVertexPositions[1];
 		s_Data.QuadVertexBufferPtr->Color = color;
 		s_Data.QuadVertexBufferPtr->TexCoord = { 1.0f, 0.0f };
 		s_Data.QuadVertexBufferPtr->TexIndex = 0;
 		s_Data.QuadVertexBufferPtr++;
 
-		s_Data.QuadVertexBufferPtr->Position = { (translation.x) + (scale.x / 2), (translation.y) + (scale.y / 2), translation.z };
+		s_Data.QuadVertexBufferPtr->Position = transform * s_Data.QuadVertexPositions[2];
 		s_Data.QuadVertexBufferPtr->Color = color;
 		s_Data.QuadVertexBufferPtr->TexCoord = { 1.0f, 1.0f };
 		s_Data.QuadVertexBufferPtr->TexIndex = 0;
 		s_Data.QuadVertexBufferPtr++;
 
-		s_Data.QuadVertexBufferPtr->Position = { (translation.x) - (scale.x / 2), (translation.y) + (scale.y / 2), translation.z };
+		s_Data.QuadVertexBufferPtr->Position = transform * s_Data.QuadVertexPositions[3];
 		s_Data.QuadVertexBufferPtr->Color = color;
 		s_Data.QuadVertexBufferPtr->TexCoord = { 0.0f, 1.0f };
 		s_Data.QuadVertexBufferPtr->TexIndex = 0;
@@ -174,17 +185,6 @@ namespace Hoowan
 		s_Data.QuadIndexCount += 6;
 
 		s_Data.WhiteTexture->Bind();
-
-		/*
-		glm::mat4 transform =
-			glm::translate(glm::mat4(1.0f), position) *
-			glm::rotate(glm::mat4(1.0f), rotation, glm::vec3(0.0f, 0.0f, 1.0f)) *
-			glm::scale(glm::mat4(1.0f), {size.x, size.y, 1.0f});
-		s_Data.Shader->SetMat4("u_Transform", transform);
-
-		s_Data.QuadVertexArray->Bind();
-		RenderCommand::DrawIndexed(s_Data.QuadVertexArray);
-		*/
 	}
 
 	void Renderer2D::DrawQuad(const glm::vec2& translation, const float rotation, const glm::vec2& scale, const Ref<Texture2D> texture)
@@ -194,9 +194,7 @@ namespace Hoowan
 
 	void Renderer2D::DrawQuad(const glm::vec3& translation, const float rotation, const glm::vec2& scale, const Ref<Texture2D> texture)
 	{
-		HW_PROFILE_FUNCTION();
-
-		// TODO: fix rotations in batch renderer
+		HW_PROFILE_FUNCTION();\
 
 		constexpr glm::vec4 color = { 1.0f, 1.0f, 1.0f, 1.0f };
 
@@ -219,44 +217,35 @@ namespace Hoowan
 			s_Data.TextureSlotIndex++;
 		}
 
-		s_Data.QuadVertexBufferPtr->Position = { (translation.x) - (scale.x / 2), (translation.y) - (scale.y / 2), translation.z };
+		glm::mat4 transform =
+			glm::translate(glm::mat4(1.0f), translation) *
+			glm::rotate(glm::mat4(1.0f), glm::radians(rotation), glm::vec3(0.0f, 0.0f, 1.0f)) *
+			glm::scale(glm::mat4(1.0f), { scale.x, scale.y, 1.0f });
+
+		s_Data.QuadVertexBufferPtr->Position = transform * s_Data.QuadVertexPositions[0];
 		s_Data.QuadVertexBufferPtr->Color = color;
 		s_Data.QuadVertexBufferPtr->TexCoord = { 0.0f, 0.0f };
 		s_Data.QuadVertexBufferPtr->TexIndex = textureIndex;
 		s_Data.QuadVertexBufferPtr++;
 
-		s_Data.QuadVertexBufferPtr->Position = { (translation.x) + (scale.x / 2), (translation.y) - (scale.y / 2), translation.z };
+		s_Data.QuadVertexBufferPtr->Position = transform * s_Data.QuadVertexPositions[1];
 		s_Data.QuadVertexBufferPtr->Color = color;
 		s_Data.QuadVertexBufferPtr->TexCoord = { 1.0f, 0.0f };
 		s_Data.QuadVertexBufferPtr->TexIndex = textureIndex;
 		s_Data.QuadVertexBufferPtr++;
 
-		s_Data.QuadVertexBufferPtr->Position = { (translation.x) + (scale.x / 2), (translation.y) + (scale.y / 2), translation.z };
+		s_Data.QuadVertexBufferPtr->Position = transform * s_Data.QuadVertexPositions[2];
 		s_Data.QuadVertexBufferPtr->Color = color;
 		s_Data.QuadVertexBufferPtr->TexCoord = { 1.0f, 1.0f };
 		s_Data.QuadVertexBufferPtr->TexIndex = textureIndex;
 		s_Data.QuadVertexBufferPtr++;
 
-		s_Data.QuadVertexBufferPtr->Position = { (translation.x) - (scale.x / 2), (translation.y) + (scale.y / 2), translation.z };
+		s_Data.QuadVertexBufferPtr->Position = transform * s_Data.QuadVertexPositions[3];
 		s_Data.QuadVertexBufferPtr->Color = color;
 		s_Data.QuadVertexBufferPtr->TexCoord = { 0.0f, 1.0f };
 		s_Data.QuadVertexBufferPtr->TexIndex = textureIndex;
 		s_Data.QuadVertexBufferPtr++;
 
 		s_Data.QuadIndexCount += 6;
-
-		/*
-		s_Data.Shader->SetFloat4("u_Color", glm::vec4(1.0f));
-		texture->Bind();
-
-		glm::mat4 transform =
-			glm::translate(glm::mat4(1.0f), translation) *
-			glm::rotate(glm::mat4(1.0f), rotation, glm::vec3(0.0f, 0.0f, 1.0f)) *
-			glm::scale(glm::mat4(1.0f), { scale.x, scale.y, 1.0f });
-		s_Data.Shader->SetMat4("u_Transform", transform);
-
-		s_Data.QuadVertexArray->Bind();
-		RenderCommand::DrawIndexed(s_Data.QuadVertexArray);
-		*/
 	}
 }
