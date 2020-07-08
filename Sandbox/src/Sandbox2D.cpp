@@ -43,20 +43,23 @@ void Sandbox2D::OnUpdate(Hoowan::Timestep ts)
 		// Begin scene
 		Hoowan::Renderer2D::BeginScene(m_CameraController.GetCamera());
 
+		const int dimensions = 100;
+
 		// Draw 100 quads
-		for (int x = -5; x < 5; x++)
+		for (int x = -(dimensions / 2); x < (dimensions / 2); x++)
 		{
-			for (int y = -5; y < 5; y++)
+			for (int y = -(dimensions / 2); y < (dimensions / 2); y++)
 			{
-				Hoowan::Renderer2D::DrawQuad({ (float)x, (float)y, 0.1f }, 0.0f, { 1.0f, 1.0f, 1.0f }, m_Color);
-				/*
+				//Hoowan::Renderer2D::DrawQuad({ (float)x, (float)y, 0.1f }, 45.0f, { 0.8f, 0.8f }, m_Color);
+
 				if ((x + y) % 2 == 0)
-					Hoowan::Renderer2D::DrawQuad({ (float)x, (float)y, 0.1f }, 0.0f, { 1.0f, 1.0f, 1.0f }, m_Texture);
+					Hoowan::Renderer2D::DrawQuad({ (float)x, (float)y, 0.1f }, 0.0f, { 1.0f, 1.0f }, m_Texture);
 				else
-					Hoowan::Renderer2D::DrawQuad({ (float)x, (float)y, 0.1f }, 0.0f, { 1.0f, 1.0f, 1.0f }, m_Color);
-					*/
+					Hoowan::Renderer2D::DrawQuad({ (float)x, (float)y, 0.1f }, 0.0f, { 1.0f, 1.0f }, m_Color);
 			}
 		}
+
+		
 
 		// End scene
 		Hoowan::Renderer2D::EndScene();
