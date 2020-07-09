@@ -23,7 +23,17 @@ Game Engine Architecture, Third Edition buy/rent: https://www.amazon.com/Engine-
 - You can visualize these files by going to "chome://tracing" in a chrome browser and loading these files
 
 # Log
-### 07/05/2020 - Camera, Context, and 2D Rendering Abstractions
+### 07/09/2020 - Instrumentation, Statistics, and Batch Rendering
+![4](RMImages/4.PNG)
+Haha engine go vroooom
+
+In this update, I focused on optimizing my 2D renderer, which led me down the rabbit-hole of instrumentation and recording runtime statistics. Hoowan now has a preprocessor directive that records instrumentation stats, which can be pulled into the Chrome tracing app (more info in “Instrumentation Usage”). I also have an ImGui window that keeps track of the engine’s draw calls, vertex data, and framerate.
+
+The biggest part of this update is the introduction of batch rendering. The 2D rendering API now allows users to specify a pre-allocated number of quads to batch together. This allows the engine to render several hundred (or even thousands) of quads in a single draw call, which significantly improves performance.
+
+We’re getting closer to actually being able to make a game! In the next update, I’ll be focusing on sprite sheets and a basic entity-component system. At that point, I’ll put Hoowan to the test and attempt to make a basic 2D game!
+
+### 07/03/2020 - Camera, Context, and 2D Rendering Abstractions
 ![3](RMImages/3.PNG)
 It's very simple if you don't think about it.
 
