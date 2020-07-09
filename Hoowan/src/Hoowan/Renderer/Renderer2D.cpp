@@ -144,12 +144,50 @@ namespace Hoowan
 		RenderCommand::DrawIndexed(s_Data.QuadVertexArray, s_Data.QuadIndexCount);
 	}
 
-	void Renderer2D::DrawQuad(const glm::vec2& translation, const float rotation, const glm::vec2& scale, const glm::vec4& color)
+	void Renderer2D::DrawStaticQuad(const glm::vec2& translation, const glm::vec2& scale, const glm::vec4& color)
 	{
-		DrawQuad({ translation.x, translation.y, 0.0f }, rotation, scale, color);
+		DrawStaticQuad({ translation.x, translation.y, 0.0f}, scale, color);
 	}
 
-	void Renderer2D::DrawQuad(const glm::vec3& translation, const float rotation, const glm::vec2& scale, const glm::vec4& color)
+	void Renderer2D::DrawStaticQuad(const glm::vec3& translation, const glm::vec2& scale, const glm::vec4& color)
+	{
+		HW_PROFILE_FUNCTION();
+
+		s_Data.QuadVertexBufferPtr->Position = { translation.x - (scale.x / 2), translation.y - (scale.y / 2), translation.z };
+		s_Data.QuadVertexBufferPtr->Color = color;
+		s_Data.QuadVertexBufferPtr->TexCoord = { 0.0f, 0.0f };
+		s_Data.QuadVertexBufferPtr->TexIndex = 0;
+		s_Data.QuadVertexBufferPtr++;
+
+		s_Data.QuadVertexBufferPtr->Position = { translation.x + (scale.x / 2), translation.y - (scale.y / 2), translation.z };
+		s_Data.QuadVertexBufferPtr->Color = color;
+		s_Data.QuadVertexBufferPtr->TexCoord = { 1.0f, 0.0f };
+		s_Data.QuadVertexBufferPtr->TexIndex = 0;
+		s_Data.QuadVertexBufferPtr++;
+
+		s_Data.QuadVertexBufferPtr->Position = { translation.x + (scale.x / 2), translation.y + (scale.y / 2), translation.z };
+		s_Data.QuadVertexBufferPtr->Color = color;
+		s_Data.QuadVertexBufferPtr->TexCoord = { 1.0f, 1.0f };
+		s_Data.QuadVertexBufferPtr->TexIndex = 0;
+		s_Data.QuadVertexBufferPtr++;
+
+		s_Data.QuadVertexBufferPtr->Position = { translation.x - (scale.x / 2), translation.y + (scale.y / 2), translation.z };
+		s_Data.QuadVertexBufferPtr->Color = color;
+		s_Data.QuadVertexBufferPtr->TexCoord = { 0.0f, 1.0f };
+		s_Data.QuadVertexBufferPtr->TexIndex = 0;
+		s_Data.QuadVertexBufferPtr++;
+
+		s_Data.QuadIndexCount += 6;
+
+		s_Data.WhiteTexture->Bind();
+	}
+
+	void Renderer2D::DrawRotatedQuad(const glm::vec2& translation, const float rotation, const glm::vec2& scale, const glm::vec4& color)
+	{
+		DrawRotatedQuad({ translation.x, translation.y, 0.0f }, rotation, scale, color);
+	}
+
+	void Renderer2D::DrawRotatedQuad(const glm::vec3& translation, const float rotation, const glm::vec2& scale, const glm::vec4& color)
 	{
 		HW_PROFILE_FUNCTION();
 
@@ -187,12 +225,69 @@ namespace Hoowan
 		s_Data.WhiteTexture->Bind();
 	}
 
-	void Renderer2D::DrawQuad(const glm::vec2& translation, const float rotation, const glm::vec2& scale, const Ref<Texture2D> texture)
+	void Renderer2D::DrawStaticQuad(const glm::vec2& translation, const glm::vec2& scale, const Ref<Texture2D> texture)
 	{
-		DrawQuad({ translation.x, translation.y, 0.0f }, rotation, scale, texture);
+		DrawStaticQuad({ translation.x, translation.y, 0.0f }, scale, texture);
 	}
 
-	void Renderer2D::DrawQuad(const glm::vec3& translation, const float rotation, const glm::vec2& scale, const Ref<Texture2D> texture)
+	void Renderer2D::DrawStaticQuad(const glm::vec3& translation, const glm::vec2& scale, const Ref<Texture2D> texture)
+	{
+		HW_PROFILE_FUNCTION();
+
+		constexpr glm::vec4 color = { 1.0f, 1.0f, 1.0f, 1.0f };
+
+		float textureIndex = 0.0f;
+
+		for (uint32_t i = 0; i < s_Data.TextureSlotIndex; i++)
+		{
+			// TODO: This is kinda ugly, will fix in engine asset manager
+			if (*s_Data.TextureSlots[i].get() == *texture.get())
+			{
+				textureIndex = (float)i;
+				break;
+			}
+		}
+
+		if (textureIndex == 0.0f)
+		{
+			textureIndex = (float)s_Data.TextureSlotIndex;
+			s_Data.TextureSlots[s_Data.TextureSlotIndex] = texture;
+			s_Data.TextureSlotIndex++;
+		}
+
+		s_Data.QuadVertexBufferPtr->Position = { translation.x - (scale.x / 2), translation.y - (scale.y / 2), translation.z };
+		s_Data.QuadVertexBufferPtr->Color = color;
+		s_Data.QuadVertexBufferPtr->TexCoord = { 0.0f, 0.0f };
+		s_Data.QuadVertexBufferPtr->TexIndex = textureIndex;
+		s_Data.QuadVertexBufferPtr++;
+
+		s_Data.QuadVertexBufferPtr->Position = { translation.x + (scale.x / 2), translation.y - (scale.y / 2), translation.z };
+		s_Data.QuadVertexBufferPtr->Color = color;
+		s_Data.QuadVertexBufferPtr->TexCoord = { 1.0f, 0.0f };
+		s_Data.QuadVertexBufferPtr->TexIndex = textureIndex;
+		s_Data.QuadVertexBufferPtr++;
+
+		s_Data.QuadVertexBufferPtr->Position = { translation.x + (scale.x / 2), translation.y + (scale.y / 2), translation.z };
+		s_Data.QuadVertexBufferPtr->Color = color;
+		s_Data.QuadVertexBufferPtr->TexCoord = { 1.0f, 1.0f };
+		s_Data.QuadVertexBufferPtr->TexIndex = textureIndex;
+		s_Data.QuadVertexBufferPtr++;
+
+		s_Data.QuadVertexBufferPtr->Position = { translation.x - (scale.x / 2), translation.y + (scale.y / 2), translation.z };
+		s_Data.QuadVertexBufferPtr->Color = color;
+		s_Data.QuadVertexBufferPtr->TexCoord = { 0.0f, 1.0f };
+		s_Data.QuadVertexBufferPtr->TexIndex = textureIndex;
+		s_Data.QuadVertexBufferPtr++;
+
+		s_Data.QuadIndexCount += 6;
+	}
+
+	void Renderer2D::DrawRotatedQuad(const glm::vec2& translation, const float rotation, const glm::vec2& scale, const Ref<Texture2D> texture)
+	{
+		DrawRotatedQuad({ translation.x, translation.y, 0.0f }, rotation, scale, texture);
+	}
+
+	void Renderer2D::DrawRotatedQuad(const glm::vec3& translation, const float rotation, const glm::vec2& scale, const Ref<Texture2D> texture)
 	{
 		HW_PROFILE_FUNCTION();\
 

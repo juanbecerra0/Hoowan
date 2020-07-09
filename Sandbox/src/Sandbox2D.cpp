@@ -43,25 +43,37 @@ void Sandbox2D::OnUpdate(Hoowan::Timestep ts)
 		// Begin scene
 		Hoowan::Renderer2D::BeginScene(m_CameraController.GetCamera());
 
-		const int dimensions = 10;
+		const int dimensions = 100;
 		const float scale = 0.8f;
 
 		static float rotation = 0.0f;
 		rotation += 45 * ts;
 
-		// Draw 100 quads
+		// Draw static quads
 		for (int x = -(dimensions / 2); x < (dimensions / 2); x++)
 		{
 			for (int y = -(dimensions / 2); y < (dimensions / 2); y++)
 			{
 				if ((x + y) % 2 == 0)
-					Hoowan::Renderer2D::DrawQuad({ (float)x, (float)y, 0.1f }, (x + y) * 15.0f + rotation, { scale, scale }, m_Texture);
+					Hoowan::Renderer2D::DrawStaticQuad({ (float)x, (float)y, 0.1f }, { scale, scale }, m_Texture);
 				else
-					Hoowan::Renderer2D::DrawQuad({ (float)x, (float)y, 0.1f }, (x + y) * 15.0f + rotation, { scale, scale }, m_Color);
+					Hoowan::Renderer2D::DrawStaticQuad({ (float)x, (float)y, 0.1f }, { scale, scale }, m_Color);
 			}
 		}
 
-		
+		/*
+		// Draw rotating quads
+		for (int x = -(dimensions / 2); x < (dimensions / 2); x++)
+		{
+			for (int y = -(dimensions / 2); y < (dimensions / 2); y++)
+			{
+				if ((x + y) % 2 == 0)
+					Hoowan::Renderer2D::DrawRotatedQuad({ (float)x, (float)y, 0.1f }, (x + y) * 15.0f + rotation, { scale, scale }, m_Texture);
+				else
+					Hoowan::Renderer2D::DrawRotatedQuad({ (float)x, (float)y, 0.1f }, (x + y) * 15.0f + rotation, { scale, scale }, m_Color);
+			}
+		}
+		*/
 
 		// End scene
 		Hoowan::Renderer2D::EndScene();
