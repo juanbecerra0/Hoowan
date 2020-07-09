@@ -29,6 +29,9 @@ void Sandbox2D::OnUpdate(Hoowan::Timestep ts)
 	// Camera Input/VP update
 	m_CameraController.OnUpdate(ts);
 
+	// Reset statistics
+	Hoowan::Renderer2D::ResetStats();
+
 	{
 		HW_PROFILE_SCOPE("ClearBuffer::OnUpdate");
 
@@ -43,7 +46,7 @@ void Sandbox2D::OnUpdate(Hoowan::Timestep ts)
 		// Begin scene
 		Hoowan::Renderer2D::BeginScene(m_CameraController.GetCamera());
 
-		const int dimensions = 100;
+		const int dimensions = 316;
 		const float scale = 0.8f;
 
 		static float rotation = 0.0f;
@@ -84,11 +87,20 @@ void Sandbox2D::OnImGuiRender()
 {
 	HW_PROFILE_FUNCTION();
 
+	// Stats
+	auto stats = Hoowan::Renderer2D::GetStats();
+
+	ImGui::Begin("Renderer2D Stats");
+	ImGui::Text("Draw Calls: %d", stats.GetDrawCallCount());
+	ImGui::Text("Quads: %d", stats.GetQuadCount());
+	ImGui::Text("Triangles: %d", stats.GetTriangleCount());
+	ImGui::Text("Vertices: %d", stats.GetVertexCount());
+	ImGui::Text("Indices: %d", stats.GetIndexCount());
+	ImGui::End();
+
 	// Color selection
 	ImGui::Begin("Color Selector");
-
 	ImGui::ColorEdit4("Color", glm::value_ptr(m_Color));
-
 	ImGui::End();
 
 }

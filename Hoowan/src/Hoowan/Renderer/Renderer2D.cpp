@@ -18,9 +18,9 @@ namespace Hoowan
 
 	struct Renderer2DData
 	{
-		const uint32_t MaxQuads = 10000;
-		const uint32_t MaxVertices = MaxQuads * 4;
-		const uint32_t MaxIndices = MaxQuads * 6;
+		static const uint32_t MaxQuads = 10000;
+		static const uint32_t MaxVertices = MaxQuads * 4;
+		static const uint32_t MaxIndices = MaxQuads * 6;
 		static const uint32_t MaxTextureSlots = 32;	// TODO: get rendering API cap
 
 		Ref<VertexArray> QuadVertexArray;
@@ -36,6 +36,8 @@ namespace Hoowan
 		uint32_t TextureSlotIndex = 1;	// 0 = white texture
 
 		glm::vec4 QuadVertexPositions[4];
+
+		Renderer2D::Stats stats;
 	};
 
 	static Renderer2DData s_Data;
@@ -142,6 +144,17 @@ namespace Hoowan
 
 		// Bind indices
 		RenderCommand::DrawIndexed(s_Data.QuadVertexArray, s_Data.QuadIndexCount);
+		s_Data.stats.DrawCalls++;
+	}
+
+	void Renderer2D::StartNewBatch()
+	{
+		EndScene();
+
+		s_Data.QuadIndexCount = 0;
+		s_Data.QuadVertexBufferPtr = s_Data.QuadVertexBufferBase;
+
+		s_Data.TextureSlotIndex = 1;
 	}
 
 	void Renderer2D::DrawStaticQuad(const glm::vec2& translation, const glm::vec2& scale, const glm::vec4& color)
@@ -153,6 +166,9 @@ namespace Hoowan
 	{
 		HW_PROFILE_FUNCTION();
 
+		if (s_Data.QuadIndexCount >= Renderer2DData::MaxIndices)
+			StartNewBatch();
+
 		s_Data.QuadVertexBufferPtr->Position = { translation.x - (scale.x / 2), translation.y - (scale.y / 2), translation.z };
 		s_Data.QuadVertexBufferPtr->Color = color;
 		s_Data.QuadVertexBufferPtr->TexCoord = { 0.0f, 0.0f };
@@ -180,6 +196,8 @@ namespace Hoowan
 		s_Data.QuadIndexCount += 6;
 
 		s_Data.WhiteTexture->Bind();
+
+		s_Data.stats.QuadCount++;
 	}
 
 	void Renderer2D::DrawRotatedQuad(const glm::vec2& translation, const float rotation, const glm::vec2& scale, const glm::vec4& color)
@@ -191,6 +209,9 @@ namespace Hoowan
 	{
 		HW_PROFILE_FUNCTION();
 
+		if (s_Data.QuadIndexCount >= Renderer2DData::MaxIndices)
+			StartNewBatch();
+
 		glm::mat4 transform =
 			glm::translate(glm::mat4(1.0f), translation) *
 			glm::rotate(glm::mat4(1.0f), glm::radians(rotation), glm::vec3(0.0f, 0.0f, 1.0f)) *
@@ -223,6 +244,8 @@ namespace Hoowan
 		s_Data.QuadIndexCount += 6;
 
 		s_Data.WhiteTexture->Bind();
+
+		s_Data.stats.QuadCount++;
 	}
 
 	void Renderer2D::DrawStaticQuad(const glm::vec2& translation, const glm::vec2& scale, const Ref<Texture2D> texture)
@@ -233,6 +256,9 @@ namespace Hoowan
 	void Renderer2D::DrawStaticQuad(const glm::vec3& translation, const glm::vec2& scale, const Ref<Texture2D> texture)
 	{
 		HW_PROFILE_FUNCTION();
+
+		if (s_Data.QuadIndexCount >= Renderer2DData::MaxIndices)
+			StartNewBatch();
 
 		constexpr glm::vec4 color = { 1.0f, 1.0f, 1.0f, 1.0f };
 
@@ -280,6 +306,8 @@ namespace Hoowan
 		s_Data.QuadVertexBufferPtr++;
 
 		s_Data.QuadIndexCount += 6;
+
+		s_Data.stats.QuadCount++;
 	}
 
 	void Renderer2D::DrawRotatedQuad(const glm::vec2& translation, const float rotation, const glm::vec2& scale, const Ref<Texture2D> texture)
@@ -289,7 +317,10 @@ namespace Hoowan
 
 	void Renderer2D::DrawRotatedQuad(const glm::vec3& translation, const float rotation, const glm::vec2& scale, const Ref<Texture2D> texture)
 	{
-		HW_PROFILE_FUNCTION();\
+		HW_PROFILE_FUNCTION();
+
+		if (s_Data.QuadIndexCount >= Renderer2DData::MaxIndices)
+			StartNewBatch();
 
 		constexpr glm::vec4 color = { 1.0f, 1.0f, 1.0f, 1.0f };
 
@@ -342,5 +373,17 @@ namespace Hoowan
 		s_Data.QuadVertexBufferPtr++;
 
 		s_Data.QuadIndexCount += 6;
+
+		s_Data.stats.QuadCount++;
+	}
+
+	Hoowan::Renderer2D::Stats Renderer2D::GetStats()
+	{
+		return s_Data.stats;
+	}
+
+	void Renderer2D::ResetStats()
+	{
+		memset(&s_Data.stats, 0, sizeof(Stats));
 	}
 }
