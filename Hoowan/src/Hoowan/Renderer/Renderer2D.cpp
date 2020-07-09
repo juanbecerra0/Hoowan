@@ -6,7 +6,6 @@
 #include "RenderCommand.h"
 #include <glm\ext\matrix_transform.hpp>
 
-// Temp for framerate!
 #include <GLFW/glfw3.h>
 
 namespace Hoowan
@@ -269,7 +268,6 @@ namespace Hoowan
 
 		for (uint32_t i = 0; i < s_Data.TextureSlotIndex; i++)
 		{
-			// TODO: This is kinda ugly, will fix in engine asset manager
 			if (*s_Data.TextureSlots[i].get() == *texture.get())
 			{
 				textureIndex = (float)i;
@@ -331,7 +329,6 @@ namespace Hoowan
 
 		for (uint32_t i = 0; i < s_Data.TextureSlotIndex; i++)
 		{
-			// TODO: This is kinda ugly, will fix in engine asset manager
 			if (*s_Data.TextureSlots[i].get() == *texture.get())
 			{
 				textureIndex = (float)i;

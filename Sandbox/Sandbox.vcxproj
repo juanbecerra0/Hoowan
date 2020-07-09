@@ -135,10 +135,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="src\Sandbox2D.h" />
+    <ClInclude Include="src\game\GameSandbox2D.h" />
+    <ClInclude Include="src\test\Sandbox2D.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\Sandbox2D.cpp" />
+    <ClCompile Include="src\game\GameSandbox2D.cpp" />
+    <ClCompile Include="src\test\Sandbox2D.cpp" />
     <ClCompile Include="src\SandboxApp.cpp" />
   </ItemGroup>
   <ItemGroup>

@@ -1,7 +1,6 @@
 #include "Sandbox2D.h"
 
 #include "imgui/imgui.h"
-#include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
 Sandbox2D::Sandbox2D()
@@ -47,12 +46,15 @@ void Sandbox2D::OnUpdate(Hoowan::Timestep ts)
 		// Begin scene
 		Hoowan::Renderer2D::BeginScene(m_CameraController.GetCamera());
 
-		const int dimensions = 500;
+		const int dimensions = 250;
 		const float scale = 0.8f;
 
 		static float rotation = 0.0f;
 		rotation += 45 * ts;
 
+#define STATIC_DRAW
+
+#ifdef STATIC_DRAW
 		// Draw static quads
 		for (int x = -(dimensions / 2); x < (dimensions / 2); x++)
 		{
@@ -64,8 +66,7 @@ void Sandbox2D::OnUpdate(Hoowan::Timestep ts)
 					Hoowan::Renderer2D::DrawStaticQuad({ (float)x, (float)y, 0.1f }, { scale, scale }, m_Color);
 			}
 		}
-
-		/*
+#else
 		// Draw rotating quads
 		for (int x = -(dimensions / 2); x < (dimensions / 2); x++)
 		{
@@ -77,7 +78,7 @@ void Sandbox2D::OnUpdate(Hoowan::Timestep ts)
 					Hoowan::Renderer2D::DrawRotatedQuad({ (float)x, (float)y, 0.1f }, (x + y) * 15.0f + rotation, { scale, scale }, m_Color);
 			}
 		}
-		*/
+#endif
 
 		// End scene
 		Hoowan::Renderer2D::EndScene();
