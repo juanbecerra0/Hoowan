@@ -31,6 +31,7 @@ void Sandbox2D::OnUpdate(Hoowan::Timestep ts)
 
 	// Reset statistics
 	Hoowan::Renderer2D::ResetStats();
+	Hoowan::Renderer2D::StatsBeginFrame();
 
 	{
 		HW_PROFILE_SCOPE("ClearBuffer::OnUpdate");
@@ -46,7 +47,7 @@ void Sandbox2D::OnUpdate(Hoowan::Timestep ts)
 		// Begin scene
 		Hoowan::Renderer2D::BeginScene(m_CameraController.GetCamera());
 
-		const int dimensions = 316;
+		const int dimensions = 500;
 		const float scale = 0.8f;
 
 		static float rotation = 0.0f;
@@ -80,6 +81,7 @@ void Sandbox2D::OnUpdate(Hoowan::Timestep ts)
 
 		// End scene
 		Hoowan::Renderer2D::EndScene();
+		Hoowan::Renderer2D::StatsEndFrame();
 	}
 }
 
@@ -89,8 +91,13 @@ void Sandbox2D::OnImGuiRender()
 
 	// Stats
 	auto stats = Hoowan::Renderer2D::GetStats();
+	float averageRenderTime = stats.TotalFrameRenderTime / stats.FrameRenderTimes.size() * 100.0f; // nb: wont be accurate until we have gathered at least stats.FrameRenderTime().size() results
+	float averageFPS = (1.0f / averageRenderTime);
 
 	ImGui::Begin("Renderer2D Stats");
+	ImGui::Text("Render time: %8.5f", averageRenderTime);
+	ImGui::Text("Render framerate: %5.0f", averageFPS);
+	ImGui::Text("");
 	ImGui::Text("Draw Calls: %d", stats.GetDrawCallCount());
 	ImGui::Text("Quads: %d", stats.GetQuadCount());
 	ImGui::Text("Triangles: %d", stats.GetTriangleCount());

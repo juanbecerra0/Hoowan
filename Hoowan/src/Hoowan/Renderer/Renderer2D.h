@@ -29,18 +29,28 @@ namespace Hoowan {
 		// Statistics
 		struct Stats
 		{
+			std::array<float, 100> FrameRenderTimes;
 			uint32_t DrawCalls = 0;
 			uint32_t QuadCount = 0;
+			uint32_t FrameCount = 0;
+
+			float CurrentFrameBeginTime = 0.0f;
+			float TotalFrameRenderTime = 0.0f;
 
 			uint32_t GetDrawCallCount()			{ return DrawCalls; };
 			uint32_t GetQuadCount()				{ return QuadCount; };
 			uint32_t GetTriangleCount()			{ return QuadCount * 2; };
 			uint32_t GetVertexCount()			{ return QuadCount * 4; };
 			uint32_t GetIndexCount()			{ return QuadCount * 6; };
+
+			
 		};
 
 		static Stats GetStats();
 		static void ResetStats();
+
+		static void StatsBeginFrame();
+		static void StatsEndFrame();
 
 	private:
 		static void StartNewBatch();

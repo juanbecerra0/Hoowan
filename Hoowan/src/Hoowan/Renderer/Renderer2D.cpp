@@ -6,6 +6,9 @@
 #include "RenderCommand.h"
 #include <glm\ext\matrix_transform.hpp>
 
+// Temp for framerate!
+#include <GLFW/glfw3.h>
+
 namespace Hoowan
 {
 	struct QuadVertex
@@ -385,5 +388,19 @@ namespace Hoowan
 	void Renderer2D::ResetStats()
 	{
 		memset(&s_Data.stats, 0, sizeof(Stats));
+	}
+
+	void Renderer2D::StatsBeginFrame()
+	{
+		s_Data.stats.CurrentFrameBeginTime = (float)glfwGetTime();
+	}
+
+	void Renderer2D::StatsEndFrame()
+	{
+		s_Data.stats.FrameRenderTimes[s_Data.stats.FrameCount] = (float)glfwGetTime() - s_Data.stats.CurrentFrameBeginTime;
+		s_Data.stats.TotalFrameRenderTime += (s_Data.stats.FrameRenderTimes[s_Data.stats.FrameCount] - s_Data.stats.FrameRenderTimes[(s_Data.stats.FrameCount + 1) % s_Data.stats.FrameRenderTimes.size()]);
+
+		if (++s_Data.stats.FrameCount == s_Data.stats.FrameRenderTimes.size())
+			s_Data.stats.FrameCount = 0;
 	}
 }
