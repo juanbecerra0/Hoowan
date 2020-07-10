@@ -32,5 +32,8 @@
     <ClInclude Include="src\test\Sandbox2D.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\game\SpriteSheet.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

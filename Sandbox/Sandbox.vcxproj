@@ -136,6 +136,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="src\game\GameSandbox2D.h" />
+    <ClInclude Include="src\game\SpriteSheet.h" />
     <ClInclude Include="src\test\Sandbox2D.h" />
   </ItemGroup>
   <ItemGroup>
