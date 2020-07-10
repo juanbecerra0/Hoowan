@@ -2,7 +2,8 @@
 
 #include "Hoowan.h"
 
-#include "SpriteSheet.h"
+#include "LevelParser.h"
+#include "Levels.h"
 
 class GameSandbox2D : public Hoowan::Layer
 {
@@ -20,6 +21,5 @@ public:
 private:
 	Hoowan::OrthographicCameraController m_CameraController;
 
-	PlatformSprites m_PlatformSprites;
-	PlayerSprites m_PlayerSprites;
+	LevelParser m_LevelParser;
 };
