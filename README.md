@@ -12,10 +12,9 @@ Game Engine Architecture, Third Edition buy/rent: https://www.amazon.com/Engine-
 
 ### To run Hoowan...
 1. Clone this repository (NOTE: Hoowan only supports Windows x64 at the moment)
-2. Download the latest version of Premake 5 (https://github.com/premake/premake-core) and place the executable under "../Hoowan/vendor/bin/premake"
-3. Run the "GenerateProjects.bat" file to run premake and create a VS solution
-4. Open the solution and compile the entire project
-5. Run the Sandbox.exe to start the current compiled project (all customer code is written under the Sandbox solution)
+2. Run the "GenerateProjects.bat" file to run premake and create a VS solution
+3. Open the solution and compile the entire project
+4. Run Sandbox.exe to start the current compiled project (all customer code is written under the Sandbox solution)
 
 ### Instrumentation Usage
 - Check Hoowan/src/Hoowan/Debug/Instrumentor.h for macro usage
