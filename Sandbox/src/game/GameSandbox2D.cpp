@@ -16,8 +16,50 @@ void GameSandbox2D::OnAttach()
 	m_PlayerSpritesheet = Hoowan::Texture2D::Create("assets/gametiles/player.png");
 	m_PlatformsSpritesheet = Hoowan::Texture2D::Create("assets/gametiles/platforms.png");
 
-	m_GreenLand = Hoowan::SubTexture2D::CreateFromCoords(m_PlatformsSpritesheet, { 0.0f , 6.0f }, { 128.0f, 128.0f });
-	m_OpenDoor = Hoowan::SubTexture2D::CreateFromCoords(m_PlatformsSpritesheet, { 5.0f, 0.0f, }, { 128.0f, 256.0f });
+	m_GreenLand =		Hoowan::SubTexture2D::CreateFromCoords(m_PlatformsSpritesheet, { 0.0f , 6.0f }, { 128.0f, 128.0f });
+	m_OpenDoor =		Hoowan::SubTexture2D::CreateFromCoords(m_PlatformsSpritesheet, { 5.0f, 0.0f, }, { 128.0f, 256.0f });
+
+	m_GreenLand =		Hoowan::SubTexture2D::CreateFromCoords(m_PlatformsSpritesheet, { 0.0f, 6.0f }, { 128.0f, 128.0f });
+	m_GreenStone =		Hoowan::SubTexture2D::CreateFromCoords(m_PlatformsSpritesheet, { 0.0f, 5.0f }, { 128.0f, 128.0f });
+	m_GreenLandJag =	Hoowan::SubTexture2D::CreateFromCoords(m_PlatformsSpritesheet, { 0.0f, 4.0f }, { 128.0f, 128.0f });
+	m_GreenStoneJag =	Hoowan::SubTexture2D::CreateFromCoords(m_PlatformsSpritesheet, { 0.0f, 3.0f }, { 128.0f, 128.0f });
+	
+	m_SandLand =		Hoowan::SubTexture2D::CreateFromCoords(m_PlatformsSpritesheet, { 1.0f, 6.0f }, { 128.0f, 128.0f });
+	m_SandStone =		Hoowan::SubTexture2D::CreateFromCoords(m_PlatformsSpritesheet, { 1.0f, 5.0f }, { 128.0f, 128.0f });
+	m_SandLandJag =		Hoowan::SubTexture2D::CreateFromCoords(m_PlatformsSpritesheet, { 1.0f, 4.0f }, { 128.0f, 128.0f });
+	m_SandStoneJag =	Hoowan::SubTexture2D::CreateFromCoords(m_PlatformsSpritesheet, { 1.0f, 3.0f }, { 128.0f, 128.0f });
+	
+	m_SnowLand =		Hoowan::SubTexture2D::CreateFromCoords(m_PlatformsSpritesheet, { 2.0f, 6.0f }, { 128.0f, 128.0f });
+	m_SnowStone =		Hoowan::SubTexture2D::CreateFromCoords(m_PlatformsSpritesheet, { 2.0f, 5.0f }, { 128.0f, 128.0f });
+	m_SnowLandJag =		Hoowan::SubTexture2D::CreateFromCoords(m_PlatformsSpritesheet, { 2.0f, 4.0f }, { 128.0f, 128.0f });
+	m_SnowStoneJag =	Hoowan::SubTexture2D::CreateFromCoords(m_PlatformsSpritesheet, { 2.0f, 3.0f }, { 128.0f, 128.0f });
+	
+	m_LandUnder =		Hoowan::SubTexture2D::CreateFromCoords(m_PlatformsSpritesheet, { 3.0f, 6.0f }, { 128.0f, 128.0f });
+	m_StoneUnder =		Hoowan::SubTexture2D::CreateFromCoords(m_PlatformsSpritesheet, { 3.0f, 5.0f }, { 128.0f, 128.0f });
+	
+	m_WaterSurface =	Hoowan::SubTexture2D::CreateFromCoords(m_PlatformsSpritesheet, { 4.0f, 6.0f }, { 128.0f, 128.0f });
+	m_WaterDepths =		Hoowan::SubTexture2D::CreateFromCoords(m_PlatformsSpritesheet, { 4.0f, 5.0f }, { 128.0f, 128.0f });
+	m_LavaSurface =		Hoowan::SubTexture2D::CreateFromCoords(m_PlatformsSpritesheet, { 5.0f, 6.0f }, { 128.0f, 128.0f });
+	m_LavaDepths =		Hoowan::SubTexture2D::CreateFromCoords(m_PlatformsSpritesheet, { 5.0f, 5.0f }, { 128.0f, 128.0f });
+	
+	m_GoldBlock =		Hoowan::SubTexture2D::CreateFromCoords(m_PlatformsSpritesheet, { 3.0f, 4.0f }, { 128.0f, 128.0f });
+	m_GoldBlockAlt =	Hoowan::SubTexture2D::CreateFromCoords(m_PlatformsSpritesheet, { 4.0f, 4.0f }, { 128.0f, 128.0f });
+	m_BrownBlock =		Hoowan::SubTexture2D::CreateFromCoords(m_PlatformsSpritesheet, { 3.0f, 3.0f }, { 128.0f, 128.0f });
+	m_BrownBlockAlt =	Hoowan::SubTexture2D::CreateFromCoords(m_PlatformsSpritesheet, { 4.0f, 3.0f }, { 128.0f, 128.0f });
+	m_GreyBlock =		Hoowan::SubTexture2D::CreateFromCoords(m_PlatformsSpritesheet, { 3.0f, 2.0f }, { 128.0f, 128.0f });
+	m_GreyBlockAlt =	Hoowan::SubTexture2D::CreateFromCoords(m_PlatformsSpritesheet, { 4.0f, 2.0f }, { 128.0f, 128.0f });
+	m_WoodBlock =		Hoowan::SubTexture2D::CreateFromCoords(m_PlatformsSpritesheet, { 3.0f, 1.0f }, { 128.0f, 128.0f });
+	m_WoodBlockAlt =	Hoowan::SubTexture2D::CreateFromCoords(m_PlatformsSpritesheet, { 4.0f, 1.0f }, { 128.0f, 128.0f });
+	
+	m_LadderTop =		Hoowan::SubTexture2D::CreateFromCoords(m_PlatformsSpritesheet, { 0.0f, 2.0f }, { 128.0f, 128.0f });
+	m_LadderStep =		Hoowan::SubTexture2D::CreateFromCoords(m_PlatformsSpritesheet, { 1.0f, 2.0f }, { 128.0f, 128.0f });
+
+	m_Bridge =			Hoowan::SubTexture2D::CreateFromCoords(m_PlatformsSpritesheet, { 2.0f, 2.0f }, { 128.0f, 128.0f });
+	m_GrassPatch =		Hoowan::SubTexture2D::CreateFromCoords(m_PlatformsSpritesheet, { 2.0f, 1.0f }, { 128.0f, 128.0f });
+	m_Spikes =			Hoowan::SubTexture2D::CreateFromCoords(m_PlatformsSpritesheet, { 0.0f, 1.0f }, { 128.0f, 128.0f });
+	m_Spinner =			Hoowan::SubTexture2D::CreateFromCoords(m_PlatformsSpritesheet, { 1.0f, 1.0f }, { 128.0f, 128.0f });
+
+	m_OpenDoor =		Hoowan::SubTexture2D::CreateFromCoords(m_PlatformsSpritesheet, { 5.0f, 0.0f }, { 128.0f, 256.0f });
 }
 
 void GameSandbox2D::OnDetach()
@@ -50,11 +92,47 @@ void GameSandbox2D::OnUpdate(Hoowan::Timestep ts)
 		// Begin scene
 		Hoowan::Renderer2D::BeginScene(m_CameraController.GetCamera());
 
-		//Hoowan::Renderer2D::DrawStaticQuad({ 0.0f, 1.0f }, { 1.0f, 1.0f }, m_PlayerSpritesheet);
-		//Hoowan::Renderer2D::DrawStaticQuad({ 0.0f, 0.0f }, { 1.0f, 1.0f }, m_PlatformsSpritesheet);
-		//Hoowan::Renderer2D::DrawRotatedQuad({ 0.0f, 0.0f }, 0.0f, { 1.0f, 1.0f }, m_PlatformsSpritesheet);
-		Hoowan::Renderer2D::DrawStaticQuad({ -0.5f, 0.0f }, { 1.0f, 1.0f }, m_GreenLand);
-		Hoowan::Renderer2D::DrawStaticQuad({ 0.5f, 0.5f }, { 1.0f, 2.0f }, m_OpenDoor);
+		Hoowan::Renderer2D::DrawStaticQuad({ 00.0f, 0.0f }, { 0.5f, 0.5f }, m_GreenLand);
+		Hoowan::Renderer2D::DrawStaticQuad({ 01.0f, 0.0f }, { 0.5f, 0.5f }, m_GreenStone);
+		Hoowan::Renderer2D::DrawStaticQuad({ 02.0f, 0.0f }, { 0.5f, 0.5f }, m_GreenLandJag);
+		Hoowan::Renderer2D::DrawStaticQuad({ 03.0f, 0.0f }, { 0.5f, 0.5f }, m_GreenStoneJag);
+
+		Hoowan::Renderer2D::DrawStaticQuad({ 04.0f, 0.0f }, { 0.5f, 0.5f }, m_SandLand);
+		Hoowan::Renderer2D::DrawStaticQuad({ 05.0f, 0.0f }, { 0.5f, 0.5f }, m_SandStone);
+		Hoowan::Renderer2D::DrawStaticQuad({ 06.0f, 0.0f }, { 0.5f, 0.5f }, m_SandLandJag);
+		Hoowan::Renderer2D::DrawStaticQuad({ 07.0f, 0.0f }, { 0.5f, 0.5f }, m_SandStoneJag);
+
+		Hoowan::Renderer2D::DrawStaticQuad({ 08.0f, 0.0f }, { 0.5f, 0.5f }, m_SnowLand);
+		Hoowan::Renderer2D::DrawStaticQuad({ 09.0f, 0.0f }, { 0.5f, 0.5f }, m_SnowStone);
+		Hoowan::Renderer2D::DrawStaticQuad({ 10.0f, 0.0f }, { 0.5f, 0.5f }, m_SnowLandJag);
+		Hoowan::Renderer2D::DrawStaticQuad({ 11.0f, 0.0f }, { 0.5f, 0.5f }, m_SnowStoneJag);
+
+		Hoowan::Renderer2D::DrawStaticQuad({ 12.0f, 0.0f }, { 0.5f, 0.5f }, m_LandUnder);
+		Hoowan::Renderer2D::DrawStaticQuad({ 13.0f, 0.0f }, { 0.5f, 0.5f }, m_StoneUnder);
+
+		Hoowan::Renderer2D::DrawStaticQuad({ 14.0f, 0.0f }, { 0.5f, 0.5f }, m_WaterSurface);
+		Hoowan::Renderer2D::DrawStaticQuad({ 15.0f, 0.0f }, { 0.5f, 0.5f }, m_WaterDepths);
+		Hoowan::Renderer2D::DrawStaticQuad({ 16.0f, 0.0f }, { 0.5f, 0.5f }, m_LavaSurface);
+		Hoowan::Renderer2D::DrawStaticQuad({ 17.0f, 0.0f }, { 0.5f, 0.5f }, m_LavaDepths);
+
+		Hoowan::Renderer2D::DrawStaticQuad({ 18.0f, 0.0f }, { 0.5f, 0.5f }, m_GoldBlock);
+		Hoowan::Renderer2D::DrawStaticQuad({ 19.0f, 0.0f }, { 0.5f, 0.5f }, m_GoldBlockAlt);
+		Hoowan::Renderer2D::DrawStaticQuad({ 20.0f, 0.0f }, { 0.5f, 0.5f }, m_BrownBlock);
+		Hoowan::Renderer2D::DrawStaticQuad({ 21.0f, 0.0f }, { 0.5f, 0.5f }, m_BrownBlockAlt);
+		Hoowan::Renderer2D::DrawStaticQuad({ 22.0f, 0.0f }, { 0.5f, 0.5f }, m_GreyBlock);
+		Hoowan::Renderer2D::DrawStaticQuad({ 23.0f, 0.0f }, { 0.5f, 0.5f }, m_GreyBlockAlt);
+		Hoowan::Renderer2D::DrawStaticQuad({ 24.0f, 0.0f }, { 0.5f, 0.5f }, m_WoodBlock);
+		Hoowan::Renderer2D::DrawStaticQuad({ 25.0f, 0.0f }, { 0.5f, 0.5f }, m_WoodBlockAlt);
+
+		Hoowan::Renderer2D::DrawStaticQuad({ 26.0f, 0.0f }, { 0.5f, 0.5f }, m_LadderTop);
+		Hoowan::Renderer2D::DrawStaticQuad({ 27.0f, 0.0f }, { 0.5f, 0.5f }, m_LadderStep);
+
+		Hoowan::Renderer2D::DrawStaticQuad({ 28.0f, 0.0f }, { 0.5f, 0.5f }, m_Bridge);
+		Hoowan::Renderer2D::DrawStaticQuad({ 29.0f, 0.0f }, { 0.5f, 0.5f }, m_GrassPatch);
+		Hoowan::Renderer2D::DrawStaticQuad({ 30.0f, 0.0f }, { 0.5f, 0.5f }, m_Spikes);
+		Hoowan::Renderer2D::DrawStaticQuad({ 31.0f, 0.0f }, { 0.5f, 0.5f }, m_Spinner);
+
+		Hoowan::Renderer2D::DrawStaticQuad({ 32.0f, 0.5f }, { 0.5f, 1.0f }, m_OpenDoor);
 
 		// End scene
 		Hoowan::Renderer2D::EndScene();
