@@ -93,11 +93,11 @@ void GameSandbox2D::OnUpdate(Hoowan::Timestep ts)
 		Hoowan::Renderer2D::DrawStaticQuad({ 30.0f, 0.0f }, { 0.5f, 0.5f }, m_PlatformSprites.Spikes);
 		Hoowan::Renderer2D::DrawStaticQuad({ 31.0f, 0.0f }, { 0.5f, 0.5f }, m_PlatformSprites.Spinner);
 
-		Hoowan::Renderer2D::DrawStaticQuad({ 32.0f, 0.5f }, { 0.5f, 1.0f }, m_PlatformSprites.OpenDoor);
-		Hoowan::Renderer2D::DrawStaticQuad({ 33.0f, 0.5f }, { 0.5f, 1.0f }, m_PlatformSprites.BlueDoor);
-		Hoowan::Renderer2D::DrawStaticQuad({ 34.0f, 0.5f }, { 0.5f, 1.0f }, m_PlatformSprites.YellowDoor);
-		Hoowan::Renderer2D::DrawStaticQuad({ 35.0f, 0.5f }, { 0.5f, 1.0f }, m_PlatformSprites.GreenDoor);
-		Hoowan::Renderer2D::DrawStaticQuad({ 36.0f, 0.5f }, { 0.5f, 1.0f }, m_PlatformSprites.RedDoor);
+		Hoowan::Renderer2D::DrawStaticQuad({ 32.0f, 0.25f }, { 0.5f, 1.0f }, m_PlatformSprites.OpenDoor);
+		Hoowan::Renderer2D::DrawStaticQuad({ 33.0f, 0.25f }, { 0.5f, 1.0f }, m_PlatformSprites.BlueDoor);
+		Hoowan::Renderer2D::DrawStaticQuad({ 34.0f, 0.25f }, { 0.5f, 1.0f }, m_PlatformSprites.YellowDoor);
+		Hoowan::Renderer2D::DrawStaticQuad({ 35.0f, 0.25f }, { 0.5f, 1.0f }, m_PlatformSprites.GreenDoor);
+		Hoowan::Renderer2D::DrawStaticQuad({ 36.0f, 0.25f }, { 0.5f, 1.0f }, m_PlatformSprites.RedDoor);
 
 		Hoowan::Renderer2D::DrawStaticQuad({ 37.0f, 0.0f }, { 0.5f, 0.5f }, m_PlatformSprites.NoticeWhite);
 		Hoowan::Renderer2D::DrawStaticQuad({ 38.0f, 0.0f }, { 0.5f, 0.5f }, m_PlatformSprites.NoticeGreen);
