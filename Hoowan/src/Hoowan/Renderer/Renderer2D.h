@@ -2,6 +2,7 @@
 
 #include "Hoowan/Renderer/OrthographicCamera.h"
 #include "Texture.h"
+#include "SubTexture2D.h"
 
 namespace Hoowan {
 
@@ -15,17 +16,24 @@ namespace Hoowan {
 		static void EndScene();
 		static void Flush();
 
-		// Primatives
+		// Colored quads 
 		static void DrawStaticQuad(const glm::vec2& translation, const glm::vec2& scale, const glm::vec4& color);
 		static void DrawStaticQuad(const glm::vec3& translation, const glm::vec2& scale, const glm::vec4& color);
 		static void DrawRotatedQuad(const glm::vec2& translation, const float rotation, const glm::vec2& scale, const glm::vec4& color);
 		static void DrawRotatedQuad(const glm::vec3& translation, const float rotation, const glm::vec2& scale, const glm::vec4& color);
 
+		// Textured quads
 		static void DrawStaticQuad(const glm::vec2& translation, const glm::vec2& scale, const Ref<Texture2D> texture);
 		static void DrawStaticQuad(const glm::vec3& translation, const glm::vec2& scale, const Ref<Texture2D> texture);
 		static void DrawRotatedQuad(const glm::vec2& translation, const float rotation, const glm::vec2& scale, const Ref<Texture2D> texture);
 		static void DrawRotatedQuad(const glm::vec3& translation, const float rotation, const glm::vec2& scale, const Ref<Texture2D> texture);
 	
+		// Subtextured quad
+		static void DrawStaticQuad(const glm::vec2& translation, const glm::vec2& scale, const Ref<SubTexture2D>& subTexture);
+		static void DrawStaticQuad(const glm::vec3& translation, const glm::vec2& scale, const Ref<SubTexture2D>& subTexture);
+		static void DrawRotatedQuad(const glm::vec2& translation, const float rotation, const glm::vec2& scale, const Ref<SubTexture2D>& subTexture);
+		static void DrawRotatedQuad(const glm::vec3& translation, const float rotation, const glm::vec2& scale, const Ref<SubTexture2D>& subTexture);
+
 		// Statistics
 		struct Stats
 		{

@@ -171,6 +171,7 @@
     <ClInclude Include="src\Hoowan\Renderer\Renderer2D.h" />
     <ClInclude Include="src\Hoowan\Renderer\RendererAPI.h" />
     <ClInclude Include="src\Hoowan\Renderer\Shader.h" />
+    <ClInclude Include="src\Hoowan\Renderer\SubTexture2D.h" />
     <ClInclude Include="src\Hoowan\Renderer\Texture.h" />
     <ClInclude Include="src\Hoowan\Renderer\VertexArray.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLBuffer.h" />
@@ -607,6 +608,7 @@
     <ClCompile Include="src\Hoowan\Renderer\Renderer2D.cpp" />
     <ClCompile Include="src\Hoowan\Renderer\RendererAPI.cpp" />
     <ClCompile Include="src\Hoowan\Renderer\Shader.cpp" />
+    <ClCompile Include="src\Hoowan\Renderer\SubTexture2D.cpp" />
     <ClCompile Include="src\Hoowan\Renderer\Texture.cpp" />
     <ClCompile Include="src\Hoowan\Renderer\VertexArray.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLBuffer.cpp" />

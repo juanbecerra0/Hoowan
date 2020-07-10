@@ -17,4 +17,10 @@ public:
 
 private:
 	Hoowan::OrthographicCameraController m_CameraController;
+
+	Hoowan::Ref<Hoowan::Texture2D> m_PlayerSpritesheet;
+	Hoowan::Ref<Hoowan::Texture2D> m_PlatformsSpritesheet;
+
+	Hoowan::Ref<Hoowan::SubTexture2D> m_GreenLand;
+	Hoowan::Ref<Hoowan::SubTexture2D> m_OpenDoor;
 };

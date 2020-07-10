@@ -12,6 +12,12 @@ GameSandbox2D::GameSandbox2D()
 void GameSandbox2D::OnAttach()
 {
 	HW_PROFILE_FUNCTION();
+
+	m_PlayerSpritesheet = Hoowan::Texture2D::Create("assets/gametiles/player.png");
+	m_PlatformsSpritesheet = Hoowan::Texture2D::Create("assets/gametiles/platforms.png");
+
+	m_GreenLand = Hoowan::SubTexture2D::CreateFromCoords(m_PlatformsSpritesheet, { 0.0f , 6.0f }, { 128.0f, 128.0f });
+	m_OpenDoor = Hoowan::SubTexture2D::CreateFromCoords(m_PlatformsSpritesheet, { 5.0f, 0.0f, }, { 128.0f, 256.0f });
 }
 
 void GameSandbox2D::OnDetach()
@@ -44,6 +50,11 @@ void GameSandbox2D::OnUpdate(Hoowan::Timestep ts)
 		// Begin scene
 		Hoowan::Renderer2D::BeginScene(m_CameraController.GetCamera());
 
+		//Hoowan::Renderer2D::DrawStaticQuad({ 0.0f, 1.0f }, { 1.0f, 1.0f }, m_PlayerSpritesheet);
+		//Hoowan::Renderer2D::DrawStaticQuad({ 0.0f, 0.0f }, { 1.0f, 1.0f }, m_PlatformsSpritesheet);
+		//Hoowan::Renderer2D::DrawRotatedQuad({ 0.0f, 0.0f }, 0.0f, { 1.0f, 1.0f }, m_PlatformsSpritesheet);
+		Hoowan::Renderer2D::DrawStaticQuad({ -0.5f, 0.0f }, { 1.0f, 1.0f }, m_GreenLand);
+		Hoowan::Renderer2D::DrawStaticQuad({ 0.5f, 0.5f }, { 1.0f, 2.0f }, m_OpenDoor);
 
 		// End scene
 		Hoowan::Renderer2D::EndScene();

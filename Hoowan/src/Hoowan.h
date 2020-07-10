@@ -23,6 +23,7 @@
 #include "Hoowan/Renderer/Buffer.h"
 #include "Hoowan/Renderer/Shader.h"
 #include "Hoowan/Renderer/Texture.h"
+#include "Hoowan/Renderer/SubTexture2D.h"
 #include "Hoowan/Renderer/VertexArray.h"
 
 #include "Hoowan/Renderer/OrthographicCamera.h"
