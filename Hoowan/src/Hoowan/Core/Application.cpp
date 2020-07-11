@@ -55,6 +55,11 @@ namespace Hoowan {
 		layer->OnAttach();
 	}
 
+	void Application::CloseApplication()
+	{
+		m_Running = false;
+	}
+
 	void Application::OnEvent(Event& e) {
 		HW_PROFILE_FUNCTION();
 

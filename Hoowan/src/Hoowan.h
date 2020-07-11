@@ -25,5 +25,6 @@
 #include "Hoowan/Renderer/Texture.h"
 #include "Hoowan/Renderer/SubTexture2D.h"
 #include "Hoowan/Renderer/VertexArray.h"
+#include "Hoowan/Renderer/FrameBuffer.h"
 
 #include "Hoowan/Renderer/OrthographicCamera.h"

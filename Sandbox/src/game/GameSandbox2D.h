@@ -19,6 +19,8 @@ public:
 	void OnEvent(Hoowan::Event& e) override;
 
 private:
+	Hoowan::Ref<Hoowan::FrameBuffer> m_FrameBuffer;
+
 	Hoowan::OrthographicCameraController m_CameraController;
 
 	LevelParser m_LevelParser;

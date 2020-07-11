@@ -1394,6 +1394,8 @@
     </ClInclude>
     <ClInclude Include="src\Hoowan\Debug\Instrumentor.h" />
     <ClInclude Include="src\Hoowan\Renderer\SubTexture2D.h" />
+    <ClInclude Include="src\Hoowan\Renderer\FrameBuffer.h" />
+    <ClInclude Include="src\Platform\OpenGL\OpenGLFrameBuffer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Hoowan\Core\Application.cpp">
@@ -1475,5 +1477,7 @@
       <Filter>vendor\stb_image</Filter>
     </ClCompile>
     <ClCompile Include="src\Hoowan\Renderer\SubTexture2D.cpp" />
+    <ClCompile Include="src\Hoowan\Renderer\FrameBuffer.cpp" />
+    <ClCompile Include="src\Platform\OpenGL\OpenGLFrameBuffer.cpp" />
   </ItemGroup>
 </Project>
