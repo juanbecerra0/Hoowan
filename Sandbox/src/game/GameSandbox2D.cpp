@@ -5,7 +5,7 @@
 
 GameSandbox2D::GameSandbox2D()
 	: Layer("GameSandbox2D"), m_CameraController(1920.0f / 1080.0f, true),
-	m_LevelParser(TestLevel)
+	m_LevelParser(TestLevel2)
 {
 
 }
@@ -35,7 +35,7 @@ void GameSandbox2D::OnUpdate(Hoowan::Timestep ts)
 		HW_PROFILE_SCOPE("ClearBuffer::OnUpdate");
 
 		// Clear frame buffer
-		Hoowan::RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1 });
+		Hoowan::RenderCommand::SetClearColor({ 0.529f, 0.808f, 0.922f, 1 });
 		Hoowan::RenderCommand::Clear();
 	}
 
