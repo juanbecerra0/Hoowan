@@ -22,7 +22,15 @@ Game Engine Architecture, Third Edition buy/rent: https://www.amazon.com/Engine-
 - You can visualize these files by going to "chome://tracing" in a chrome browser and loading these files
 
 # Log
-### 07/09/2020 - Instrumentation, Statistics, and Batch Rendering
+### 07/12/2020 - Sprite Sheets, Scene Viewport, and the Hoowan Editor
+![5](RMImages/5.PNG)
+Call it an asset-flip, baby
+
+In this update, I created a SubTexture class along with 2D renderer extensions. Essentially, Hoowan can now read data from sprite sheets and form basic scenes. These entities are also managed by the batch renderer, and texture data is shared between these individual objects when they are in a single batch data structure. I also added a new dockable scene viewport using the ImGui API, which I plan on slowly adding development tools to help out with workflow. I also started work on a test game, which includes a level parser. It’s pretty simply, as it just reads in level sprites/orientation via string literals, but it can be used in a pretty powerful way.
+
+For the next update, I plan on creating a basic entity-component system, in addition to some basic collision and physics. We’re close to being able to make a basic 2D game!
+
+### 07/08/2020 - Instrumentation, Statistics, and Batch Rendering
 ![4](RMImages/4.PNG)
 Haha engine go vroooom
 
