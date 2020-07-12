@@ -154,6 +154,7 @@
     <ClInclude Include="src\Hoowan\Core\LayerStack.h" />
     <ClInclude Include="src\Hoowan\Core\Log.h" />
     <ClInclude Include="src\Hoowan\Core\MouseButtonCodes.h" />
+    <ClInclude Include="src\Hoowan\Core\MouseCodes.h" />
     <ClInclude Include="src\Hoowan\Core\Timestep.h" />
     <ClInclude Include="src\Hoowan\Core\Window.h" />
     <ClInclude Include="src\Hoowan\Debug\Instrumentor.h" />
@@ -182,7 +183,6 @@
     <ClInclude Include="src\Platform\OpenGL\OpenGLShader.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLTexture.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLVertexArray.h" />
-    <ClInclude Include="src\Platform\Windows\WindowsInput.h" />
     <ClInclude Include="src\Platform\Windows\WindowsWindow.h" />
     <ClInclude Include="src\hwpch.h" />
     <ClInclude Include="vendor\glm\glm\common.hpp" />
