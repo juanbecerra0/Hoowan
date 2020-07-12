@@ -10,7 +10,7 @@
 
 #include "Hoowan/Core/Input.h"
 #include "Hoowan/Core/KeyCodes.h"
-#include "Hoowan/Core/MouseButtonCodes.h"
+#include "Hoowan/Core/MouseCodes.h"
 #include "Hoowan/Renderer/OrthographicCameraController.h"
 
 #include "Hoowan/ImGui/ImGuiLayer.h"

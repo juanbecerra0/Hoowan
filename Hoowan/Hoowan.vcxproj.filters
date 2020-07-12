@@ -84,9 +84,6 @@
     <ClInclude Include="src\Hoowan\Core\Log.h">
       <Filter>src\Hoowan\Core</Filter>
     </ClInclude>
-    <ClInclude Include="src\Hoowan\Core\MouseButtonCodes.h">
-      <Filter>src\Hoowan\Core</Filter>
-    </ClInclude>
     <ClInclude Include="src\Hoowan\Core\Timestep.h">
       <Filter>src\Hoowan\Core</Filter>
     </ClInclude>
