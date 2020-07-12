@@ -135,18 +135,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="src\game\GameSandbox2D.h" />
-    <ClInclude Include="src\game\LevelParser.h" />
-    <ClInclude Include="src\game\Levels.h" />
-    <ClInclude Include="src\game\Player.h" />
-    <ClInclude Include="src\game\SpriteSheet.h" />
     <ClInclude Include="src\test\Sandbox2D.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\game\GameSandbox2D.cpp" />
-    <ClCompile Include="src\game\LevelParser.cpp" />
-    <ClCompile Include="src\test\Sandbox2D.cpp" />
     <ClCompile Include="src\SandboxApp.cpp" />
+    <ClCompile Include="src\test\Sandbox2D.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Hoowan\Hoowan.vcxproj">

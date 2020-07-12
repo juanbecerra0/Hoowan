@@ -15,7 +15,7 @@ namespace Hoowan {
 
 	class HOOWAN_API Application {
 	public:
-		Application();
+		Application(const std::string& name = "Hoowan Application");
 		virtual ~Application();
 
 		void Run();

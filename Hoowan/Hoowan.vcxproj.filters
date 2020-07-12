@@ -10,6 +10,9 @@
     <Filter Include="src\Hoowan\Core">
       <UniqueIdentifier>{C0755CC9-2C01-CA8D-3512-4D82A11C268E}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Hoowan\Debug">
+      <UniqueIdentifier>{DE88F7F4-CA81-1647-F3B3-FBCBDF0BF652}</UniqueIdentifier>
+    </Filter>
     <Filter Include="src\Hoowan\Events">
       <UniqueIdentifier>{4CF77297-B80D-712D-0185-FC4E6DDA41B5}</UniqueIdentifier>
     </Filter>
@@ -90,6 +93,9 @@
     <ClInclude Include="src\Hoowan\Core\Window.h">
       <Filter>src\Hoowan\Core</Filter>
     </ClInclude>
+    <ClInclude Include="src\Hoowan\Debug\Instrumentor.h">
+      <Filter>src\Hoowan\Debug</Filter>
+    </ClInclude>
     <ClInclude Include="src\Hoowan\Events\ApplicationEvent.h">
       <Filter>src\Hoowan\Events</Filter>
     </ClInclude>
@@ -106,6 +112,9 @@
       <Filter>src\Hoowan\ImGui</Filter>
     </ClInclude>
     <ClInclude Include="src\Hoowan\Renderer\Buffer.h">
+      <Filter>src\Hoowan\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Hoowan\Renderer\FrameBuffer.h">
       <Filter>src\Hoowan\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\Hoowan\Renderer\GraphicsContext.h">
@@ -132,6 +141,9 @@
     <ClInclude Include="src\Hoowan\Renderer\Shader.h">
       <Filter>src\Hoowan\Renderer</Filter>
     </ClInclude>
+    <ClInclude Include="src\Hoowan\Renderer\SubTexture2D.h">
+      <Filter>src\Hoowan\Renderer</Filter>
+    </ClInclude>
     <ClInclude Include="src\Hoowan\Renderer\Texture.h">
       <Filter>src\Hoowan\Renderer</Filter>
     </ClInclude>
@@ -142,6 +154,9 @@
       <Filter>src\Platform\OpenGL</Filter>
     </ClInclude>
     <ClInclude Include="src\Platform\OpenGL\OpenGLContext.h">
+      <Filter>src\Platform\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Platform\OpenGL\OpenGLFrameBuffer.h">
       <Filter>src\Platform\OpenGL</Filter>
     </ClInclude>
     <ClInclude Include="src\Platform\OpenGL\OpenGLRendererAPI.h">
@@ -1392,10 +1407,6 @@
     <ClInclude Include="vendor\stb_image\stb_image.h">
       <Filter>vendor\stb_image</Filter>
     </ClInclude>
-    <ClInclude Include="src\Hoowan\Debug\Instrumentor.h" />
-    <ClInclude Include="src\Hoowan\Renderer\SubTexture2D.h" />
-    <ClInclude Include="src\Hoowan\Renderer\FrameBuffer.h" />
-    <ClInclude Include="src\Platform\OpenGL\OpenGLFrameBuffer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Hoowan\Core\Application.cpp">
@@ -1419,6 +1430,9 @@
     <ClCompile Include="src\Hoowan\Renderer\Buffer.cpp">
       <Filter>src\Hoowan\Renderer</Filter>
     </ClCompile>
+    <ClCompile Include="src\Hoowan\Renderer\FrameBuffer.cpp">
+      <Filter>src\Hoowan\Renderer</Filter>
+    </ClCompile>
     <ClCompile Include="src\Hoowan\Renderer\OrthographicCamera.cpp">
       <Filter>src\Hoowan\Renderer</Filter>
     </ClCompile>
@@ -1440,6 +1454,9 @@
     <ClCompile Include="src\Hoowan\Renderer\Shader.cpp">
       <Filter>src\Hoowan\Renderer</Filter>
     </ClCompile>
+    <ClCompile Include="src\Hoowan\Renderer\SubTexture2D.cpp">
+      <Filter>src\Hoowan\Renderer</Filter>
+    </ClCompile>
     <ClCompile Include="src\Hoowan\Renderer\Texture.cpp">
       <Filter>src\Hoowan\Renderer</Filter>
     </ClCompile>
@@ -1450,6 +1467,9 @@
       <Filter>src\Platform\OpenGL</Filter>
     </ClCompile>
     <ClCompile Include="src\Platform\OpenGL\OpenGLContext.cpp">
+      <Filter>src\Platform\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Platform\OpenGL\OpenGLFrameBuffer.cpp">
       <Filter>src\Platform\OpenGL</Filter>
     </ClCompile>
     <ClCompile Include="src\Platform\OpenGL\OpenGLRendererAPI.cpp">
@@ -1476,8 +1496,5 @@
     <ClCompile Include="vendor\stb_image\stb_image.cpp">
       <Filter>vendor\stb_image</Filter>
     </ClCompile>
-    <ClCompile Include="src\Hoowan\Renderer\SubTexture2D.cpp" />
-    <ClCompile Include="src\Hoowan\Renderer\FrameBuffer.cpp" />
-    <ClCompile Include="src\Platform\OpenGL\OpenGLFrameBuffer.cpp" />
   </ItemGroup>
 </Project>
