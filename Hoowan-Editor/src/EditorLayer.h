@@ -25,6 +25,8 @@ namespace Hoowan
 		OrthographicCameraController m_CameraController;
 		Ref<FrameBuffer> m_FrameBuffer;
 
+		glm::vec2 m_ViewportSize;
+
 		LevelParser m_LevelParser;
 	};
 
