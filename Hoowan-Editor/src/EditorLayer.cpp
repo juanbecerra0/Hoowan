@@ -31,7 +31,8 @@ namespace Hoowan
 		HW_PROFILE_FUNCTION();
 
 		// Camera Input/VP update
-		m_CameraController.OnUpdate(ts);
+		if (m_ViewportFocused)
+			m_CameraController.OnUpdate(ts);
 
 		// Reset statistics
 		Hoowan::Renderer2D::ResetStats();
@@ -134,6 +135,9 @@ namespace Hoowan
 		// Scene viewport
 		ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2{ 0.0f, 0.0f });
 		ImGui::Begin("Scene Viewport");
+		m_ViewportFocused = ImGui::IsWindowFocused();
+		m_ViewportHovered = ImGui::IsWindowHovered();
+		Application::Get().GetImGuiLayer()->BlockEvents(!m_ViewportFocused || !m_ViewportHovered);
 		uint32_t textureID = m_FrameBuffer->GetColorAttachmentRendererID();
 		ImVec2 viewportPanelSize = ImGui::GetContentRegionAvail();
 		// Check if viewport has been resized
