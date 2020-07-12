@@ -30,7 +30,7 @@ In this update, I focused on optimizing my 2D renderer, which led me down the ra
 
 The biggest part of this update is the introduction of batch rendering. The 2D rendering API now allows users to specify a pre-allocated number of quads to batch together. This allows the engine to render several hundred (or even thousands) of quads in a single draw call, which significantly improves performance.
 
-We’re getting closer to actually being able to make a game! In the next update, I’ll be focusing on sprite sheets and a basic entity-component system. At that point, I’ll put Hoowan to the test and attempt to make a basic 2D game!
+We’re getting closer to actually being able to make a game! In the next update, I’ll be focusing on sprite sheets and an editor/viewport interface.
 
 ### 07/03/2020 - Camera, Context, and 2D Rendering Abstractions
 ![3](RMImages/3.PNG)
