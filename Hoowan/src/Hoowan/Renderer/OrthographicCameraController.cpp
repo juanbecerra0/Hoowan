@@ -18,35 +18,32 @@ namespace Hoowan {
 		HW_PROFILE_FUNCTION();
 
 		// Up/down movement
-		if (Input::IsKeyPressed(HW_KEY_KP_8))
+		if (Input::IsKeyPressed(HW_KEY_UP))
 		{
 			m_CameraPosition.x += -sin(glm::radians(m_CameraRotation)) * m_CameraTranslationSpeed * ts;
 			m_CameraPosition.y += cos(glm::radians(m_CameraRotation)) * m_CameraTranslationSpeed * ts;
 		}
-		else if (Input::IsKeyPressed(HW_KEY_KP_2))
+		else if (Input::IsKeyPressed(HW_KEY_DOWN))
 		{
 			m_CameraPosition.x -= -sin(glm::radians(m_CameraRotation)) * m_CameraTranslationSpeed * ts;
 			m_CameraPosition.y -= cos(glm::radians(m_CameraRotation)) * m_CameraTranslationSpeed * ts;
 		}
 
 		// Left/right movement
-		if (Input::IsKeyPressed(HW_KEY_KP_4))
+		if (Input::IsKeyPressed(HW_KEY_LEFT))
 		{
 			m_CameraPosition.x -= cos(glm::radians(m_CameraRotation)) * m_CameraTranslationSpeed * ts;
 			m_CameraPosition.y -= sin(glm::radians(m_CameraRotation)) * m_CameraTranslationSpeed * ts;
 		}
-		else if (Input::IsKeyPressed(HW_KEY_KP_6))
+		else if (Input::IsKeyPressed(HW_KEY_RIGHT))
 		{
 			m_CameraPosition.x += cos(glm::radians(m_CameraRotation)) * m_CameraTranslationSpeed * ts;
 			m_CameraPosition.y += sin(glm::radians(m_CameraRotation)) * m_CameraTranslationSpeed * ts;
 		}
 
 		// Recenter
-		if (Input::IsKeyPressed(HW_KEY_KP_5))
+		if (Input::IsKeyPressed(HW_KEY_SLASH))
 		{
-			m_CameraPosition.x = 0.0f;
-			m_CameraPosition.y = 0.0f;
-
 			m_CameraRotation = 0.0f;
 		}
 
@@ -55,11 +52,11 @@ namespace Hoowan {
 
 		// Rotation
 		if (m_Rotation) {
-			if (Input::IsKeyPressed(HW_KEY_KP_7))
+			if (Input::IsKeyPressed(HW_KEY_COMMA))
 			{
 				m_CameraRotation -= m_CameraRotationSpeed * ts;
 			}
-			else if (Input::IsKeyPressed(HW_KEY_KP_9))
+			else if (Input::IsKeyPressed(HW_KEY_PERIOD))
 			{
 				m_CameraRotation += m_CameraRotationSpeed * ts;
 			}
