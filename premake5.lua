@@ -16,13 +16,13 @@ workspace "Hoowan"
 
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
--- Include directories relative to root folder (solution directory)
 IncludeDir = {}
 IncludeDir["GLFW"] = "Hoowan/vendor/GLFW/include"
 IncludeDir["Glad"] = "Hoowan/vendor/Glad/include"
 IncludeDir["ImGui"] = "Hoowan/vendor/imgui"
 IncludeDir["glm"] = "Hoowan/vendor/glm"
 IncludeDir["stb_image"] = "Hoowan/vendor/stb_image"
+IncludeDir["EnTT"] = "Hoowan/vendor/EnTT"
 
 group "Dependencies"
 	include "Hoowan/vendor/GLFW"
@@ -51,7 +51,7 @@ project "Hoowan"
 		"%{prj.name}/vendor/stb_image/**.h",
 		"%{prj.name}/vendor/stb_image/**.cpp",
 		"%{prj.name}/vendor/glm/glm/**.hpp",
-		"%{prj.name}/vendor/glm/glm/**.inl",
+		"%{prj.name}/vendor/glm/glm/**.inl"
 	}
 
 	defines
@@ -67,7 +67,8 @@ project "Hoowan"
 		"%{IncludeDir.Glad}",
 		"%{IncludeDir.ImGui}",
 		"%{IncludeDir.glm}",
-		"%{IncludeDir.stb_image}"
+		"%{IncludeDir.stb_image}",
+		"%{IncludeDir.EnTT}"
 	}
 
 	links 
@@ -124,7 +125,8 @@ project "Hoowan-Editor"
 		"Hoowan/vendor/spdlog/include",
 		"Hoowan/src",
 		"Hoowan/vendor",
-		"%{IncludeDir.glm}"
+		"%{IncludeDir.glm}",
+		"%{IncludeDir.EnTT}"
 	}
 
 	links
@@ -177,7 +179,8 @@ project "Sandbox"
 		"Hoowan/vendor/spdlog/include",
 		"Hoowan/src",
 		"Hoowan/vendor",
-		"%{IncludeDir.glm}"
+		"%{IncludeDir.glm}",
+		"%{IncludeDir.EnTT}"
 	}
 
 	links

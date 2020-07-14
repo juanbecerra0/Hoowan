@@ -84,6 +84,9 @@
     <ClInclude Include="src\Hoowan\Core\Log.h">
       <Filter>src\Hoowan\Core</Filter>
     </ClInclude>
+    <ClInclude Include="src\Hoowan\Core\MouseCodes.h">
+      <Filter>src\Hoowan\Core</Filter>
+    </ClInclude>
     <ClInclude Include="src\Hoowan\Core\Timestep.h">
       <Filter>src\Hoowan\Core</Filter>
     </ClInclude>
@@ -1401,9 +1404,7 @@
     <ClInclude Include="vendor\stb_image\stb_image.h">
       <Filter>vendor\stb_image</Filter>
     </ClInclude>
-    <ClInclude Include="src\Hoowan\Core\MouseCodes.h">
-      <Filter>src\Hoowan\Core</Filter>
-    </ClInclude>
+    <ClInclude Include="src\Hoowan\ECS\Scene.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Hoowan\Core\Application.cpp">
@@ -1493,5 +1494,6 @@
     <ClCompile Include="vendor\stb_image\stb_image.cpp">
       <Filter>vendor\stb_image</Filter>
     </ClCompile>
+    <ClCompile Include="src\Hoowan\ECS\Scene.cpp" />
   </ItemGroup>
 </Project>

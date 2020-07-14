@@ -28,3 +28,6 @@
 #include "Hoowan/Renderer/FrameBuffer.h"
 
 #include "Hoowan/Renderer/OrthographicCamera.h"
+
+// Entity-Component System
+#include "Hoowan/ECS/Scene.h"
