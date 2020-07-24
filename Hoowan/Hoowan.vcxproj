@@ -157,6 +157,7 @@
     <ClInclude Include="src\Hoowan\Core\Timestep.h" />
     <ClInclude Include="src\Hoowan\Core\Window.h" />
     <ClInclude Include="src\Hoowan\Debug\Instrumentor.h" />
+    <ClInclude Include="src\Hoowan\ECS\Components.h" />
     <ClInclude Include="src\Hoowan\ECS\Scene.h" />
     <ClInclude Include="src\Hoowan\Events\ApplicationEvent.h" />
     <ClInclude Include="src\Hoowan\Events\Event.h" />

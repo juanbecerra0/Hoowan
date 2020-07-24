@@ -19,6 +19,14 @@ namespace Hoowan
 
 		FrameBufferSpecs specs{ 1920, 1080 };
 		m_FrameBuffer = FrameBuffer::Create(specs);
+
+		m_Scene = CreateRef<Scene>();
+
+		auto square = m_Scene->CreateEntity();
+		m_Scene->GetReg().emplace<TransformComponent>(square);
+		m_Scene->GetReg().emplace<SpriteRendererComponent>(square, glm::vec4{0.0f, 1.0f, 0.0f, 1.0f});
+
+		m_SquareEnt = square;
 	}
 
 	void EditorLayer::OnDetach()
@@ -26,7 +34,7 @@ namespace Hoowan
 		HW_PROFILE_FUNCTION();
 	}
 
-	void EditorLayer::OnUpdate(Hoowan::Timestep ts)
+	void EditorLayer::OnUpdate(Timestep ts)
 	{
 		HW_PROFILE_FUNCTION();
 
@@ -35,32 +43,35 @@ namespace Hoowan
 			m_CameraController.OnUpdate(ts);
 
 		// Reset statistics
-		Hoowan::Renderer2D::ResetStats();
-		Hoowan::Renderer2D::StatsBeginFrame();
+		Renderer2D::ResetStats();
+		Renderer2D::StatsBeginFrame();
 
 		{
 			HW_PROFILE_SCOPE("ClearBuffer::OnUpdate");
 
 			// Clear frame buffer
 			m_FrameBuffer->Bind();
-			Hoowan::RenderCommand::SetClearColor({ 0.529f, 0.808f, 0.922f, 1 });
-			Hoowan::RenderCommand::Clear();
+			RenderCommand::SetClearColor({ 0.529f, 0.808f, 0.922f, 1 });
+			RenderCommand::Clear();
 		}
 
 		{
 			HW_PROFILE_SCOPE("RenderDrawScene::OnUpdate");
 
 			// Begin scene
-			Hoowan::Renderer2D::BeginScene(m_CameraController.GetCamera());
+			Renderer2D::BeginScene(m_CameraController.GetCamera());
 
 			// Render entire scene
-			m_LevelParser.RenderLevel();
+			// m_LevelParser.RenderLevel();
+
+			// Scene update
+			m_Scene->OnUpdate(ts);
 
 			// End scene
-			Hoowan::Renderer2D::EndScene();
+			Renderer2D::EndScene();
 			m_FrameBuffer->Unbind();
 
-			Hoowan::Renderer2D::StatsEndFrame();
+			Renderer2D::StatsEndFrame();
 		}
 	}
 
@@ -109,7 +120,7 @@ namespace Hoowan
 		{
 			if (ImGui::BeginMenu("Application"))
 			{
-				if (ImGui::MenuItem("Exit")) Hoowan::Application::Get().CloseApplication();
+				if (ImGui::MenuItem("Exit")) Application::Get().CloseApplication();
 				ImGui::EndMenu();
 			}
 
@@ -117,7 +128,7 @@ namespace Hoowan
 		}
 
 		// Stats
-		auto stats = Hoowan::Renderer2D::GetStats();
+		auto stats = Renderer2D::GetStats();
 		float averageRenderTime = stats.TotalFrameRenderTime / stats.FrameRenderTimes.size() * 100.0f;
 		float averageFPS = (1.0f / averageRenderTime);
 
@@ -130,6 +141,12 @@ namespace Hoowan
 		ImGui::Text("Triangles: %d", stats.GetTriangleCount());
 		ImGui::Text("Vertices: %d", stats.GetVertexCount());
 		ImGui::Text("Indices: %d", stats.GetIndexCount());
+		ImGui::End();
+
+		// Color picker
+		auto& squareColor = m_Scene->GetReg().get<SpriteRendererComponent>(m_SquareEnt).Color;
+		ImGui::Begin("Square Color");
+		ImGui::ColorEdit4("Color", glm::value_ptr(squareColor));
 		ImGui::End();
 
 		// Scene viewport
@@ -154,7 +171,7 @@ namespace Hoowan
 		ImGui::End();
 	}
 
-	void EditorLayer::OnEvent(Hoowan::Event& e)
+	void EditorLayer::OnEvent(Event& e)
 	{
 		m_CameraController.OnEvent(e);
 	}

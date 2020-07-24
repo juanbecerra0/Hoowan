@@ -13,6 +13,9 @@
     <Filter Include="src\Hoowan\Debug">
       <UniqueIdentifier>{DE88F7F4-CA81-1647-F3B3-FBCBDF0BF652}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Hoowan\ECS">
+      <UniqueIdentifier>{B2B8A534-9E86-993A-871A-0A617387759F}</UniqueIdentifier>
+    </Filter>
     <Filter Include="src\Hoowan\Events">
       <UniqueIdentifier>{4CF77297-B80D-712D-0185-FC4E6DDA41B5}</UniqueIdentifier>
     </Filter>
@@ -95,6 +98,12 @@
     </ClInclude>
     <ClInclude Include="src\Hoowan\Debug\Instrumentor.h">
       <Filter>src\Hoowan\Debug</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Hoowan\ECS\Components.h">
+      <Filter>src\Hoowan\ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Hoowan\ECS\Scene.h">
+      <Filter>src\Hoowan\ECS</Filter>
     </ClInclude>
     <ClInclude Include="src\Hoowan\Events\ApplicationEvent.h">
       <Filter>src\Hoowan\Events</Filter>
@@ -1404,7 +1413,6 @@
     <ClInclude Include="vendor\stb_image\stb_image.h">
       <Filter>vendor\stb_image</Filter>
     </ClInclude>
-    <ClInclude Include="src\Hoowan\ECS\Scene.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Hoowan\Core\Application.cpp">
@@ -1418,6 +1426,9 @@
     </ClCompile>
     <ClCompile Include="src\Hoowan\Core\Log.cpp">
       <Filter>src\Hoowan\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Hoowan\ECS\Scene.cpp">
+      <Filter>src\Hoowan\ECS</Filter>
     </ClCompile>
     <ClCompile Include="src\Hoowan\ImGui\ImGuiBuild.cpp">
       <Filter>src\Hoowan\ImGui</Filter>
@@ -1494,6 +1505,5 @@
     <ClCompile Include="vendor\stb_image\stb_image.cpp">
       <Filter>vendor\stb_image</Filter>
     </ClCompile>
-    <ClCompile Include="src\Hoowan\ECS\Scene.cpp" />
   </ItemGroup>
 </Project>

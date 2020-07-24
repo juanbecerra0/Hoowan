@@ -22,6 +22,9 @@ namespace Hoowan
 		void OnEvent(Event& e) override;
 
 	private:
+		Ref<Scene> m_Scene;
+		entt::entity m_SquareEnt;
+
 		OrthographicCameraController m_CameraController;
 		Ref<FrameBuffer> m_FrameBuffer;
 

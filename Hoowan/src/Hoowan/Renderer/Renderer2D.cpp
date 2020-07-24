@@ -171,35 +171,11 @@ namespace Hoowan
 		if (s_Data.QuadIndexCount >= Renderer2DData::MaxIndices)
 			StartNewBatch();
 
-		s_Data.QuadVertexBufferPtr->Position = { translation.x - (scale.x / 2), translation.y - (scale.y / 2), translation.z };
-		s_Data.QuadVertexBufferPtr->Color = color;
-		s_Data.QuadVertexBufferPtr->TexCoord = { 0.0f, 0.0f };
-		s_Data.QuadVertexBufferPtr->TexIndex = 0;
-		s_Data.QuadVertexBufferPtr++;
+		glm::mat4 transform =
+			glm::translate(glm::mat4(1.0f), translation) *
+			glm::scale(glm::mat4(1.0f), { scale.x, scale.y, 1.0f });
 
-		s_Data.QuadVertexBufferPtr->Position = { translation.x + (scale.x / 2), translation.y - (scale.y / 2), translation.z };
-		s_Data.QuadVertexBufferPtr->Color = color;
-		s_Data.QuadVertexBufferPtr->TexCoord = { 1.0f, 0.0f };
-		s_Data.QuadVertexBufferPtr->TexIndex = 0;
-		s_Data.QuadVertexBufferPtr++;
-
-		s_Data.QuadVertexBufferPtr->Position = { translation.x + (scale.x / 2), translation.y + (scale.y / 2), translation.z };
-		s_Data.QuadVertexBufferPtr->Color = color;
-		s_Data.QuadVertexBufferPtr->TexCoord = { 1.0f, 1.0f };
-		s_Data.QuadVertexBufferPtr->TexIndex = 0;
-		s_Data.QuadVertexBufferPtr++;
-
-		s_Data.QuadVertexBufferPtr->Position = { translation.x - (scale.x / 2), translation.y + (scale.y / 2), translation.z };
-		s_Data.QuadVertexBufferPtr->Color = color;
-		s_Data.QuadVertexBufferPtr->TexCoord = { 0.0f, 1.0f };
-		s_Data.QuadVertexBufferPtr->TexIndex = 0;
-		s_Data.QuadVertexBufferPtr++;
-
-		s_Data.QuadIndexCount += 6;
-
-		s_Data.WhiteTexture->Bind();
-
-		s_Data.stats.QuadCount++;
+		DrawQuad(transform, color);
 	}
 
 	void Renderer2D::DrawRotatedQuad(const glm::vec2& translation, const float rotation, const glm::vec2& scale, const glm::vec4& color)
@@ -218,6 +194,16 @@ namespace Hoowan
 			glm::translate(glm::mat4(1.0f), translation) *
 			glm::rotate(glm::mat4(1.0f), glm::radians(rotation), glm::vec3(0.0f, 0.0f, 1.0f)) *
 			glm::scale(glm::mat4(1.0f), { scale.x, scale.y, 1.0f });
+
+		DrawQuad(transform, color);
+	}
+
+	void Renderer2D::DrawQuad(const glm::mat4 transform, const glm::vec4& color)
+	{
+		HW_PROFILE_FUNCTION();
+
+		if (s_Data.QuadIndexCount >= Renderer2DData::MaxIndices)
+			StartNewBatch();
 
 		s_Data.QuadVertexBufferPtr->Position = transform * s_Data.QuadVertexPositions[0];
 		s_Data.QuadVertexBufferPtr->Color = color;
