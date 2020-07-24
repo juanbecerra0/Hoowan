@@ -28,14 +28,14 @@ namespace Hoowan {
 		static void DrawStaticQuad(const glm::vec3& translation, const glm::vec2& scale, const Ref<Texture2D> texture);
 		static void DrawRotatedQuad(const glm::vec2& translation, const float rotation, const glm::vec2& scale, const Ref<Texture2D> texture);
 		static void DrawRotatedQuad(const glm::vec3& translation, const float rotation, const glm::vec2& scale, const Ref<Texture2D> texture);
-		//static void DrawQuad(const glm::mat4& transform, const Ref<Texture2D> texture);
+		static void DrawQuad(const glm::mat4& transform, const Ref<Texture2D> texture);
 	
 		// Subtextured quad
 		static void DrawStaticQuad(const glm::vec2& translation, const glm::vec2& scale, const Ref<SubTexture2D>& subTexture);
 		static void DrawStaticQuad(const glm::vec3& translation, const glm::vec2& scale, const Ref<SubTexture2D>& subTexture);
 		static void DrawRotatedQuad(const glm::vec2& translation, const float rotation, const glm::vec2& scale, const Ref<SubTexture2D>& subTexture);
 		static void DrawRotatedQuad(const glm::vec3& translation, const float rotation, const glm::vec2& scale, const Ref<SubTexture2D>& subTexture);
-		//static void DrawQuad(const glm::mat4& transform, const Ref<SubTexture2D> subTexture);
+		static void DrawQuad(const glm::mat4& transform, const Ref<SubTexture2D> subTexture);
 
 		// Statistics
 		struct Stats
