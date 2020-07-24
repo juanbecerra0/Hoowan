@@ -158,6 +158,7 @@
     <ClInclude Include="src\Hoowan\Core\Window.h" />
     <ClInclude Include="src\Hoowan\Debug\Instrumentor.h" />
     <ClInclude Include="src\Hoowan\ECS\Components.h" />
+    <ClInclude Include="src\Hoowan\ECS\Entity.h" />
     <ClInclude Include="src\Hoowan\ECS\Scene.h" />
     <ClInclude Include="src\Hoowan\Events\ApplicationEvent.h" />
     <ClInclude Include="src\Hoowan\Events\Event.h" />
@@ -601,6 +602,7 @@
     <ClCompile Include="src\Hoowan\Core\Layer.cpp" />
     <ClCompile Include="src\Hoowan\Core\LayerStack.cpp" />
     <ClCompile Include="src\Hoowan\Core\Log.cpp" />
+    <ClCompile Include="src\Hoowan\ECS\Entity.cpp" />
     <ClCompile Include="src\Hoowan\ECS\Scene.cpp" />
     <ClCompile Include="src\Hoowan\ImGui\ImGuiBuild.cpp" />
     <ClCompile Include="src\Hoowan\ImGui\ImGuiLayer.cpp" />

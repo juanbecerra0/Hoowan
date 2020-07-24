@@ -20,12 +20,12 @@ namespace Hoowan
 		FrameBufferSpecs specs{ 1920, 1080 };
 		m_FrameBuffer = FrameBuffer::Create(specs);
 
+		// Create a scene
 		m_Scene = CreateRef<Scene>();
 
-		auto square = m_Scene->CreateEntity();
-		m_Scene->GetReg().emplace<TransformComponent>(square);
-		m_Scene->GetReg().emplace<SpriteRendererComponent>(square, glm::vec4{0.0f, 1.0f, 0.0f, 1.0f});
-
+		// Add an entity to the scene
+		auto square = m_Scene->CreateEntity("Square");
+		square.AddComponent<SpriteRendererComponent>(glm::vec4{ 0.0f, 1.0f, 0.0f, 1.0f });
 		m_SquareEnt = square;
 	}
 
@@ -144,10 +144,14 @@ namespace Hoowan
 		ImGui::End();
 
 		// Color picker
-		auto& squareColor = m_Scene->GetReg().get<SpriteRendererComponent>(m_SquareEnt).Color;
-		ImGui::Begin("Square Color");
-		ImGui::ColorEdit4("Color", glm::value_ptr(squareColor));
-		ImGui::End();
+		if (m_SquareEnt)
+		{
+			auto& squareColor = m_SquareEnt.GetComponent<SpriteRendererComponent>().Color;
+			ImGui::Begin("Square Entity");
+			ImGui::Text("%s", m_SquareEnt.GetComponent<TagComponent>().Tag.c_str());
+			ImGui::ColorEdit4("Color", glm::value_ptr(squareColor));
+			ImGui::End();
+		}
 
 		// Scene viewport
 		ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2{ 0.0f, 0.0f });

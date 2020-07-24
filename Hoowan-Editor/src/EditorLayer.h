@@ -23,7 +23,7 @@ namespace Hoowan
 
 	private:
 		Ref<Scene> m_Scene;
-		entt::entity m_SquareEnt;
+		Entity m_SquareEnt;
 
 		OrthographicCameraController m_CameraController;
 		Ref<FrameBuffer> m_FrameBuffer;

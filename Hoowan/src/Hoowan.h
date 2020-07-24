@@ -16,6 +16,7 @@
 #include "Hoowan/ImGui/ImGuiLayer.h"
 
 #include "Hoowan/ECS/Scene.h"
+#include "Hoowan/ECS/Entity.h"
 #include "Hoowan/ECS/Components.h"
 
 // Renderer
