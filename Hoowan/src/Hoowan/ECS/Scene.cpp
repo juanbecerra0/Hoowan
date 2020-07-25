@@ -14,31 +14,6 @@ namespace Hoowan
 
 static void AFunction(entt::registry& registry, entt::entity entity) {}
 
-struct MeshComponent {};
-
-struct TransformComponent
-{
-	glm::mat4 Transform;
-
-	// Constructors
-	TransformComponent() = default;
-	TransformComponent(const TransformComponent&) = default;
-	TransformComponent(const glm::mat4& transform) : Transform(transform) {}
-
-	// Easy casts
-	operator glm::mat4& () { return Transform; }
-	operator const glm::mat4& () const { return Transform; }
-};
-
-// Ent is the ID of the new component placed in m_Registry
-entt::entity ent = m_Registry.create();
-m_Registry.emplace<TransformComponent>(ent, glm::mat4(1.0f));
-
-
-// Get a reference to the transform component
-if (m_Registry.has<TransformComponent>(ent))
-	TransformComponent& trans = m_Registry.get<TransformComponent>(ent);
-
 // Iterate through each transform component in registry
 auto view = m_Registry.view<TransformComponent>();
 for (auto e : view)
@@ -86,8 +61,8 @@ m_Registry.remove<TransformComponent>(ent);
 	void Scene::OnUpdate(Timestep ts)
 	{
 		HW_PROFILE_FUNCTION()
-		//UpdateColoredSpriteComponents(ts);
-		//UpdateTexturedSpriteComponents(ts);
+		UpdateColoredSpriteComponents(ts);
+		UpdateTexturedSpriteComponents(ts);
 		UpdateSubTexturedSpriteComponents(ts);
 	}
 
@@ -95,7 +70,8 @@ m_Registry.remove<TransformComponent>(ent);
 	{
 		HW_PROFILE_FUNCTION()
 
-		auto group = m_Registry.group<TransformComponent>(entt::get<SpriteRendererColorComponent>);
+		auto group = m_Registry.group<>(entt::get<TransformComponent, SpriteRendererColorComponent>);
+		//auto group = m_Registry.group<TransformComponent>(entt::get<SpriteRendererColorComponent>);
 		for (auto entity : group)
 		{
 			auto& [transform, sprite] = group.get<TransformComponent, SpriteRendererColorComponent>(entity);
@@ -108,7 +84,8 @@ m_Registry.remove<TransformComponent>(ent);
 	{
 		HW_PROFILE_FUNCTION()
 
-		auto group = m_Registry.group<TransformComponent>(entt::get<SpriteRendererTextureComponent>);
+		auto group = m_Registry.group<>(entt::get<TransformComponent, SpriteRendererTextureComponent>);
+		//auto group = m_Registry.group<TransformComponent>(entt::get<SpriteRendererTextureComponent>);
 		for (auto entity : group)
 		{
 			auto& [transform, sprite] = group.get<TransformComponent, SpriteRendererTextureComponent>(entity);
@@ -121,7 +98,8 @@ m_Registry.remove<TransformComponent>(ent);
 	{
 		HW_PROFILE_FUNCTION()
 
-		auto group = m_Registry.group<TransformComponent>(entt::get<SpriteRendererSubTextureComponent>);
+		auto group = m_Registry.group<>(entt::get<TransformComponent, SpriteRendererSubTextureComponent>);
+		//auto group = m_Registry.group<TransformComponent>(entt::get<SpriteRendererSubTextureComponent>);
 		for (auto entity : group)
 		{
 			auto& [transform, sprite] = group.get<TransformComponent, SpriteRendererSubTextureComponent>(entity);
