@@ -28,7 +28,7 @@ namespace Hoowan
 		}
 
 		template<typename T>
-		void RemoteComponent()
+		void RemoveComponent()
 		{
 			HW_CORE_ASSERT(HasComponent<T>(), "Entity does not have this component type!")
 			m_Scene->m_Registry.remove<T>(m_EntityHandle);

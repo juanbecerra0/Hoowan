@@ -23,6 +23,7 @@ namespace Hoowan
 
 	private:
 		Ref<Scene> m_Scene;
+		LevelParser m_LevelParser;
 		Entity m_SquareEnt;
 
 		OrthographicCameraController m_CameraController;
@@ -30,8 +31,6 @@ namespace Hoowan
 
 		glm::vec2 m_ViewportSize;
 		bool m_ViewportFocused = false, m_ViewportHovered = false;
-
-		LevelParser m_LevelParser;
 	};
 
 }

@@ -10,10 +10,6 @@ struct QuadRender
 class LevelParser
 {
 public:
-	LevelParser(const std::string& levelString);
-	void RenderLevel();
-
-private:
-	std::vector<QuadRender> m_QuadRenderList;
-
+	LevelParser() = default;
+	LevelParser(const std::string& levelString, Hoowan::Ref<Hoowan::Scene> scene);
 };

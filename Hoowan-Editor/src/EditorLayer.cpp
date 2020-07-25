@@ -7,10 +7,10 @@ namespace Hoowan
 {
 
 	EditorLayer::EditorLayer()
-		:	Layer("EditorLayer"), m_CameraController(1920.0f / 1080.0f, true),
-			m_LevelParser(TestLevel2)
+		: Layer("EditorLayer"), m_CameraController(1920.0f / 1080.0f, true),
+		m_ViewportSize({ 1920.0f, 1080.0f })
 	{
-
+		
 	}
 
 	void EditorLayer::OnAttach()
@@ -20,13 +20,15 @@ namespace Hoowan
 		FrameBufferSpecs specs{ 1920, 1080 };
 		m_FrameBuffer = FrameBuffer::Create(specs);
 
-		// Create a scene
 		m_Scene = CreateRef<Scene>();
+
+		m_LevelParser = { TestLevel2, m_Scene };
 
 		// Add an entity to the scene
 		auto square = m_Scene->CreateEntity("Square");
-		square.AddComponent<SpriteRendererComponent>(glm::vec4{ 0.0f, 1.0f, 0.0f, 1.0f });
+		square.AddComponent<SpriteRendererColorComponent>(glm::vec4{ 0.0f, 1.0f, 0.0f, 1.0f });
 		m_SquareEnt = square;
+
 	}
 
 	void EditorLayer::OnDetach()
@@ -62,7 +64,7 @@ namespace Hoowan
 			Renderer2D::BeginScene(m_CameraController.GetCamera());
 
 			// Render entire scene
-			// m_LevelParser.RenderLevel();
+			//m_LevelParser.RenderLevel();
 
 			// Scene update
 			m_Scene->OnUpdate(ts);
@@ -146,7 +148,7 @@ namespace Hoowan
 		// Color picker
 		if (m_SquareEnt)
 		{
-			auto& squareColor = m_SquareEnt.GetComponent<SpriteRendererComponent>().Color;
+			auto& squareColor = m_SquareEnt.GetComponent<SpriteRendererColorComponent>().Color;
 			ImGui::Begin("Square Entity");
 			ImGui::Text("%s", m_SquareEnt.GetComponent<TagComponent>().Tag.c_str());
 			ImGui::ColorEdit4("Color", glm::value_ptr(squareColor));

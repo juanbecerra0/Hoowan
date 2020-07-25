@@ -1,7 +1,8 @@
 #include "LevelParser.h"
 #include "SpriteSheet.h"
+#include "glm/gtx/string_cast.hpp"
 
-LevelParser::LevelParser(const std::string& levelString)
+LevelParser::LevelParser(const std::string& levelString, Hoowan::Ref<Hoowan::Scene> scene)
 {
 	// Init symbols
 	PlatformSprites platformSprites;
@@ -27,16 +28,11 @@ LevelParser::LevelParser(const std::string& levelString)
 		}
 		else
 		{
-			m_QuadRenderList.push_back({ position, symbolMap.at(c) });
+			auto sprite = scene->CreateEntity("LevelSprite :: " + glm::to_string(position));
+			sprite.AddComponent<Hoowan::SpriteRendererSubTextureComponent>(symbolMap.at(c));
+			sprite.GetComponent<Hoowan::TransformComponent>().Transform = glm::translate(glm::mat4(1.0f), { position.x, position.y, 0.0f });
+
 			position.x += 1.0f;
 		}
-	}
-}
-
-void LevelParser::RenderLevel()
-{
-	for (QuadRender qr : m_QuadRenderList)
-	{
-		Hoowan::Renderer2D::DrawStaticQuad(qr.Position, { 1.0f, 1.0f }, qr.Sprite);
 	}
 }

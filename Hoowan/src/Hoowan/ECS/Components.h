@@ -1,6 +1,8 @@
 #pragma once
 
 #include "glm/glm.hpp"
+#include "Hoowan/Renderer/Texture.h"
+#include "Hoowan/Renderer/SubTexture2D.h"
 
 namespace Hoowan
 {
@@ -28,13 +30,33 @@ namespace Hoowan
 		operator const glm::mat4& () const { return Transform; }
 	};
 
-	struct SpriteRendererComponent
+	struct SpriteRendererColorComponent
 	{
 		glm::vec4 Color { 1.0f, 1.0f, 1.0f, 1.0f };
 
 		// Constructors
-		SpriteRendererComponent() = default;
-		SpriteRendererComponent(const SpriteRendererComponent&) = default;
-		SpriteRendererComponent(const glm::vec4& color) : Color(color) {}
+		SpriteRendererColorComponent() = default;
+		SpriteRendererColorComponent(const SpriteRendererColorComponent&) = default;
+		SpriteRendererColorComponent(const glm::vec4& color) : Color(color) {}
+	};
+
+	struct SpriteRendererTextureComponent
+	{
+		Hoowan::Ref<Texture2D> Texture;
+
+		// Constructors
+		SpriteRendererTextureComponent() = default;
+		SpriteRendererTextureComponent(const SpriteRendererTextureComponent&) = default;
+		SpriteRendererTextureComponent(const Ref<Texture2D> texture) : Texture(texture) {}
+	};
+
+	struct SpriteRendererSubTextureComponent
+	{
+		Hoowan::Ref<SubTexture2D> SubTexture;
+
+		// Constructors
+		SpriteRendererSubTextureComponent() = default;
+		SpriteRendererSubTextureComponent(const SpriteRendererSubTextureComponent&) = default;
+		SpriteRendererSubTextureComponent(const Ref<SubTexture2D> subTexture) : SubTexture(subTexture) {}
 	};
 }

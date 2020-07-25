@@ -85,12 +85,48 @@ m_Registry.remove<TransformComponent>(ent);
 
 	void Scene::OnUpdate(Timestep ts)
 	{
-		auto group = m_Registry.group<TransformComponent>(entt::get<SpriteRendererComponent>);
+		HW_PROFILE_FUNCTION()
+		//UpdateColoredSpriteComponents(ts);
+		//UpdateTexturedSpriteComponents(ts);
+		UpdateSubTexturedSpriteComponents(ts);
+	}
+
+	void Scene::UpdateColoredSpriteComponents(Timestep ts)
+	{
+		HW_PROFILE_FUNCTION()
+
+		auto group = m_Registry.group<TransformComponent>(entt::get<SpriteRendererColorComponent>);
 		for (auto entity : group)
 		{
-			auto& [transform, sprite] = group.get<TransformComponent, SpriteRendererComponent>(entity);
+			auto& [transform, sprite] = group.get<TransformComponent, SpriteRendererColorComponent>(entity);
 
 			Renderer2D::DrawQuad(transform, sprite.Color);
+		}
+	}
+
+	void Scene::UpdateTexturedSpriteComponents(Timestep ts)
+	{
+		HW_PROFILE_FUNCTION()
+
+		auto group = m_Registry.group<TransformComponent>(entt::get<SpriteRendererTextureComponent>);
+		for (auto entity : group)
+		{
+			auto& [transform, sprite] = group.get<TransformComponent, SpriteRendererTextureComponent>(entity);
+
+			Renderer2D::DrawQuad(transform, sprite.Texture);
+		}
+	}
+
+	void Scene::UpdateSubTexturedSpriteComponents(Timestep ts)
+	{
+		HW_PROFILE_FUNCTION()
+
+		auto group = m_Registry.group<TransformComponent>(entt::get<SpriteRendererSubTextureComponent>);
+		for (auto entity : group)
+		{
+			auto& [transform, sprite] = group.get<TransformComponent, SpriteRendererSubTextureComponent>(entity);
+
+			Renderer2D::DrawQuad(transform, sprite.SubTexture);
 		}
 	}
 

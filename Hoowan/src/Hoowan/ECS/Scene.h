@@ -21,6 +21,11 @@ namespace Hoowan
 		void OnUpdate(Timestep ts);
 
 	private:
+		void UpdateColoredSpriteComponents(Timestep ts);
+		void UpdateTexturedSpriteComponents(Timestep ts);
+		void UpdateSubTexturedSpriteComponents(Timestep ts);
+
+	private:
 		entt::registry m_Registry;
 
 		// Entity does not own Scene, but it must be able to reference its registry
