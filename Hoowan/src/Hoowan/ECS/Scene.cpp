@@ -61,9 +61,41 @@ m_Registry.remove<TransformComponent>(ent);
 	void Scene::OnUpdate(Timestep ts)
 	{
 		HW_PROFILE_FUNCTION()
-		UpdateColoredSpriteComponents(ts);
-		UpdateTexturedSpriteComponents(ts);
-		UpdateSubTexturedSpriteComponents(ts);
+
+		RenderScene(ts);
+	}
+
+	void Scene::RenderScene(Timestep ts)
+	{
+		HW_PROFILE_FUNCTION()
+
+		Camera* mainCamera = nullptr;
+		glm::mat4* mainTransform = nullptr;
+
+		auto group = m_Registry.group<>(entt::get<TransformComponent, CameraComponent>);
+		for (auto entity : group)
+		{
+			auto& [transform, camera] = group.get<TransformComponent, CameraComponent>(entity);
+
+			if (camera.IsPrimary)
+			{
+				mainCamera = &camera.Camera;
+				mainTransform = &transform.Transform;
+				break;
+			}
+		}
+
+		if (mainCamera)
+		{
+			Renderer2D::BeginScene(mainCamera->GetProjection(), *mainTransform);
+
+			UpdateColoredSpriteComponents(ts);
+			UpdateTexturedSpriteComponents(ts);
+			UpdateSubTexturedSpriteComponents(ts);
+
+			Renderer2D::EndScene();
+		}
+
 	}
 
 	void Scene::UpdateColoredSpriteComponents(Timestep ts)

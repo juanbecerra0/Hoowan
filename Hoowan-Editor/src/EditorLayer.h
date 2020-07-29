@@ -24,7 +24,9 @@ namespace Hoowan
 	private:
 		Ref<Scene> m_Scene;
 		LevelParser m_LevelParser;
+
 		Entity m_SquareEnt;
+		Entity m_CameraEntity;
 
 		OrthographicCameraController m_CameraController;
 		Ref<FrameBuffer> m_FrameBuffer;

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Hoowan/Renderer/OrthographicCamera.h"
+#include "Hoowan/Renderer/Camera.h"
 #include "Texture.h"
 #include "SubTexture2D.h"
 
@@ -12,7 +13,8 @@ namespace Hoowan {
 		static void Init();
 		static void Shutdown();
 
-		static void BeginScene(const OrthographicCamera& camera);
+		static void BeginScene(const OrthographicCamera& camera);	// TODO: remove when we fill out Camera API
+		static void BeginScene(const Camera& camera, const glm::mat4& transform);
 		static void EndScene();
 		static void Flush();
 

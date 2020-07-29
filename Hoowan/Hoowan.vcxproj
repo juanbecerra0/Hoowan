@@ -166,6 +166,7 @@
     <ClInclude Include="src\Hoowan\Events\MouseEvent.h" />
     <ClInclude Include="src\Hoowan\ImGui\ImGuiLayer.h" />
     <ClInclude Include="src\Hoowan\Renderer\Buffer.h" />
+    <ClInclude Include="src\Hoowan\Renderer\Camera.h" />
     <ClInclude Include="src\Hoowan\Renderer\FrameBuffer.h" />
     <ClInclude Include="src\Hoowan\Renderer\GraphicsContext.h" />
     <ClInclude Include="src\Hoowan\Renderer\OrthographicCamera.h" />

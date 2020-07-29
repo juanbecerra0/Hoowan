@@ -3,6 +3,7 @@
 #include "glm/glm.hpp"
 #include "Hoowan/Renderer/Texture.h"
 #include "Hoowan/Renderer/SubTexture2D.h"
+#include "Hoowan/Renderer/Camera.h"
 
 namespace Hoowan
 {
@@ -59,4 +60,15 @@ namespace Hoowan
 		SpriteRendererSubTextureComponent(const SpriteRendererSubTextureComponent&) = default;
 		SpriteRendererSubTextureComponent(const Ref<SubTexture2D> subTexture) : SubTexture(subTexture) {}
 	};
+
+	struct CameraComponent
+	{
+		Hoowan::Camera Camera;
+		bool IsPrimary = false;
+
+		CameraComponent() = default;
+		CameraComponent(const CameraComponent&) = default;
+		CameraComponent(const glm::mat4& projection) : Camera(projection) {}
+	};
+
 }

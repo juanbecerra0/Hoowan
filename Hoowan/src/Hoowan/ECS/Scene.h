@@ -21,6 +21,7 @@ namespace Hoowan
 		void OnUpdate(Timestep ts);
 
 	private:
+		void RenderScene(Timestep ts);
 		void UpdateColoredSpriteComponents(Timestep ts);
 		void UpdateTexturedSpriteComponents(Timestep ts);
 		void UpdateSubTexturedSpriteComponents(Timestep ts);

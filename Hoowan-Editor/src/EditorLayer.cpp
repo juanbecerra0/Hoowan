@@ -24,11 +24,14 @@ namespace Hoowan
 
 		m_LevelParser = { TestLevel2, m_Scene };
 
-		// Add an entity to the scene
-		auto square = m_Scene->CreateEntity("Square");
-		square.AddComponent<SpriteRendererColorComponent>(glm::vec4{ 0.0f, 1.0f, 0.0f, 1.0f });
-		m_SquareEnt = square;
+		// Add a square entity to the scene
+		m_SquareEnt = m_Scene->CreateEntity("Square");
+		m_SquareEnt.AddComponent<SpriteRendererColorComponent>(glm::vec4{ 0.0f, 1.0f, 0.0f, 1.0f });
 
+		// Add a camera component to the scene
+		m_CameraEntity = m_Scene->CreateEntity("Camera");
+		m_CameraEntity.AddComponent<CameraComponent>(glm::ortho(-16.0f, 16.0f, -9.0f, 9.0f));
+		m_CameraEntity.GetComponent<CameraComponent>().IsPrimary = true;
 	}
 
 	void EditorLayer::OnDetach()
@@ -60,17 +63,9 @@ namespace Hoowan
 		{
 			HW_PROFILE_SCOPE("RenderDrawScene::OnUpdate");
 
-			// Begin scene
-			Renderer2D::BeginScene(m_CameraController.GetCamera());
-
-			// Render entire scene
-			//m_LevelParser.RenderLevel();
-
 			// Scene update
 			m_Scene->OnUpdate(ts);
 
-			// End scene
-			Renderer2D::EndScene();
 			m_FrameBuffer->Unbind();
 
 			Renderer2D::StatsEndFrame();
@@ -154,6 +149,11 @@ namespace Hoowan
 			ImGui::ColorEdit4("Color", glm::value_ptr(squareColor));
 			ImGui::End();
 		}
+
+		// Camera mover
+		ImGui::Begin("Camera Entity");
+		ImGui::DragFloat2("Camera Transform", glm::value_ptr(m_CameraEntity.GetComponent<TransformComponent>().Transform[3]));
+		ImGui::End();
 
 		// Scene viewport
 		ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2{ 0.0f, 0.0f });
