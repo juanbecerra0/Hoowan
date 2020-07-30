@@ -10,31 +10,6 @@
 namespace Hoowan
 {
 
-/*
-
-static void AFunction(entt::registry& registry, entt::entity entity) {}
-
-// Iterate through each transform component in registry
-auto view = m_Registry.view<TransformComponent>();
-for (auto e : view)
-{
-	TransformComponent& trans = m_Registry.get<TransformComponent>(e);
-}
-
-// Get entities that contain both a transform and mesh and save as a pair
-auto group = m_Registry.group<TransformComponent>(entt::get<MeshComponent>);
-for (auto e : group)
-{
-	auto&[transform, mesh] = group.get<TransformComponent, MeshComponent>(e);
-}
-
-// Tie registry events to functions
-m_Registry.on_construct<TransformComponent>().connect<&AFunction>();
-
-// Remove entity
-m_Registry.remove<TransformComponent>(ent);
-*/
-
 	Scene::Scene()
 	{
 
@@ -62,6 +37,7 @@ m_Registry.remove<TransformComponent>(ent);
 	{
 		HW_PROFILE_FUNCTION()
 
+		CheckForCollisions(ts);
 		RenderScene(ts);
 	}
 
@@ -80,7 +56,7 @@ m_Registry.remove<TransformComponent>(ent);
 			if (camera.IsPrimary)
 			{
 				mainCamera = &camera.Camera;
-				mainTransform = &transform.Transform;
+				mainTransform = transform.Transform.get();
 				break;
 			}
 		}
@@ -94,6 +70,29 @@ m_Registry.remove<TransformComponent>(ent);
 			UpdateSubTexturedSpriteComponents(ts);
 
 			Renderer2D::EndScene();
+		}
+
+	}
+
+	void Scene::CheckForCollisions(Timestep ts)
+	{
+		HW_PROFILE_FUNCTION();
+
+		auto dynamicView = m_Registry.view<Collider2DDynamicComponent>();
+		auto staticView = m_Registry.view<Collider2DStaticComponent>();
+
+		for (auto dynamicEnt : dynamicView)
+		{
+			auto dynamicComponent = dynamicView.get(dynamicEnt);
+
+			for (auto staticEnt : staticView)
+			{
+				if (dynamicComponent.Collider.IsColliding(staticView.get(staticEnt).Collider))
+				{
+					// Collision detected between a dynamic component and static component
+					HW_CORE_WARN("Collision detected");
+				}
+			}
 		}
 
 	}

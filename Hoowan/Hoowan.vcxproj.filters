@@ -1415,6 +1415,7 @@
     </ClInclude>
     <ClInclude Include="src\Hoowan\ECS\Entity.h" />
     <ClInclude Include="src\Hoowan\Renderer\Camera.h" />
+    <ClInclude Include="src\Hoowan\Physics\RectangleCollider.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Hoowan\Core\Application.cpp">
@@ -1508,5 +1509,6 @@
       <Filter>vendor\stb_image</Filter>
     </ClCompile>
     <ClCompile Include="src\Hoowan\ECS\Entity.cpp" />
+    <ClCompile Include="src\Hoowan\Physics\RectangleCollider.cpp" />
   </ItemGroup>
 </Project>

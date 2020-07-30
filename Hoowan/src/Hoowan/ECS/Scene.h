@@ -22,6 +22,8 @@ namespace Hoowan
 
 	private:
 		void RenderScene(Timestep ts);
+		void CheckForCollisions(Timestep ts);
+
 		void UpdateColoredSpriteComponents(Timestep ts);
 		void UpdateTexturedSpriteComponents(Timestep ts);
 		void UpdateSubTexturedSpriteComponents(Timestep ts);

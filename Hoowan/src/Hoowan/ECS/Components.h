@@ -4,6 +4,7 @@
 #include "Hoowan/Renderer/Texture.h"
 #include "Hoowan/Renderer/SubTexture2D.h"
 #include "Hoowan/Renderer/Camera.h"
+#include "Hoowan/Physics/RectangleCollider.h"
 
 namespace Hoowan
 {
@@ -19,16 +20,15 @@ namespace Hoowan
 
 	struct TransformComponent
 	{
-		glm::mat4 Transform { 1.0f };
+		Ref<glm::mat4> Transform = CreateRef<glm::mat4>(glm::mat4(1.0f));
 
 		// Constructors
 		TransformComponent() = default;
 		TransformComponent(const TransformComponent&) = default;
-		TransformComponent(const glm::mat4& transform) : Transform(transform) {}
+		TransformComponent(const Ref<glm::mat4> transform) : Transform(transform) {}
 
-		// glm::mat4 overloads
-		operator glm::mat4& () { return Transform; }
-		operator const glm::mat4& () const { return Transform; }
+		operator glm::mat4& () { return *Transform; }
+		operator const glm::mat4& () const { return *Transform; }
 	};
 
 	struct SpriteRendererColorComponent
@@ -39,6 +39,7 @@ namespace Hoowan
 		SpriteRendererColorComponent() = default;
 		SpriteRendererColorComponent(const SpriteRendererColorComponent&) = default;
 		SpriteRendererColorComponent(const glm::vec4& color) : Color(color) {}
+
 	};
 
 	struct SpriteRendererTextureComponent
@@ -71,4 +72,23 @@ namespace Hoowan
 		CameraComponent(const glm::mat4& projection) : Camera(projection) {}
 	};
 
+	struct Collider2DStaticComponent
+	{
+		RectangleCollider Collider;
+
+		Collider2DStaticComponent() = default;
+		Collider2DStaticComponent(const Collider2DStaticComponent&) = default;
+		Collider2DStaticComponent(Ref<glm::mat4> transform) : Collider(transform) {}
+		Collider2DStaticComponent(Ref<glm::mat4> transform, const glm::vec2 dimensions) : Collider(transform, dimensions) {}
+	};
+
+	struct Collider2DDynamicComponent
+	{
+		RectangleCollider Collider;
+
+		Collider2DDynamicComponent() = default;
+		Collider2DDynamicComponent(const Collider2DDynamicComponent&) = default;
+		Collider2DDynamicComponent(Ref<glm::mat4> transform) : Collider(transform) {}
+		Collider2DDynamicComponent(Ref<glm::mat4> transform, const glm::vec2 dimensions) : Collider(transform, dimensions) {}
+	};
 }
