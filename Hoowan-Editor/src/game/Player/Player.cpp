@@ -28,10 +28,12 @@ void Player::Move(bool holdingLeft, bool holdingRight, Hoowan::Timestep ts)
 	if (holdingLeft)
 	{
 		transform = glm::translate(transform, glm::vec3(-m_Speed, 0, 0) * ts.GetSeconds());
+		FlipPlayerOrientation(true);
 	}
 	else if (holdingRight)
 	{
 		transform = glm::translate(transform, glm::vec3(m_Speed, 0, 0) * ts.GetSeconds());
+		FlipPlayerOrientation(false);
 	}
 
 
@@ -40,10 +42,7 @@ void Player::Move(bool holdingLeft, bool holdingRight, Hoowan::Timestep ts)
 
 void Player::FlipPlayerOrientation(bool flip)
 {
-	Hoowan::SubTexture2D subTexture = m_PlayerEntity.GetComponent<Hoowan::SpriteRendererSubTextureComponent>().GetSubTexture();
+	Hoowan::SubTexture2D& subTexture = m_PlayerEntity.GetComponent<Hoowan::SpriteRendererSubTextureComponent>().GetSubTexture();
 
-	if (flip)
-	{
-		
-	}
+	flip ? subTexture.FlipOrientation(false, true) : subTexture.FlipOrientation(false, false);
 }

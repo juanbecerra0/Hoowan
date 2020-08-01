@@ -19,8 +19,6 @@ private:
 private:
 	Hoowan::Entity m_PlayerEntity;
 	PlayerSprites m_PlayerSprites;
-	
-	glm::vec2 m_OriginalTexCoords[4];
 
 	float m_Speed = 3.0f;
 
