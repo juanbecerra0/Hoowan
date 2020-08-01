@@ -2,8 +2,10 @@
 
 #include "Hoowan.h"
 
-#include "game/LevelParser.h"
-#include "game/Levels.h"
+#include "game/Scene/LevelParser.h"
+#include "game/Scene/Levels.h"
+
+#include "game/Player/Player.h"
 
 namespace Hoowan
 {
@@ -24,6 +26,8 @@ namespace Hoowan
 	private:
 		Ref<Scene> m_Scene;
 		LevelParser m_LevelParser;
+
+		Player m_Player;
 
 		Entity m_SquareEnt;
 		Entity m_CameraEntity;

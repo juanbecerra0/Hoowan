@@ -8,7 +8,8 @@ namespace Hoowan
 
 	EditorLayer::EditorLayer()
 		: Layer("EditorLayer"), m_CameraController(1920.0f / 1080.0f, true),
-		m_ViewportSize({ 1920.0f, 1080.0f })
+		m_ViewportSize({ 1920.0f, 1080.0f }), m_Scene(CreateRef<Scene>()),
+		m_Player(m_Scene)
 	{
 		
 	}
@@ -19,8 +20,6 @@ namespace Hoowan
 
 		FrameBufferSpecs specs{ 1920, 1080 };
 		m_FrameBuffer = FrameBuffer::Create(specs);
-
-		m_Scene = CreateRef<Scene>();
 
 		m_LevelParser = { TestLevel2, m_Scene };
 
@@ -69,6 +68,7 @@ namespace Hoowan
 
 			// Scene update
 			m_Scene->OnUpdate(ts);
+			m_Player.OnUpdate(ts);
 
 			m_FrameBuffer->Unbind();
 

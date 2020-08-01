@@ -49,6 +49,7 @@ namespace Hoowan
 		Hoowan::Ref<Texture2D> Texture;
 
 		Texture2D& GetTexture() { return *Texture; }
+		void SetTexture(Texture2D& texture) { *Texture = texture; }
 
 		// Constructors
 		SpriteRendererTextureComponent() = default;
@@ -61,6 +62,7 @@ namespace Hoowan
 		Hoowan::Ref<SubTexture2D> SubTexture;
 
 		SubTexture2D& GetSubTexture() { return *SubTexture; }
+		void SetSubTexture(SubTexture2D& subTexture) { *SubTexture = subTexture; }
 
 		// Constructors
 		SpriteRendererSubTextureComponent() = default;

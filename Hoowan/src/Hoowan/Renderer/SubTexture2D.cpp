@@ -12,6 +12,12 @@ namespace Hoowan
 		m_TexCoords[3] = { min.x, max.y };
 	}
 
+	void SubTexture2D::FlipOrientation(bool horizontal, bool vertical)
+	{
+		// TODO: cache original tex coords, flip them appropriately
+
+	}
+
 	Ref<SubTexture2D> SubTexture2D::CreateFromCoords(const Ref<Texture2D>& texture, const glm::vec2& coords, const glm::vec2& cellSize, const glm::vec2& spriteSize)
 	{
 		glm::vec2 min = { (coords.x * cellSize.x) / texture->GetWidth(), (coords.y * cellSize.y) / texture->GetHeight() };
