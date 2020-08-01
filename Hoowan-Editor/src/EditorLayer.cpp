@@ -26,7 +26,7 @@ namespace Hoowan
 
 		// Add a square entity to the scene
 		m_SquareEnt = m_Scene->CreateEntity("Square");
-		*(m_SquareEnt.GetComponent<TransformComponent>().Transform) = 
+		m_SquareEnt.GetComponent<TransformComponent>().GetTransform() =
 			glm::translate(glm::mat4(1.0f), glm::vec3(2.5f, -1.0f, 0.0f));
 
 		m_SquareEnt.AddComponent<SpriteRendererColorComponent>(glm::vec4{ 0.0f, 1.0f, 0.0f, 1.0f });
@@ -150,14 +150,14 @@ namespace Hoowan
 			auto& squareColor = m_SquareEnt.GetComponent<SpriteRendererColorComponent>().Color;
 			ImGui::Begin("Square Entity");
 			ImGui::Text("%s", m_SquareEnt.GetComponent<TagComponent>().Tag.c_str());
-			ImGui::DragFloat2("Position", glm::value_ptr((*m_SquareEnt.GetComponent<TransformComponent>().Transform)[3]));
+			ImGui::DragFloat2("Position", glm::value_ptr(m_SquareEnt.GetComponent<TransformComponent>().GetTransform()[3]));
 			ImGui::ColorEdit4("Color", glm::value_ptr(squareColor));
 			ImGui::End();
 		}
 
 		// Camera mover
 		ImGui::Begin("Camera Entity");
-		ImGui::DragFloat2("Camera Transform", glm::value_ptr((*m_CameraEntity.GetComponent<TransformComponent>().Transform)[3]));
+		ImGui::DragFloat2("Camera Transform", glm::value_ptr(m_CameraEntity.GetComponent<TransformComponent>().GetTransform()[3]));
 		ImGui::End();
 
 		// Scene viewport

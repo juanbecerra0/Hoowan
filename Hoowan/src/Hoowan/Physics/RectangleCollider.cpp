@@ -4,7 +4,7 @@
 namespace Hoowan
 {
 
-	// TODO: Account for rotated rectangle colliders using the transform component quaternions
+	// TODO: Account for rotated rectangle colliders using the transform component quaternion
 
 	RectangleCollider::RectangleCollider(Ref<glm::mat4> transform)
 		: m_Transform(transform), m_Dimensions({ 1.0f, 1.0f })

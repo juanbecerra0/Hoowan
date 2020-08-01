@@ -22,6 +22,8 @@ namespace Hoowan
 	{
 		Ref<glm::mat4> Transform = CreateRef<glm::mat4>(glm::mat4(1.0f));
 
+		glm::mat4& GetTransform() { return *Transform; }
+
 		// Constructors
 		TransformComponent() = default;
 		TransformComponent(const TransformComponent&) = default;
@@ -46,6 +48,8 @@ namespace Hoowan
 	{
 		Hoowan::Ref<Texture2D> Texture;
 
+		Texture2D& GetTexture() { return *Texture; }
+
 		// Constructors
 		SpriteRendererTextureComponent() = default;
 		SpriteRendererTextureComponent(const SpriteRendererTextureComponent&) = default;
@@ -55,6 +59,8 @@ namespace Hoowan
 	struct SpriteRendererSubTextureComponent
 	{
 		Hoowan::Ref<SubTexture2D> SubTexture;
+
+		SubTexture2D& GetSubTexture() { return *SubTexture; }
 
 		// Constructors
 		SpriteRendererSubTextureComponent() = default;

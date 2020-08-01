@@ -56,7 +56,7 @@ namespace Hoowan
 			if (camera.IsPrimary)
 			{
 				mainCamera = &camera.Camera;
-				mainTransform = transform.Transform.get();
+				mainTransform = &transform.GetTransform();
 				break;
 			}
 		}
