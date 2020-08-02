@@ -4,12 +4,14 @@
 #include <glm\ext\matrix_transform.hpp>
 #include <glm/gtx/compatibility.hpp>
 
-Player::Player(Hoowan::Ref<Hoowan::Scene> scene)
+Player::Player(Hoowan::Ref<Hoowan::Scene> scene, glm::vec2& startingPosition)
 {
 	m_PlayerEntity = scene->CreateEntity("Player");
+	m_PlayerEntity.GetComponent<Hoowan::TransformComponent>().GetTransform()[3][0] = startingPosition.x;
+	m_PlayerEntity.GetComponent<Hoowan::TransformComponent>().GetTransform()[3][1] = startingPosition.y;
 
 	m_PlayerEntity.AddComponent<Hoowan::SpriteRendererSubTextureComponent>(m_PlayerSprites.Idle);
-	m_PlayerEntity.AddComponent<Hoowan::Collider2DDynamicComponent>(m_PlayerEntity.GetComponent<Hoowan::TransformComponent>().Transform);
+	m_PlayerEntity.AddComponent<Hoowan::Collider2DDynamicComponent>(m_PlayerEntity.GetComponent<Hoowan::TransformComponent>().Transform, glm::vec2( 0.75f, 0.75f ));
 }
 
 Player::~Player()

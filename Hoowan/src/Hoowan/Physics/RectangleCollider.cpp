@@ -40,4 +40,88 @@ namespace Hoowan
 		return false;
 	}
 
+	void RectangleCollider::SetPosition(const glm::vec2& newPosition)
+	{
+		(*m_Transform)[3][0] = newPosition.x;
+		(*m_Transform)[3][1] = newPosition.y;
+	}
+
+	void RectangleCollider::CorrectCollision(RectangleCollider& dynamicRect, const RectangleCollider& staticRect, const glm::vec2& previousPosition)
+	{
+		// Get the distances between the adjacent edges of both colliders
+		float left  =  ((staticRect.GetOrigin().x - (staticRect.GetDimensions().x / 2)) - (previousPosition.x + (dynamicRect.GetDimensions().x / 2)));
+		float right =  ((previousPosition.x - (dynamicRect.GetDimensions().x / 2)) - (staticRect.GetOrigin().x + (staticRect.GetDimensions().x / 2)));
+		float above =  ((previousPosition.y - (dynamicRect.GetDimensions().y / 2)) - (staticRect.GetOrigin().y + (staticRect.GetDimensions().y / 2)));
+		float below =  ((staticRect.GetOrigin().y - (staticRect.GetDimensions().y / 2)) - (previousPosition.y + (dynamicRect.GetDimensions().y / 2)));
+
+		// Determine the max of all of these values and push the dynamic rect in that direction
+		if (left >= right)
+		{
+			if (above >= below)
+			{
+				if (left >= above)
+				{
+					// Left
+					dynamicRect.SetPosition({ staticRect.GetOrigin().x - (staticRect.GetDimensions().x / 2) - dynamicRect.GetDimensions().x, 
+						dynamicRect.GetOrigin().y });
+				}
+				else
+				{
+					// Above
+					dynamicRect.SetPosition({ dynamicRect.GetOrigin().x, 
+						staticRect.GetOrigin().y + (staticRect.GetDimensions().y / 2) + dynamicRect.GetDimensions().y });
+				}
+			}
+			else
+			{
+				if (left >= below)
+				{
+					// Left
+					dynamicRect.SetPosition({ staticRect.GetOrigin().x - (staticRect.GetDimensions().x / 2) - dynamicRect.GetDimensions().x, 
+						dynamicRect.GetOrigin().y });
+				}
+				else
+				{
+					// Below
+					dynamicRect.SetPosition({ dynamicRect.GetOrigin().x, 
+						staticRect.GetOrigin().y - (staticRect.GetDimensions().y / 2) - dynamicRect.GetDimensions().y });
+				}
+			}
+		}
+		else
+		{
+			if (above >= below)
+			{
+				if (right >= above)
+				{
+					// Right
+					dynamicRect.SetPosition({ staticRect.GetOrigin().x + (staticRect.GetDimensions().x / 2) + dynamicRect.GetDimensions().x,
+						dynamicRect.GetOrigin().y });
+				}
+				else
+				{
+					// Above
+					dynamicRect.SetPosition({ dynamicRect.GetOrigin().x, 
+						staticRect.GetOrigin().y + (staticRect.GetDimensions().y / 2) + dynamicRect.GetDimensions().y });
+				}
+			}
+			else
+			{
+				if (right >= below)
+				{
+					// Right
+					dynamicRect.SetPosition({ staticRect.GetOrigin().x + (staticRect.GetDimensions().x / 2) + dynamicRect.GetDimensions().x,
+						dynamicRect.GetOrigin().y });
+				}
+				else
+				{
+					// Below
+					dynamicRect.SetPosition({ dynamicRect.GetOrigin().x, 
+						staticRect.GetOrigin().y - (staticRect.GetDimensions().y / 2) - dynamicRect.GetDimensions().y });
+				}
+			}
+		}
+
+ 	}
+
 }

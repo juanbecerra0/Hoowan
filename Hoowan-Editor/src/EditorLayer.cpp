@@ -1,7 +1,9 @@
 #include "EditorLayer.h"
 
 #include "imgui/imgui.h"
+
 #include <glm/gtc/type_ptr.hpp>
+#include <glm/gtx/compatibility.hpp>
 
 namespace Hoowan
 {
@@ -9,7 +11,7 @@ namespace Hoowan
 	EditorLayer::EditorLayer()
 		: Layer("EditorLayer"), m_CameraController(1920.0f / 1080.0f, true),
 		m_ViewportSize({ 1920.0f, 1080.0f }), m_Scene(CreateRef<Scene>()),
-		m_Player(m_Scene)
+		m_Player(m_Scene, glm::vec2(6.3f, 2.0f))
 	{
 		
 	}
@@ -69,6 +71,10 @@ namespace Hoowan
 			// Scene update
 			m_Scene->OnUpdate(ts);
 			m_Player.OnUpdate(ts);
+
+			// Move camera
+			glm::vec2& playerPosition = m_Player.GetPosition();
+			glm::vec2& cameraPosition = { 0, 0 };
 
 			m_FrameBuffer->Unbind();
 

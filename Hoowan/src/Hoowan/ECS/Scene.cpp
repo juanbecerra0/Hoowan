@@ -87,11 +87,14 @@ namespace Hoowan
 
 			for (auto staticEnt : staticView)
 			{
-				if (dynamicComponent.Collider.IsColliding(staticView.get(staticEnt).Collider))
+				auto staticComponent = staticView.get(staticEnt);
+				if (dynamicComponent.Collider.IsColliding(staticComponent.Collider))
 				{
 					// Collision detected between a dynamic component and static component
-					HW_CORE_WARN("Collision detected");
+					// Fix the position of the dynamic component
+					RectangleCollider::CorrectCollision(dynamicComponent.Collider, staticComponent.Collider, dynamicComponent.PreviousPosition);
 				}
+				dynamicComponent.PreviousPosition = dynamicComponent.Collider.GetOrigin();
 			}
 		}
 

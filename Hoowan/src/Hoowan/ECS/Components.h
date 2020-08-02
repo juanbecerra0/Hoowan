@@ -93,10 +93,11 @@ namespace Hoowan
 	struct Collider2DDynamicComponent
 	{
 		RectangleCollider Collider;
+		glm::vec2 PreviousPosition = { 0.0f, 0.0f };
 
 		Collider2DDynamicComponent() = default;
 		Collider2DDynamicComponent(const Collider2DDynamicComponent&) = default;
-		Collider2DDynamicComponent(Ref<glm::mat4> transform) : Collider(transform) {}
-		Collider2DDynamicComponent(Ref<glm::mat4> transform, const glm::vec2 dimensions) : Collider(transform, dimensions) {}
+		Collider2DDynamicComponent(Ref<glm::mat4> transform) : Collider(transform), PreviousPosition((*transform)[3]) {}
+		Collider2DDynamicComponent(Ref<glm::mat4> transform, const glm::vec2 dimensions) : Collider(transform, dimensions), PreviousPosition((*transform)[3]) {}
 	};
 }

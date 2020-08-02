@@ -6,10 +6,12 @@
 class Player
 {
 public:
-	Player(Hoowan::Ref<Hoowan::Scene> scene);
+	Player(Hoowan::Ref<Hoowan::Scene> scene, glm::vec2& startingPosition);
 	~Player();
 
 	void OnUpdate(Hoowan::Timestep ts);
+
+	glm::vec2 GetPosition() { return m_PlayerEntity.GetComponent <Hoowan::TransformComponent>().GetTransform()[3]; }
 
 private:
 	void Move(bool holdingLeft, bool holdingRight, Hoowan::Timestep ts);
@@ -26,6 +28,6 @@ private:
 	const glm::vec2 MAX_VELOCITY = { 5.0f, 9.8f };
 
 private:
-	float m_Mass = 1.8f;
+	float m_Mass = 1.2f;
 	bool m_HasJumped = false;
 };
