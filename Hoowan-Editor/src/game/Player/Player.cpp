@@ -11,7 +11,7 @@ Player::Player(Hoowan::Ref<Hoowan::Scene> scene, glm::vec2& startingPosition)
 	m_PlayerEntity.GetComponent<Hoowan::TransformComponent>().GetTransform()[3][1] = startingPosition.y;
 
 	m_PlayerEntity.AddComponent<Hoowan::SpriteRendererSubTextureComponent>(m_PlayerSprites.Idle);
-	m_PlayerEntity.AddComponent<Hoowan::Collider2DDynamicComponent>(m_PlayerEntity.GetComponent<Hoowan::TransformComponent>().Transform, glm::vec2( 0.75f, 0.75f ));
+	m_PlayerEntity.AddComponent<Hoowan::Collider2DDynamicComponent>(m_PlayerEntity.GetComponent<Hoowan::TransformComponent>().Transform);
 }
 
 Player::~Player()

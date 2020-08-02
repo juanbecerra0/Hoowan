@@ -62,14 +62,14 @@ namespace Hoowan
 				if (left >= above)
 				{
 					// Left
-					dynamicRect.SetPosition({ staticRect.GetOrigin().x - (staticRect.GetDimensions().x / 2) - dynamicRect.GetDimensions().x, 
+					dynamicRect.SetPosition({ staticRect.GetOrigin().x - (staticRect.GetDimensions().x / 2) - (dynamicRect.GetDimensions().x / 2), 
 						dynamicRect.GetOrigin().y });
 				}
 				else
 				{
 					// Above
 					dynamicRect.SetPosition({ dynamicRect.GetOrigin().x, 
-						staticRect.GetOrigin().y + (staticRect.GetDimensions().y / 2) + dynamicRect.GetDimensions().y });
+						staticRect.GetOrigin().y + (staticRect.GetDimensions().y / 2) + (dynamicRect.GetDimensions().y / 2) });
 				}
 			}
 			else
@@ -77,14 +77,14 @@ namespace Hoowan
 				if (left >= below)
 				{
 					// Left
-					dynamicRect.SetPosition({ staticRect.GetOrigin().x - (staticRect.GetDimensions().x / 2) - dynamicRect.GetDimensions().x, 
+					dynamicRect.SetPosition({ staticRect.GetOrigin().x - (staticRect.GetDimensions().x / 2) - (dynamicRect.GetDimensions().x / 2), 
 						dynamicRect.GetOrigin().y });
 				}
 				else
 				{
 					// Below
 					dynamicRect.SetPosition({ dynamicRect.GetOrigin().x, 
-						staticRect.GetOrigin().y - (staticRect.GetDimensions().y / 2) - dynamicRect.GetDimensions().y });
+						staticRect.GetOrigin().y - (staticRect.GetDimensions().y / 2) - (dynamicRect.GetDimensions().y / 2) });
 				}
 			}
 		}
@@ -95,14 +95,14 @@ namespace Hoowan
 				if (right >= above)
 				{
 					// Right
-					dynamicRect.SetPosition({ staticRect.GetOrigin().x + (staticRect.GetDimensions().x / 2) + dynamicRect.GetDimensions().x,
+					dynamicRect.SetPosition({ staticRect.GetOrigin().x + (staticRect.GetDimensions().x / 2) + (dynamicRect.GetDimensions().x / 2),
 						dynamicRect.GetOrigin().y });
 				}
 				else
 				{
 					// Above
 					dynamicRect.SetPosition({ dynamicRect.GetOrigin().x, 
-						staticRect.GetOrigin().y + (staticRect.GetDimensions().y / 2) + dynamicRect.GetDimensions().y });
+						staticRect.GetOrigin().y + (staticRect.GetDimensions().y / 2) + (dynamicRect.GetDimensions().y / 2) });
 				}
 			}
 			else
@@ -110,14 +110,14 @@ namespace Hoowan
 				if (right >= below)
 				{
 					// Right
-					dynamicRect.SetPosition({ staticRect.GetOrigin().x + (staticRect.GetDimensions().x / 2) + dynamicRect.GetDimensions().x,
+					dynamicRect.SetPosition({ staticRect.GetOrigin().x + (staticRect.GetDimensions().x / 2) + (dynamicRect.GetDimensions().x / 2),
 						dynamicRect.GetOrigin().y });
 				}
 				else
 				{
 					// Below
 					dynamicRect.SetPosition({ dynamicRect.GetOrigin().x, 
-						staticRect.GetOrigin().y - (staticRect.GetDimensions().y / 2) - dynamicRect.GetDimensions().y });
+						staticRect.GetOrigin().y - (staticRect.GetDimensions().y / 2) - (dynamicRect.GetDimensions().y / 2) });
 				}
 			}
 		}

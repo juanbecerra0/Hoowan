@@ -74,7 +74,10 @@ namespace Hoowan
 
 			// Move camera
 			glm::vec2& playerPosition = m_Player.GetPosition();
-			glm::vec2& cameraPosition = { 0, 0 };
+			m_CameraEntity.GetComponent<TransformComponent>().GetTransform()[3][0] =
+				glm::mix(m_CameraEntity.GetComponent<TransformComponent>().GetTransform()[3][0], playerPosition.x, 0.5f);
+			m_CameraEntity.GetComponent<TransformComponent>().GetTransform()[3][1] =
+				glm::mix(m_CameraEntity.GetComponent<TransformComponent>().GetTransform()[3][1], playerPosition.y, 0.5f);
 
 			m_FrameBuffer->Unbind();
 
