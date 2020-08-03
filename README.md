@@ -22,6 +22,15 @@ Game Engine Architecture, Third Edition buy/rent: https://www.amazon.com/Engine-
 - You can visualize these files by going to "chome://tracing" in a chrome browser and loading these files
 
 # Log
+### 08/03/2020 - Entity-Component System, 2D Collision Handling, and the Player Actor
+![6](RMImages/6.PNG)
+BONK. You shouldn't be inside this block.
+
+In this update, I utilized the popular ECS library, EnTT (https://github.com/skypjack/entt), for my wrapped entity-component system. I can now treat objects in a scene as distinct entities with various types of components attached to them, like a tag, transform, sprite, camera, or collision volume. Speaking of collision, I also implemented a basic rectangle vs. rectangle collision system. It works by checking all static vs dynamic collision volumes for collisions. In the case of a collision, just before rendering, the dynamic component is moved to avoid objects clipping into other objects. It certainly isn’t perfect, as the correction can have undefined behavior in different framerates and there is no special partitioning to improve performance, but I think it’s an excellent first step.
+
+To put the new ECS to the test, I started to work on a basic player class that can move using the A and D keys and jump using the spacebar. The entire scene acts as a large collision volume that prevents the player from falling through. This means that a basic game can finally be created! There’s still a lot of work to do, especially in terms of collision correction, but I’ll be making a basic platformer by the next update (this may be a bit as I’ll be heading back to school and starting an internship soon).
+
+
 ### 07/12/2020 - Sprite Sheets, Scene Viewport, and the Hoowan Editor
 ![5](RMImages/5.PNG)
 Call it an asset-flip, baby
