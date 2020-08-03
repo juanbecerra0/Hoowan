@@ -37,11 +37,11 @@ namespace Hoowan
 	{
 		HW_PROFILE_FUNCTION()
 
-		CheckForCollisions(ts);
+		HandleCollisions(ts);
 		RenderScene(ts);
 	}
 
-	void Scene::CheckForCollisions(Timestep ts)
+	void Scene::HandleCollisions(Timestep ts)
 	{
 		HW_PROFILE_FUNCTION();
 
@@ -61,8 +61,9 @@ namespace Hoowan
 					// Fix the position of the dynamic component
 					RectangleCollider::CorrectCollision(dynamicComponent.Collider, staticComponent.Collider, dynamicComponent.PreviousPosition);
 				}
-				dynamicComponent.PreviousPosition = dynamicComponent.Collider.GetOrigin();
 			}
+
+			dynamicComponent.PreviousPosition = dynamicComponent.Collider.GetOrigin();
 		}
 	}
 
