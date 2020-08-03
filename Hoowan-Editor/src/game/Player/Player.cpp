@@ -6,7 +6,7 @@
 
 Player::Player(Hoowan::Ref<Hoowan::Scene> scene, glm::vec2& startingPosition)
 {
-	m_PlayerEntity = scene->CreateEntity("Player");
+	m_PlayerEntity = scene->CreateEntity("PlayerActor");
 	m_PlayerEntity.GetComponent<Hoowan::TransformComponent>().GetTransform()[3][0] = startingPosition.x;
 	m_PlayerEntity.GetComponent<Hoowan::TransformComponent>().GetTransform()[3][1] = startingPosition.y;
 

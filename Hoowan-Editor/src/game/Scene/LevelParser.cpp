@@ -28,14 +28,19 @@ LevelParser::LevelParser(const std::string& levelString, Hoowan::Ref<Hoowan::Sce
 		}
 		else
 		{
-			// Create an entity with a tag, transform, subtexture, and static collider
+			// Create an entity
 			auto sprite = scene->CreateEntity("LevelSprite :: " + glm::to_string(position));
 
+			// Set position
 			sprite.GetComponent<Hoowan::TransformComponent>().GetTransform() = 
 				glm::translate(glm::mat4(1.0f), { position.x, position.y, 0.0f });
 
+			// Add subtexture component
 			sprite.AddComponent<Hoowan::SpriteRendererSubTextureComponent>(symbolMap.at(c));
-			sprite.AddComponent<Hoowan::Collider2DStaticComponent>(sprite.GetComponent<Hoowan::TransformComponent>().Transform);
+
+			// (Maybe) add a static collider component
+			if (c != 'B' && c!= 'b')
+				sprite.AddComponent<Hoowan::Collider2DStaticComponent>(sprite.GetComponent<Hoowan::TransformComponent>().Transform);
 
 			position.x += 1.0f;
 		}

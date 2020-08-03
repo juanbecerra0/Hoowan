@@ -41,6 +41,31 @@ namespace Hoowan
 		RenderScene(ts);
 	}
 
+	void Scene::CheckForCollisions(Timestep ts)
+	{
+		HW_PROFILE_FUNCTION();
+
+		auto dynamicView = m_Registry.view<Collider2DDynamicComponent>();
+		auto staticView = m_Registry.view<Collider2DStaticComponent>();
+
+		for (auto dynamicEnt : dynamicView)
+		{
+			auto dynamicComponent = dynamicView.get(dynamicEnt);
+
+			for (auto staticEnt : staticView)
+			{
+				auto staticComponent = staticView.get(staticEnt);
+				if (dynamicComponent.Collider.IsColliding(staticComponent.Collider))
+				{
+					// Collision detected between a dynamic component and static component
+					// Fix the position of the dynamic component
+					RectangleCollider::CorrectCollision(dynamicComponent.Collider, staticComponent.Collider, dynamicComponent.PreviousPosition);
+				}
+				dynamicComponent.PreviousPosition = dynamicComponent.Collider.GetOrigin();
+			}
+		}
+	}
+
 	void Scene::RenderScene(Timestep ts)
 	{
 		HW_PROFILE_FUNCTION()
@@ -70,32 +95,6 @@ namespace Hoowan
 			UpdateSubTexturedSpriteComponents(ts);
 
 			Renderer2D::EndScene();
-		}
-
-	}
-
-	void Scene::CheckForCollisions(Timestep ts)
-	{
-		HW_PROFILE_FUNCTION();
-
-		auto dynamicView = m_Registry.view<Collider2DDynamicComponent>();
-		auto staticView = m_Registry.view<Collider2DStaticComponent>();
-
-		for (auto dynamicEnt : dynamicView)
-		{
-			auto dynamicComponent = dynamicView.get(dynamicEnt);
-
-			for (auto staticEnt : staticView)
-			{
-				auto staticComponent = staticView.get(staticEnt);
-				if (dynamicComponent.Collider.IsColliding(staticComponent.Collider))
-				{
-					// Collision detected between a dynamic component and static component
-					// Fix the position of the dynamic component
-					RectangleCollider::CorrectCollision(dynamicComponent.Collider, staticComponent.Collider, dynamicComponent.PreviousPosition);
-				}
-				dynamicComponent.PreviousPosition = dynamicComponent.Collider.GetOrigin();
-			}
 		}
 
 	}

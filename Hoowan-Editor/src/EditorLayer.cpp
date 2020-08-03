@@ -69,8 +69,8 @@ namespace Hoowan
 			HW_PROFILE_SCOPE("RenderDrawScene::OnUpdate");
 
 			// Scene update
-			m_Scene->OnUpdate(ts);
 			m_Player.OnUpdate(ts);
+			m_Scene->OnUpdate(ts);
 
 			// Move camera
 			glm::vec2& playerPosition = m_Player.GetPosition();
@@ -166,7 +166,12 @@ namespace Hoowan
 
 		// Camera mover
 		ImGui::Begin("Camera Entity");
-		ImGui::DragFloat2("Camera Transform", glm::value_ptr(m_CameraEntity.GetComponent<TransformComponent>().GetTransform()[3]));
+		ImGui::DragFloat2("Camera Position", glm::value_ptr(m_CameraEntity.GetComponent<TransformComponent>().GetTransform()[3]));
+		ImGui::End();
+
+		// Player mover
+		ImGui::Begin("Player Entity");
+		ImGui::DragFloat2("Player Position", glm::value_ptr(m_Player.GetTransform()[3]));
 		ImGui::End();
 
 		// Scene viewport
@@ -187,7 +192,6 @@ namespace Hoowan
 		ImGui::Image((ImTextureID)textureID, ImVec2{ m_ViewportSize.x, m_ViewportSize.y }, ImVec2{ 0.0f, 1.0f }, ImVec2{ 1.0f, 0.0f });
 		ImGui::End();
 		ImGui::PopStyleVar();
-
 		ImGui::End();
 	}
 

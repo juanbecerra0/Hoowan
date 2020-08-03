@@ -11,7 +11,8 @@ public:
 
 	void OnUpdate(Hoowan::Timestep ts);
 
-	glm::vec2 GetPosition() { return m_PlayerEntity.GetComponent <Hoowan::TransformComponent>().GetTransform()[3]; }
+	glm::mat4& GetTransform() { return m_PlayerEntity.GetComponent<Hoowan::TransformComponent>().GetTransform(); }
+	glm::vec2 GetPosition() { return m_PlayerEntity.GetComponent<Hoowan::TransformComponent>().GetTransform()[3]; }
 
 private:
 	void Move(bool holdingLeft, bool holdingRight, Hoowan::Timestep ts);
