@@ -160,6 +160,7 @@
     <ClInclude Include="src\Hoowan\ECS\Components.h" />
     <ClInclude Include="src\Hoowan\ECS\Entity.h" />
     <ClInclude Include="src\Hoowan\ECS\Scene.h" />
+    <ClInclude Include="src\Hoowan\ECS\SceneCamera.h" />
     <ClInclude Include="src\Hoowan\Events\ApplicationEvent.h" />
     <ClInclude Include="src\Hoowan\Events\Event.h" />
     <ClInclude Include="src\Hoowan\Events\KeyEvent.h" />
@@ -606,6 +607,7 @@
     <ClCompile Include="src\Hoowan\Core\Log.cpp" />
     <ClCompile Include="src\Hoowan\ECS\Entity.cpp" />
     <ClCompile Include="src\Hoowan\ECS\Scene.cpp" />
+    <ClCompile Include="src\Hoowan\ECS\SceneCamera.cpp" />
     <ClCompile Include="src\Hoowan\ImGui\ImGuiBuild.cpp" />
     <ClCompile Include="src\Hoowan\ImGui\ImGuiLayer.cpp" />
     <ClCompile Include="src\Hoowan\Physics\RectangleCollider.cpp" />

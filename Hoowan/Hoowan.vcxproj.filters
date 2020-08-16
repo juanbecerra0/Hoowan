@@ -1416,6 +1416,7 @@
     <ClInclude Include="src\Hoowan\ECS\Entity.h" />
     <ClInclude Include="src\Hoowan\Renderer\Camera.h" />
     <ClInclude Include="src\Hoowan\Physics\RectangleCollider.h" />
+    <ClInclude Include="src\Hoowan\ECS\SceneCamera.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Hoowan\Core\Application.cpp">
@@ -1510,5 +1511,6 @@
     </ClCompile>
     <ClCompile Include="src\Hoowan\ECS\Entity.cpp" />
     <ClCompile Include="src\Hoowan\Physics\RectangleCollider.cpp" />
+    <ClCompile Include="src\Hoowan\ECS\SceneCamera.cpp" />
   </ItemGroup>
 </Project>

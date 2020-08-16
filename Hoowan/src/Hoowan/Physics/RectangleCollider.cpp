@@ -62,14 +62,12 @@ namespace Hoowan
 				if (left >= above)
 				{
 					// Left
-					HW_CORE_INFO("LEFT");
 					dynamicRect.SetPosition({ staticRect.GetOrigin().x - (staticRect.GetDimensions().x / 2) - (dynamicRect.GetDimensions().x / 2), 
 						dynamicRect.GetOrigin().y });
 				}
 				else
 				{
 					// Above
-					HW_CORE_INFO("ABOVE");
 					dynamicRect.SetPosition({ dynamicRect.GetOrigin().x, 
 						staticRect.GetOrigin().y + (staticRect.GetDimensions().y / 2) + (dynamicRect.GetDimensions().y / 2) });
 				}
@@ -79,14 +77,12 @@ namespace Hoowan
 				if (left >= below)
 				{
 					// Left
-					HW_CORE_INFO("LEFT");
 					dynamicRect.SetPosition({ staticRect.GetOrigin().x - (staticRect.GetDimensions().x / 2) - (dynamicRect.GetDimensions().x / 2), 
 						dynamicRect.GetOrigin().y });
 				}
 				else
 				{
 					// Below
-					HW_CORE_INFO("BELOW");
 					dynamicRect.SetPosition({ dynamicRect.GetOrigin().x, 
 						staticRect.GetOrigin().y - (staticRect.GetDimensions().y / 2) - (dynamicRect.GetDimensions().y / 2) });
 				}
@@ -99,14 +95,12 @@ namespace Hoowan
 				if (right >= above)
 				{
 					// Right
-					HW_CORE_INFO("RIGHT");
 					dynamicRect.SetPosition({ staticRect.GetOrigin().x + (staticRect.GetDimensions().x / 2) + (dynamicRect.GetDimensions().x / 2),
 						dynamicRect.GetOrigin().y });
 				}
 				else
 				{
 					// Above
-					HW_CORE_INFO("ABOVE");
 					dynamicRect.SetPosition({ dynamicRect.GetOrigin().x, 
 						staticRect.GetOrigin().y + (staticRect.GetDimensions().y / 2) + (dynamicRect.GetDimensions().y / 2) });
 				}
@@ -116,14 +110,12 @@ namespace Hoowan
 				if (right >= below)
 				{
 					// Right
-					HW_CORE_INFO("RIGHT");
 					dynamicRect.SetPosition({ staticRect.GetOrigin().x + (staticRect.GetDimensions().x / 2) + (dynamicRect.GetDimensions().x / 2),
 						dynamicRect.GetOrigin().y });
 				}
 				else
 				{
 					// Below
-					HW_CORE_INFO("BELOW");
 					dynamicRect.SetPosition({ dynamicRect.GetOrigin().x, 
 						staticRect.GetOrigin().y - (staticRect.GetDimensions().y / 2) - (dynamicRect.GetDimensions().y / 2) });
 				}

@@ -3,8 +3,8 @@
 #include "glm/glm.hpp"
 #include "Hoowan/Renderer/Texture.h"
 #include "Hoowan/Renderer/SubTexture2D.h"
-#include "Hoowan/Renderer/Camera.h"
 #include "Hoowan/Physics/RectangleCollider.h"
+#include <Hoowan\ECS\SceneCamera.h>
 
 namespace Hoowan
 {
@@ -72,12 +72,12 @@ namespace Hoowan
 
 	struct CameraComponent
 	{
-		Hoowan::Camera Camera;
+		Hoowan::SceneCamera Camera;
 		bool IsPrimary = false;
+		bool FixedAspectRatio = false;
 
 		CameraComponent() = default;
 		CameraComponent(const CameraComponent&) = default;
-		CameraComponent(const glm::mat4& projection) : Camera(projection) {}
 	};
 
 	struct Collider2DStaticComponent
