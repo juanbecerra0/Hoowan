@@ -47,4 +47,5 @@ namespace Hoowan
 		Scene* m_Scene = nullptr;
 
 	};
+
 }

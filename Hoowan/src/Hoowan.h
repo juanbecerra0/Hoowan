@@ -15,8 +15,10 @@
 
 #include "Hoowan/ImGui/ImGuiLayer.h"
 
+// Entity-Component System
 #include "Hoowan/ECS/Scene.h"
 #include "Hoowan/ECS/Entity.h"
+#include "Hoowan/ECS/ScriptableEntity.h"
 #include "Hoowan/ECS/Components.h"
 
 // Renderer
@@ -32,6 +34,3 @@
 #include "Hoowan/Renderer/FrameBuffer.h"
 
 #include "Hoowan/Renderer/OrthographicCamera.h"
-
-// Entity-Component System
-#include "Hoowan/ECS/Scene.h"

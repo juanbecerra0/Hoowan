@@ -22,6 +22,9 @@
     <Filter Include="src\Hoowan\ImGui">
       <UniqueIdentifier>{92F355F5-7EEC-7447-A71E-5ACC93765453}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Hoowan\Physics">
+      <UniqueIdentifier>{DABB56B5-C69F-170B-2F00-125E1B03028D}</UniqueIdentifier>
+    </Filter>
     <Filter Include="src\Hoowan\Renderer">
       <UniqueIdentifier>{0E090937-7A6A-E644-03D8-2CF76F381D04}</UniqueIdentifier>
     </Filter>
@@ -102,7 +105,16 @@
     <ClInclude Include="src\Hoowan\ECS\Components.h">
       <Filter>src\Hoowan\ECS</Filter>
     </ClInclude>
+    <ClInclude Include="src\Hoowan\ECS\Entity.h">
+      <Filter>src\Hoowan\ECS</Filter>
+    </ClInclude>
     <ClInclude Include="src\Hoowan\ECS\Scene.h">
+      <Filter>src\Hoowan\ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Hoowan\ECS\SceneCamera.h">
+      <Filter>src\Hoowan\ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Hoowan\ECS\ScriptableEntity.h">
       <Filter>src\Hoowan\ECS</Filter>
     </ClInclude>
     <ClInclude Include="src\Hoowan\Events\ApplicationEvent.h">
@@ -120,7 +132,13 @@
     <ClInclude Include="src\Hoowan\ImGui\ImGuiLayer.h">
       <Filter>src\Hoowan\ImGui</Filter>
     </ClInclude>
+    <ClInclude Include="src\Hoowan\Physics\RectangleCollider.h">
+      <Filter>src\Hoowan\Physics</Filter>
+    </ClInclude>
     <ClInclude Include="src\Hoowan\Renderer\Buffer.h">
+      <Filter>src\Hoowan\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Hoowan\Renderer\Camera.h">
       <Filter>src\Hoowan\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\Hoowan\Renderer\FrameBuffer.h">
@@ -1413,10 +1431,6 @@
     <ClInclude Include="vendor\stb_image\stb_image.h">
       <Filter>vendor\stb_image</Filter>
     </ClInclude>
-    <ClInclude Include="src\Hoowan\ECS\Entity.h" />
-    <ClInclude Include="src\Hoowan\Renderer\Camera.h" />
-    <ClInclude Include="src\Hoowan\Physics\RectangleCollider.h" />
-    <ClInclude Include="src\Hoowan\ECS\SceneCamera.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Hoowan\Core\Application.cpp">
@@ -1431,7 +1445,13 @@
     <ClCompile Include="src\Hoowan\Core\Log.cpp">
       <Filter>src\Hoowan\Core</Filter>
     </ClCompile>
+    <ClCompile Include="src\Hoowan\ECS\Entity.cpp">
+      <Filter>src\Hoowan\ECS</Filter>
+    </ClCompile>
     <ClCompile Include="src\Hoowan\ECS\Scene.cpp">
+      <Filter>src\Hoowan\ECS</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Hoowan\ECS\SceneCamera.cpp">
       <Filter>src\Hoowan\ECS</Filter>
     </ClCompile>
     <ClCompile Include="src\Hoowan\ImGui\ImGuiBuild.cpp">
@@ -1439,6 +1459,9 @@
     </ClCompile>
     <ClCompile Include="src\Hoowan\ImGui\ImGuiLayer.cpp">
       <Filter>src\Hoowan\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Hoowan\Physics\RectangleCollider.cpp">
+      <Filter>src\Hoowan\Physics</Filter>
     </ClCompile>
     <ClCompile Include="src\Hoowan\Renderer\Buffer.cpp">
       <Filter>src\Hoowan\Renderer</Filter>
@@ -1509,8 +1532,5 @@
     <ClCompile Include="vendor\stb_image\stb_image.cpp">
       <Filter>vendor\stb_image</Filter>
     </ClCompile>
-    <ClCompile Include="src\Hoowan\ECS\Entity.cpp" />
-    <ClCompile Include="src\Hoowan\Physics\RectangleCollider.cpp" />
-    <ClCompile Include="src\Hoowan\ECS\SceneCamera.cpp" />
   </ItemGroup>
 </Project>

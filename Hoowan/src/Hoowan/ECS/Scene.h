@@ -1,6 +1,5 @@
 #pragma once
 
-#include "Components.h"
 #include "entt.hpp"
 
 #include "Hoowan/Core/Timestep.h"
@@ -22,6 +21,7 @@ namespace Hoowan
 		void OnViewportResize(uint32_t width, uint32_t height);
 
 	private:
+		void UpdateScriptComponents(Timestep ts);
 		void HandleCollisions(Timestep ts);
 		void RenderScene(Timestep ts);
 
@@ -31,12 +31,10 @@ namespace Hoowan
 
 	private:
 		entt::registry m_Registry;
+		uint32_t m_ViewportWidth = 0, m_ViewportHeight = 0;
 
 		// Entity does not own Scene, but it must be able to reference its registry
 		friend class Entity;
-
-	private:
-		uint32_t m_ViewportWidth = 0, m_ViewportHeight = 0;
 	};
 
 }

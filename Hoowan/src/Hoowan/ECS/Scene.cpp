@@ -7,6 +7,8 @@
 
 #include "Entity.h"
 
+#include "Components.h"
+
 namespace Hoowan
 {
 
@@ -37,6 +39,7 @@ namespace Hoowan
 	{
 		HW_PROFILE_FUNCTION()
 
+		UpdateScriptComponents(ts);
 		HandleCollisions(ts);
 		RenderScene(ts);
 	}
@@ -55,6 +58,23 @@ namespace Hoowan
 				camera.Camera.SetViewportSize(width, height);
 
 		}
+	}
+
+	void Scene::UpdateScriptComponents(Timestep ts)
+	{
+		HW_PROFILE_FUNCTION();
+
+		m_Registry.view<NativeScriptComponent>().each([=](auto entity, auto& nsc)
+		{
+			if (!nsc.Instance)
+			{
+				nsc.CreateInstanceFunction();
+				nsc.Instance->m_Entity = Entity{ entity, this };
+				nsc.OnCreateFunction(nsc.Instance);
+			}
+
+			nsc.OnUpdateFunction(nsc.Instance, ts);
+		});
 	}
 
 	void Scene::HandleCollisions(Timestep ts)

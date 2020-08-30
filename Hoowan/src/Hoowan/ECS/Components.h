@@ -1,10 +1,13 @@
 #pragma once
 
 #include "glm/glm.hpp"
+
 #include "Hoowan/Renderer/Texture.h"
 #include "Hoowan/Renderer/SubTexture2D.h"
 #include "Hoowan/Physics/RectangleCollider.h"
-#include <Hoowan\ECS\SceneCamera.h>
+
+#include <Hoowan/ECS/SceneCamera.h>
+#include "Hoowan/ECS/ScriptableEntity.h"
 
 namespace Hoowan
 {
@@ -99,5 +102,28 @@ namespace Hoowan
 		Collider2DDynamicComponent(const Collider2DDynamicComponent&) = default;
 		Collider2DDynamicComponent(Ref<glm::mat4> transform) : Collider(transform), PreviousPosition((*transform)[3]) {}
 		Collider2DDynamicComponent(Ref<glm::mat4> transform, const glm::vec2 dimensions) : Collider(transform, dimensions), PreviousPosition((*transform)[3]) {}
+	};
+
+	struct NativeScriptComponent
+	{
+		ScriptableEntity* Instance = nullptr;
+
+		std::function<void()> CreateInstanceFunction;
+		std::function<void()> DestroyInstanceFunction;
+
+		std::function<void(ScriptableEntity*)> OnCreateFunction;
+		std::function<void(ScriptableEntity*)> OnDestroyFunction;
+		std::function<void(ScriptableEntity*, Timestep)> OnUpdateFunction;
+
+		template<typename T>
+		void Bind()
+		{
+			CreateInstanceFunction = [&]() { Instance = new T(); };
+			DestroyInstanceFunction = [&]() { delete (T*)Instance; Instance = nullptr; };
+
+			OnCreateFunction = [](ScriptableEntity* instance) { ((T*)instance)->OnCreate(); };
+			OnDestroyFunction = [](ScriptableEntity* instance) { ((T*)instance)->OnDestroy(); };
+			OnUpdateFunction = [](ScriptableEntity* instance, Timestep ts) { ((T*)instance)->OnUpdate(ts); };
+		}
 	};
 }

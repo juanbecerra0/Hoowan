@@ -32,6 +32,9 @@
 
 #define HW_BIND_EVENT_FN(fn) std::bind(&fn, this, std::placeholders::_1)
 
+// For EnTT
+#define NOMINMAX
+
 namespace Hoowan {
 
 	template<typename T>

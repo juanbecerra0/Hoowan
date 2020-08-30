@@ -37,6 +37,31 @@ namespace Hoowan
 		m_CameraEntity = m_Scene->CreateEntity("Camera");
 		m_CameraEntity.AddComponent<CameraComponent>();
 		m_CameraEntity.GetComponent<CameraComponent>().IsPrimary = true;
+
+		// Add a scriptable components
+
+		
+		class CameraController : public ScriptableEntity
+		{
+		public:
+			void OnCreate()
+			{
+				//std::cout << "CreateCameraEnt" << std::endl;
+			}
+
+			void OnDestroy()
+			{
+
+			}
+
+			void OnUpdate(Timestep ts)
+			{
+				//std::cout << ts.GetMilliseconds() << std::endl;
+			}
+		};
+
+		m_CameraEntity.AddComponent<NativeScriptComponent>().Bind<CameraController>();
+		
 	}
 
 	void EditorLayer::OnDetach()
