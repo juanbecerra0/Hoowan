@@ -23,13 +23,13 @@ IncludeDir["ImGui"] = "Hoowan/vendor/imgui"
 IncludeDir["glm"] = "Hoowan/vendor/glm"
 IncludeDir["stb_image"] = "Hoowan/vendor/stb_image"
 IncludeDir["EnTT"] = "Hoowan/vendor/EnTT"
+IncludeDir["Box2D"] = "Hoowan/vendor/Box2D/include"
 
 group "Dependencies"
 	include "Hoowan/vendor/GLFW"
 	include "Hoowan/vendor/Glad"
 	include "Hoowan/vendor/imgui"
-	
-group ""
+	include "Hoowan/vendor/Box2D"
 
 project "Hoowan"
 	location "Hoowan"
@@ -68,7 +68,8 @@ project "Hoowan"
 		"%{IncludeDir.ImGui}",
 		"%{IncludeDir.glm}",
 		"%{IncludeDir.stb_image}",
-		"%{IncludeDir.EnTT}"
+		"%{IncludeDir.EnTT}",
+		"%{IncludeDir.Box2D}"
 	}
 
 	links 
@@ -76,6 +77,7 @@ project "Hoowan"
 		"GLFW",
 		"Glad",
 		"ImGui",
+		"Box2D",
 		"opengl32.lib"
 	}
 
@@ -126,7 +128,8 @@ project "Hoowan-Editor"
 		"Hoowan/src",
 		"Hoowan/vendor",
 		"%{IncludeDir.glm}",
-		"%{IncludeDir.EnTT}"
+		"%{IncludeDir.EnTT}",
+		"%{IncludeDir.Box2D}"
 	}
 
 	links
@@ -180,7 +183,8 @@ project "Sandbox"
 		"Hoowan/src",
 		"Hoowan/vendor",
 		"%{IncludeDir.glm}",
-		"%{IncludeDir.EnTT}"
+		"%{IncludeDir.EnTT}",
+		"%{IncludeDir.Box2D}"
 	}
 
 	links

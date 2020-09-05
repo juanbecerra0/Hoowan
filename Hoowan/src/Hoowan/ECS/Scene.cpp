@@ -13,8 +13,9 @@ namespace Hoowan
 {
 
 	Scene::Scene()
+		: m_PhysicsWorld(-9.8f)
 	{
-
+		
 	}
 
 	Scene::~Scene()

@@ -4,6 +4,8 @@
 
 #include "Hoowan/Core/Timestep.h"
 
+#include "Hoowan/Physics/Physics2DWorld.h"
+
 namespace Hoowan
 {
 	// Forward-declared
@@ -32,6 +34,7 @@ namespace Hoowan
 	private:
 		entt::registry m_Registry;
 		uint32_t m_ViewportWidth = 0, m_ViewportHeight = 0;
+		Hoowan::Physics2DWorld m_PhysicsWorld;
 
 		// Entity does not own Scene, but it must be able to reference its registry
 		friend class Entity;
