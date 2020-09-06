@@ -9,6 +9,7 @@
 
 namespace Hoowan
 {
+	// Takes care of linking error
 	Ref<b2World> CollisionBody::s_World = nullptr;
 
 	void CollisionBody::Init(Ref<b2World> world)
@@ -39,7 +40,10 @@ namespace Hoowan
 		// Define a body position
 		b2BodyDef bodyDefinition;
 		bodyDefinition.position.Set(position.x, position.y);
-		if (isDynamic) bodyDefinition.type = b2_dynamicBody;
+		if (isDynamic)
+			bodyDefinition.type = b2_dynamicBody;
+		else
+			bodyDefinition.type = b2_staticBody;
 
 		// Alloc the body object
 		m_Body = (*s_World).CreateBody(&bodyDefinition);
@@ -67,8 +71,17 @@ namespace Hoowan
 
 	CollisionBody::~CollisionBody()
 	{
-		// TODO: Check if m_Body is being properly freed by Box2D
-		//free(m_Body);
+		// Box2D takes care of memory management via the s_World reference
+	}
+
+	void CollisionBody::SetLinearVelocity(glm::vec2& velocity)
+	{
+		m_Body->SetLinearVelocity(b2Vec2(velocity.x, velocity.y));
+	}
+
+	void CollisionBody::ApplyForce(glm::vec2& force)
+	{
+		m_Body->ApplyForce(b2Vec2(force.x, force.y), m_Body->GetWorldCenter(), false);
 	}
 
 	glm::mat4 CollisionBody::GetTransform()

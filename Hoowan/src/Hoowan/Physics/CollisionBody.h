@@ -19,6 +19,11 @@ namespace Hoowan
 
 		~CollisionBody();
 
+		// Methods
+		void SetLinearVelocity(glm::vec2& velocity);
+		void ApplyForce(glm::vec2& force);
+
+		// Getters
 		glm::mat4 GetTransform();
 
 	private:

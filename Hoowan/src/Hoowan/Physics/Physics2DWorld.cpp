@@ -16,10 +16,16 @@ namespace Hoowan
 
 	}
 
-	void Physics2DWorld::SimulateWorld()
+	void Physics2DWorld::SimulateFrame()
 	{
-		// TODO: Keep fixed to 60 fps?
 		(*m_World).Step(1.0f / 60.0f, 6, 2);
+	}
+
+	void Physics2DWorld::SimulateFrame(Timestep ts)
+	{
+		// This may ruin everything lmao.
+		// Prefer to use non-argument function (fixed 60fps)
+		(*m_World).Step(ts.GetSeconds(), 6, 2);
 	}
 
 	Ref<b2World> Physics2DWorld::GetWorldReference()

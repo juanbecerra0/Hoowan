@@ -85,7 +85,7 @@ namespace Hoowan
 		HW_PROFILE_FUNCTION();
 
 		// Simulate the world
-		m_PhysicsWorld.SimulateWorld();
+		m_PhysicsWorld.SimulateFrame(ts);
 
 		// Update the transform components of possibly-moved objects
 		// TODO: Optimize to only trigger on dynamic objects

@@ -25,10 +25,10 @@ private:
 	Hoowan::Entity m_PlayerEntity;
 	PlayerSprites m_PlayerSprites;
 
-	glm::vec2 m_Velocity = { 0.0f, 0.0f };
-	const glm::vec2 MAX_VELOCITY = { 5.0f, 9.8f };
+	glm::vec2 m_DesiredVelocity = { 0.0f, 0.0f };
+	const glm::vec2 MAX_VELOCITY = { 8.0f, 9.8f };
 
 private:
-	float m_Mass = 1.2f;
+	float m_Mass = 1.5f;
 	bool m_HasJumped = false;
 };

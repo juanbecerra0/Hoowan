@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Hoowan/Core/Timestep.h"
+
 #include "box2d/b2_world.h"
 
 namespace Hoowan
@@ -10,7 +12,8 @@ namespace Hoowan
 		Physics2DWorld(float gravity);
 		~Physics2DWorld();
 
-		void SimulateWorld();
+		void SimulateFrame();
+		void SimulateFrame(Timestep ts);
 
 		Ref<b2World> GetWorldReference();
 

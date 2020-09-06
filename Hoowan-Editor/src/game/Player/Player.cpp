@@ -27,8 +27,11 @@ void Player::OnUpdate(Hoowan::Timestep ts)
 	ApplyGravity(ts);
 
 	// Apply transformation
-	glm::mat4& transform = m_PlayerEntity.GetComponent<Hoowan::TransformComponent>().GetTransform();
-	transform = glm::translate(transform, glm::vec3(m_Velocity.x, m_Velocity.y, 0.0f) * ts.GetSeconds());
+	//m_PlayerEntity.GetComponent<Hoowan::CollisionComponent>().CollisionBody.ApplyForce(m_DesiredVelocity);
+	m_PlayerEntity.GetComponent<Hoowan::CollisionComponent>().CollisionBody.SetLinearVelocity(m_DesiredVelocity);
+
+	//glm::mat4& transform = m_PlayerEntity.GetComponent<Hoowan::TransformComponent>().GetTransform();
+	//transform = glm::translate(transform, glm::vec3(m_DesiredVelocity.x, m_DesiredVelocity.y, 0.0f) * ts.GetSeconds());
 }
 
 // Util
@@ -37,17 +40,17 @@ void Player::Move(bool holdingLeft, bool holdingRight, Hoowan::Timestep ts)
 {
 	if (holdingLeft)
 	{
-		m_Velocity.x = -MAX_VELOCITY.x;
+		m_DesiredVelocity.x = -MAX_VELOCITY.x;
 		FlipPlayerOrientation(true);
 	}
 	else if (holdingRight)
 	{
-		m_Velocity.x = MAX_VELOCITY.x;
+		m_DesiredVelocity.x = MAX_VELOCITY.x;
 		FlipPlayerOrientation(false);
 	}
 	else
 	{
-		m_Velocity.x = 0.0f;
+		m_DesiredVelocity.x = 0.0f;
 	}
 }
 
@@ -57,7 +60,7 @@ void Player::Jump(bool holdingJump, Hoowan::Timestep ts)
 	{
 		m_HasJumped = true;
 
-		m_Velocity.y = MAX_VELOCITY.y;
+		m_DesiredVelocity.y = MAX_VELOCITY.y;
 	}
 	else if (!holdingJump)
 	{
@@ -67,7 +70,8 @@ void Player::Jump(bool holdingJump, Hoowan::Timestep ts)
 
 void Player::ApplyGravity(Hoowan::Timestep ts)
 {
-	//m_Velocity.y = std::clamp(m_Velocity.y - (MAX_VELOCITY.y * m_Mass * ts.GetSeconds()), -MAX_VELOCITY.y, MAX_VELOCITY.y);
+	// No longer used, Box2D takes care of this
+	m_DesiredVelocity.y = std::clamp(m_DesiredVelocity.y - (MAX_VELOCITY.y * m_Mass * ts.GetSeconds()), -MAX_VELOCITY.y, MAX_VELOCITY.y);
 }
 
 void Player::FlipPlayerOrientation(bool flip)
