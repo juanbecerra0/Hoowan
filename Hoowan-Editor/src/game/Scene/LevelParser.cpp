@@ -40,7 +40,7 @@ LevelParser::LevelParser(const std::string& levelString, Hoowan::Ref<Hoowan::Sce
 
 			// (Maybe) add a static collider component
 			if (c != 'B' && c!= 'b')
-				sprite.AddComponent<Hoowan::Collider2DStaticComponent>(sprite.GetComponent<Hoowan::TransformComponent>().Transform);
+				sprite.AddComponent<Hoowan::CollisionComponent>(false, sprite.GetComponent<Hoowan::TransformComponent>().GetTransform());
 
 			position.x += 1.0f;
 		}

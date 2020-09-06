@@ -11,7 +11,7 @@ Player::Player(Hoowan::Ref<Hoowan::Scene> scene, glm::vec2& startingPosition)
 	m_PlayerEntity.GetComponent<Hoowan::TransformComponent>().GetTransform()[3][1] = startingPosition.y;
 
 	m_PlayerEntity.AddComponent<Hoowan::SpriteRendererSubTextureComponent>(m_PlayerSprites.Idle);
-	m_PlayerEntity.AddComponent<Hoowan::Collider2DDynamicComponent>(m_PlayerEntity.GetComponent<Hoowan::TransformComponent>().Transform);
+	m_PlayerEntity.AddComponent<Hoowan::CollisionComponent>(true, startingPosition);
 }
 
 Player::~Player()
@@ -67,7 +67,7 @@ void Player::Jump(bool holdingJump, Hoowan::Timestep ts)
 
 void Player::ApplyGravity(Hoowan::Timestep ts)
 {
-	m_Velocity.y = std::clamp(m_Velocity.y - (MAX_VELOCITY.y * m_Mass * ts.GetSeconds()), -MAX_VELOCITY.y, MAX_VELOCITY.y);
+	//m_Velocity.y = std::clamp(m_Velocity.y - (MAX_VELOCITY.y * m_Mass * ts.GetSeconds()), -MAX_VELOCITY.y, MAX_VELOCITY.y);
 }
 
 void Player::FlipPlayerOrientation(bool flip)

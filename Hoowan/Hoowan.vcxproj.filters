@@ -138,9 +138,6 @@
     <ClInclude Include="src\Hoowan\Physics\Physics2DWorld.h">
       <Filter>src\Hoowan\Physics</Filter>
     </ClInclude>
-    <ClInclude Include="src\Hoowan\Physics\RectangleCollider.h">
-      <Filter>src\Hoowan\Physics</Filter>
-    </ClInclude>
     <ClInclude Include="src\Hoowan\Renderer\Buffer.h">
       <Filter>src\Hoowan\Renderer</Filter>
     </ClInclude>
@@ -1468,9 +1465,6 @@
       <Filter>src\Hoowan\ImGui</Filter>
     </ClCompile>
     <ClCompile Include="src\Hoowan\Physics\Physics2DWorld.cpp">
-      <Filter>src\Hoowan\Physics</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Hoowan\Physics\RectangleCollider.cpp">
       <Filter>src\Hoowan\Physics</Filter>
     </ClCompile>
     <ClCompile Include="src\Hoowan\Renderer\Buffer.cpp">

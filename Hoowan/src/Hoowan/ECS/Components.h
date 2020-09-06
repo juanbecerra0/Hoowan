@@ -6,7 +6,6 @@
 #include "Hoowan/Renderer/SubTexture2D.h"
 
 #include "Hoowan/Physics/CollisionBody.h"
-#include "Hoowan/Physics/RectangleCollider.h"
 
 #include "Hoowan/ECS/SceneCamera.h"
 #include "Hoowan/ECS/ScriptableEntity.h"
@@ -33,6 +32,9 @@ namespace Hoowan
 		TransformComponent() = default;
 		TransformComponent(const TransformComponent&) = default;
 		TransformComponent(const Ref<glm::mat4> transform) : Transform(transform) {}
+
+		// Setters
+		void SetTransform(glm::mat4& newTransform) { *Transform = newTransform; }
 
 		operator glm::mat4& () { return *Transform; }
 		operator const glm::mat4& () const { return *Transform; }
@@ -85,35 +87,18 @@ namespace Hoowan
 		CameraComponent(const CameraComponent&) = default;
 	};
 
-	struct Collider2DStaticComponent
-	{
-		RectangleCollider Collider;
-
-		Collider2DStaticComponent() = default;
-		Collider2DStaticComponent(const Collider2DStaticComponent&) = default;
-		Collider2DStaticComponent(Ref<glm::mat4> transform) : Collider(transform) {}
-		Collider2DStaticComponent(Ref<glm::mat4> transform, const glm::vec2 dimensions) : Collider(transform, dimensions) {}
-	};
-
-	struct Collider2DDynamicComponent
-	{
-		RectangleCollider Collider;
-		glm::vec2 PreviousPosition = { 0.0f, 0.0f };
-
-		Collider2DDynamicComponent() = default;
-		Collider2DDynamicComponent(const Collider2DDynamicComponent&) = default;
-		Collider2DDynamicComponent(Ref<glm::mat4> transform) : Collider(transform), PreviousPosition((*transform)[3]) {}
-		Collider2DDynamicComponent(Ref<glm::mat4> transform, const glm::vec2 dimensions) : Collider(transform, dimensions), PreviousPosition((*transform)[3]) {}
-	};
-
 	struct CollisionComponent
 	{
 		CollisionBody CollisionBody;
 
 		CollisionComponent(const CollisionComponent&) = default;
-		CollisionComponent(b2World& world, bool isDynamic) : CollisionBody(world, isDynamic) {}
-		CollisionComponent(b2World& world, bool isDynamic, glm::vec2& position) : CollisionBody(world, isDynamic, position) {}
-		CollisionComponent(b2World& world, bool isDynamic, glm::vec2& position, glm::vec2& scale) : CollisionBody(world, isDynamic, position, scale) {}
+		CollisionComponent(bool isDynamic) : CollisionBody(isDynamic) {}
+		CollisionComponent(bool isDynamic, glm::vec2& position) : CollisionBody(isDynamic, position) {}
+		CollisionComponent(bool isDynamic, glm::mat4& transform) : CollisionBody(isDynamic, transform) {}
+		CollisionComponent(bool isDynamic, glm::vec2& position, glm::vec2& scale) : CollisionBody(isDynamic, position, scale) {}
+
+		// Getters
+		glm::mat4 GetTransform() { return CollisionBody.GetTransform(); };
 	};
 
 	struct NativeScriptComponent

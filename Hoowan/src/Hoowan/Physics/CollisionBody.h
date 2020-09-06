@@ -10,14 +10,20 @@ namespace Hoowan
 	class CollisionBody
 	{
 	public:
-		CollisionBody(b2World& world, bool isDynamic);
-		CollisionBody(b2World& world, bool isDynamic, glm::vec2& position);
-		CollisionBody(b2World& world, bool isDynamic, glm::vec2& position, glm::vec2& scale);
+		static void Init(Ref<b2World> world);
+
+		CollisionBody(bool isDynamic);
+		CollisionBody(bool isDynamic, glm::vec2& position);
+		CollisionBody(bool isDynamic, glm::mat4& transform);
+		CollisionBody(bool isDynamic, glm::vec2& position, glm::vec2& scale);
 
 		~CollisionBody();
 
+		glm::mat4 GetTransform();
+
 	private:
-		//b2BodyDef m_Body;
+		static Ref<b2World> s_World;
+
 		b2Body* m_Body;
 	};
 }

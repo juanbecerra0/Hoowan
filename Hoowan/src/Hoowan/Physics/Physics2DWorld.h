@@ -10,9 +10,11 @@ namespace Hoowan
 		Physics2DWorld(float gravity);
 		~Physics2DWorld();
 
-		b2World& GetWorldReference();
+		void SimulateWorld();
+
+		Ref<b2World> GetWorldReference();
 
 	private:
-		b2World m_World;
+		Ref<b2World> m_World;
 	};
 }

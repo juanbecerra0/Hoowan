@@ -31,7 +31,6 @@ namespace Hoowan
 			glm::translate(glm::mat4(1.0f), glm::vec3(2.5f, -1.0f, 0.0f));
 
 		m_SquareEnt.AddComponent<SpriteRendererColorComponent>(glm::vec4{ 0.0f, 1.0f, 0.0f, 1.0f });
-		m_SquareEnt.AddComponent<Collider2DDynamicComponent>(m_SquareEnt.GetComponent<TransformComponent>().Transform);
 
 		// Add a camera component to the scene
 		m_CameraEntity = m_Scene->CreateEntity("Camera");

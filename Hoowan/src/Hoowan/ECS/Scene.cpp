@@ -15,7 +15,7 @@ namespace Hoowan
 	Scene::Scene()
 		: m_PhysicsWorld(-9.8f)
 	{
-		
+		CollisionBody::Init(m_PhysicsWorld.GetWorldReference());
 	}
 
 	Scene::~Scene()
@@ -84,25 +84,17 @@ namespace Hoowan
 	{
 		HW_PROFILE_FUNCTION();
 
-		auto dynamicView = m_Registry.view<Collider2DDynamicComponent>();
-		auto staticView = m_Registry.view<Collider2DStaticComponent>();
+		// Simulate the world
+		m_PhysicsWorld.SimulateWorld();
 
-		for (auto dynamicEnt : dynamicView)
+		// Update the transform components of possibly-moved objects
+		// TODO: Optimize to only trigger on dynamic objects
+		auto group = m_Registry.group<>(entt::get<TransformComponent, CollisionComponent>);
+		for (auto entity : group)
 		{
-			auto dynamicComponent = dynamicView.get(dynamicEnt);
+			auto& [transform, collider] = group.get<TransformComponent, CollisionComponent>(entity);
 
-			for (auto staticEnt : staticView)
-			{
-				auto staticComponent = staticView.get(staticEnt);
-				if (dynamicComponent.Collider.IsColliding(staticComponent.Collider))
-				{
-					// Collision detected between a dynamic component and static component
-					// Fix the position of the dynamic component
-					RectangleCollider::CorrectCollision(dynamicComponent.Collider, staticComponent.Collider, dynamicComponent.PreviousPosition);
-				}
-			}
-
-			dynamicComponent.PreviousPosition = dynamicComponent.Collider.GetOrigin();
+			transform.SetTransform(collider.GetTransform());
 		}
 	}
 
