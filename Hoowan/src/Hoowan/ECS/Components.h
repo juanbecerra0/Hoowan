@@ -4,9 +4,11 @@
 
 #include "Hoowan/Renderer/Texture.h"
 #include "Hoowan/Renderer/SubTexture2D.h"
+
+#include "Hoowan/Physics/CollisionBody.h"
 #include "Hoowan/Physics/RectangleCollider.h"
 
-#include <Hoowan/ECS/SceneCamera.h>
+#include "Hoowan/ECS/SceneCamera.h"
 #include "Hoowan/ECS/ScriptableEntity.h"
 
 namespace Hoowan
@@ -102,6 +104,16 @@ namespace Hoowan
 		Collider2DDynamicComponent(const Collider2DDynamicComponent&) = default;
 		Collider2DDynamicComponent(Ref<glm::mat4> transform) : Collider(transform), PreviousPosition((*transform)[3]) {}
 		Collider2DDynamicComponent(Ref<glm::mat4> transform, const glm::vec2 dimensions) : Collider(transform, dimensions), PreviousPosition((*transform)[3]) {}
+	};
+
+	struct CollisionComponent
+	{
+		CollisionBody CollisionBody;
+
+		CollisionComponent(const CollisionComponent&) = default;
+		CollisionComponent(b2World& world, bool isDynamic) : CollisionBody(world, isDynamic) {}
+		CollisionComponent(b2World& world, bool isDynamic, glm::vec2& position) : CollisionBody(world, isDynamic, position) {}
+		CollisionComponent(b2World& world, bool isDynamic, glm::vec2& position, glm::vec2& scale) : CollisionBody(world, isDynamic, position, scale) {}
 	};
 
 	struct NativeScriptComponent

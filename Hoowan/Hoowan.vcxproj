@@ -167,6 +167,7 @@
     <ClInclude Include="src\Hoowan\Events\KeyEvent.h" />
     <ClInclude Include="src\Hoowan\Events\MouseEvent.h" />
     <ClInclude Include="src\Hoowan\ImGui\ImGuiLayer.h" />
+    <ClInclude Include="src\Hoowan\Physics\CollisionBody.h" />
     <ClInclude Include="src\Hoowan\Physics\Physics2D.h" />
     <ClInclude Include="src\Hoowan\Physics\Physics2DWorld.h" />
     <ClInclude Include="src\Hoowan\Physics\RectangleCollider.h" />
@@ -613,6 +614,7 @@
     <ClCompile Include="src\Hoowan\ECS\SceneCamera.cpp" />
     <ClCompile Include="src\Hoowan\ImGui\ImGuiBuild.cpp" />
     <ClCompile Include="src\Hoowan\ImGui\ImGuiLayer.cpp" />
+    <ClCompile Include="src\Hoowan\Physics\CollisionBody.cpp" />
     <ClCompile Include="src\Hoowan\Physics\Physics2DWorld.cpp" />
     <ClCompile Include="src\Hoowan\Physics\RectangleCollider.cpp" />
     <ClCompile Include="src\Hoowan\Renderer\Buffer.cpp" />

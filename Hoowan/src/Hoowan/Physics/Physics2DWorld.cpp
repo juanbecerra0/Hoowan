@@ -16,4 +16,9 @@ namespace Hoowan
 
 	}
 
+	b2World& Physics2DWorld::GetWorldReference()
+	{
+		return m_World;
+	}
+
 }
