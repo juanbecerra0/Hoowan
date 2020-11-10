@@ -40,6 +40,7 @@ namespace Hoowan
 		// Define a body position
 		b2BodyDef bodyDefinition;
 		bodyDefinition.position.Set(position.x, position.y);
+
 		if (isDynamic)
 			bodyDefinition.type = b2_dynamicBody;
 		else
@@ -59,7 +60,7 @@ namespace Hoowan
 			fixtureDefinition.shape = &polygonDefinition;
 
 			fixtureDefinition.density = 1.0f;
-			fixtureDefinition.friction = 0.3f;
+			fixtureDefinition.friction = 0.0f;
 
 			m_Body->CreateFixture(&fixtureDefinition);
 		}

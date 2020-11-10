@@ -132,6 +132,9 @@
     <ClInclude Include="src\Hoowan\ImGui\ImGuiLayer.h">
       <Filter>src\Hoowan\ImGui</Filter>
     </ClInclude>
+    <ClInclude Include="src\Hoowan\Physics\CollisionBody.h">
+      <Filter>src\Hoowan\Physics</Filter>
+    </ClInclude>
     <ClInclude Include="src\Hoowan\Physics\Physics2D.h">
       <Filter>src\Hoowan\Physics</Filter>
     </ClInclude>
@@ -1434,7 +1437,6 @@
     <ClInclude Include="vendor\stb_image\stb_image.h">
       <Filter>vendor\stb_image</Filter>
     </ClInclude>
-    <ClInclude Include="src\Hoowan\Physics\CollisionBody.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Hoowan\Core\Application.cpp">
@@ -1463,6 +1465,9 @@
     </ClCompile>
     <ClCompile Include="src\Hoowan\ImGui\ImGuiLayer.cpp">
       <Filter>src\Hoowan\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Hoowan\Physics\CollisionBody.cpp">
+      <Filter>src\Hoowan\Physics</Filter>
     </ClCompile>
     <ClCompile Include="src\Hoowan\Physics\Physics2DWorld.cpp">
       <Filter>src\Hoowan\Physics</Filter>
@@ -1536,6 +1541,5 @@
     <ClCompile Include="vendor\stb_image\stb_image.cpp">
       <Filter>vendor\stb_image</Filter>
     </ClCompile>
-    <ClCompile Include="src\Hoowan\Physics\CollisionBody.cpp" />
   </ItemGroup>
 </Project>
